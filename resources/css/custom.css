@@ -1,0 +1,101 @@
+/************************************************
+            *FONT-SECTION-STARTS*
+ ************************************************/
+
+ html,body{font-family: 'Poppins', sans-serif; margin: 0!important; padding: 0!important;}
+
+ .Poppins { font-family: 'Poppins', sans-serif!important; }
+ .Nunito { font-family: 'Nunito', sans-serif!important; }
+ .calibri { font-family: 'Calibri'!important; }
+ .TimesNR { font-family: 'Times New Roman'!important; }
+
+ .text-justify{ text-align: justify!important; }
+
+ .scroll-style::-webkit-scrollbar { width: 5px!important;height: 5px!important; }
+ .scroll-style::-webkit-scrollbar-track { background: #FBF9F6!important; }
+ .scroll-style::-webkit-scrollbar-thumb { background-color: #374151!important;border-radius: 20px!important; }
+
+ .fs-08 { font-size: 0.5rem !important; }
+ .fs-10 { font-size: 0.625rem !important; }
+ .fs-12 { font-size: 0.75rem !important; }
+ .fs-14 { font-size: 0.875rem !important; }
+ .fs-16 { font-size: 1rem !important; }
+ .fs-18 { font-size: 1.125rem !important; }
+ .fs-20 { font-size: 1.25rem !important; }
+ .fs-22 { font-size: 1.375rem !important; }
+ .fs-24 { font-size: 1.5rem !important; }
+ .fs-26 { font-size: 1.625rem !important; }
+ .fs-28 { font-size: 1.75rem !important; }
+ .fs-30 { font-size: 1.875rem !important; }
+ .fs-32 { font-size: 2rem !important; }
+ .fs-34 { font-size: 2.125rem !important; }
+
+
+ .fw-200 { font-weight: 200!important; }
+ .fw-300 { font-weight: 300!important; }
+ .fw-400 { font-weight: 400!important; }
+ .fw-500 { font-weight: 500!important; }
+ .fw-600 { font-weight: 600!important; }
+ .fw-700 { font-weight: 700!important; }
+ .fw-800 { font-weight: 800!important; }
+ .fw-900 { font-weight: 900!important; }
+
+
+
+ .theme-1 { background-color: #!important; }
+ .theme-2 { background-color: #!important; }
+ .theme-3 { background-color: #!important; }
+ .theme-4 { background-color: #!important; }
+ .theme-5 { background-color: #!important; }
+ .theme-6 { background-color: #!important; }
+
+
+ .text-1 { color: #!important; }
+ .text-2 { color: #!important; }
+ .text-3 { color: #!important; }
+ .text-4 { color: #!important; }
+ .text-5 { color: #!important; }
+ .text-6 { color: #!important; }
+
+
+ .bord-1 { border-color: #!important; }
+ .bord-2 { border-color: #!important; }
+ .bord-3 { border-color: #!important; }
+ .bord-4 { border-color: #!important; }
+ .bord-5 { border-color: #!important; }
+ .bord-6 { border-color: #!important; }
+
+
+ .lh-10 { line-height: 10%!important; }
+ .lh-20 { line-height: 20%!important; }
+ .lh-30 { line-height: 30%!important; }
+ .lh-40 { line-height: 40%!important; }
+ .lh-50 { line-height: 50%!important; }
+ .lh-60 { line-height: 60%!important; }
+ .lh-70 { line-height: 70%!important; }
+ .lh-80 { line-height: 80%!important; }
+ .lh-90 { line-height: 90%!important; }
+ .lh-100 { line-height: 100%!important; }
+ .lh-110 { line-height: 110%!important; }
+ .lh-120 { line-height: 120%!important; }
+
+
+ .lh-15 { line-height: 10%!important; }
+ .lh-25 { line-height: 20%!important; }
+ .lh-35 { line-height: 30%!important; }
+ .lh-45 { line-height: 40%!important; }
+ .lh-55 { line-height: 50%!important; }
+ .lh-65 { line-height: 60%!important; }
+ .lh-75 { line-height: 70%!important; }
+ .lh-85 { line-height: 80%!important; }
+ .lh-95 { line-height: 90%!important; }
+ .lh-105 { line-height: 100%!important; }
+ .lh-115 { line-height: 110%!important; }
+ .lh-125 { line-height: 120%!important; }
+
+
+
+ /************************************************
+             *FONT-SECTION-STARTS*
+  ************************************************/
+
