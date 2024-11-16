@@ -75,7 +75,7 @@
         <div class="grow flex flex-col group">
             <div class="h-full flex flex-col items-center md:items-start">
                 <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
-                    href="payment.php">
+                    href="#">
                     <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
                             class="m-auto text-sm TimesNR">₹</span></div>
                     <span class="hidden lg:inline-block">Payment</span>
@@ -143,16 +143,6 @@
                     <p class="text-xs uppercase font-semibold text-gray-600">Highest Qualification</p>
                     @if ($userDetails->high_qual == 1)
                         <p class="text-sm font-medium">HSLC</p>
-                    @elseif ($userDetails->high_qual == 2)
-                        <p class="text-sm font-medium">HS</p>
-                    @elseif ($userDetails->high_qual == 3)
-                        <p class="text-sm font-medium">Diploma</p>
-                    @elseif ($userDetails->high_qual == 4)
-                        <p class="text-sm font-medium">Graduation</p>
-                    @elseif ($userDetails->high_qual == 5)
-                        <p class="text-sm font-medium">Post Graduation</p>
-                    @else
-                        <p class="text-sm font-medium">Phd.</p>
                     @endif
                 </div>
                 <div class="border border-1 rounded-md p-2 col-span-6 md:col-span-3 lg::col-span-4 xl:col-span-3">

@@ -9,13 +9,13 @@
             var postId = '';
 
             if (section === 'ab') {
-                postText = 'AB (ARMED BRANCH)';
+                postText = 'Constable (AB)';
                 postId = 1;
             } else if (section === 'ub') {
-                postText = 'UB (UNARMED BRANCH)';
+                postText = 'Constable (UB)';
                 postId = 2;
             } else if (section === 'constable') {
-                postText = 'CONSTABLE';
+                postText = 'Constable (Mechanic)';
                 postId = 3;
             }
 
@@ -103,15 +103,14 @@
             });
         }
 
-
         function updatePreferencesList(preferences) {
             $('#post-list-container').empty();
 
             preferences.forEach(function(preference) {
                 var postText = '';
-                if (preference.post_id == 1) postText = 'AB (ARMED BRANCH)';
-                else if (preference.post_id == 2) postText = 'UB (UNARMED BRANCH)';
-                else postText = 'CONSTABLE';
+                if (preference.post_id == 1) postText = 'Constable (AB)';
+                else if (preference.post_id == 2) postText = 'Constable (UB)';
+                else postText = 'Constable (Mechanic)';
 
                 $('#post-list-container').append(`
                 <div class="mb-8 post-list-item" data-post-id="${preference.post_id}">

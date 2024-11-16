@@ -66,27 +66,31 @@
             </div>
         </div>
         <div class="grow flex flex-col group">
-			<div class="h-full flex flex-col items-center md:items-start">
-				<a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs" href="preview.php">
-					<div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span class="m-auto text-sm TimesNR"><i class="bi bi-eye"></i></span></div>
-					<span class="hidden lg:inline-block">Preview</span>
-				</a>
-				<div class="flex h-6 ml-6">
-					<div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
-				</div>
-			</div>
-		</div>
-		<div class="grow flex flex-col group">
-			<div class="h-full flex flex-col items-center md:items-start">
-				<a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs" href="payment.php">
-					<div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span class="m-auto text-sm TimesNR">₹</span></div>
-					<span class="hidden lg:inline-block">Payment</span>
-				</a>
-				<div class="flex h-6 ml-6">
-					<div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
-				</div>
-			</div>
-		</div>
+            <div class="h-full flex flex-col items-center md:items-start">
+                <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
+                    href="#">
+                    <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
+                            class="m-auto text-sm TimesNR"><i class="bi bi-eye"></i></span></div>
+                    <span class="hidden lg:inline-block">Preview</span>
+                </a>
+                <div class="flex h-6 ml-6">
+                    <div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grow flex flex-col group">
+            <div class="h-full flex flex-col items-center md:items-start">
+                <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
+                    href="#">
+                    <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
+                            class="m-auto text-sm TimesNR">₹</span></div>
+                    <span class="hidden lg:inline-block">Payment</span>
+                </a>
+                <div class="flex h-6 ml-6">
+                    <div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
+                </div>
+            </div>
+        </div>
     </div>
     <form id="profile-form" action="" method="POST">
         @csrf
@@ -335,28 +339,55 @@
                             @enderror
                         </div>
                     </div>
-                    <!-- State -->
-                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
-                        <div class="h-full flex flex-col">
-                            <label for="State" class="block mb-auto px-1 text-sm font-medium text-gray-600">
-                                State<span class="ps-1 text-red-500">*</span>
-                            </label>
-                            <select id="p_state_id" name="permanent_address[state_id]"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                required>
-                                <option value="" selected disabled>Select</option>
-                                @foreach ($states as $state)
-                                    <option value="{{ $state->id }}"
-                                        {{ old('permanent_address.state_id', $userProfiles && $userProfiles->p_state_id ? $userProfiles->p_state_id : '') == $state->id ? 'selected' : '' }}>
-                                        {{ $state->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('permanent_address.state_id')
-                                <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
-                            @enderror
+                    @if ($registerDetails->permanent_residence == 1)
+                        <!-- State -->
+                        <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
+                            <div class="h-full flex flex-col">
+                                <label for="State" class="block mb-auto px-1 text-sm font-medium text-gray-600">
+                                    State <span class="ps-1 text-red-500">*</span>
+                                </label>
+                                <select id="p_state_id" name="permanent_address[state_id]"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2
+                                        @if ($registerDetails->permanent_residence == 1) pointer-events-none cursor-not-allowed @endif">
+                                    <option value="" selected disabled>Select</option>
+                                    @foreach ($states as $state)
+                                        <option value="{{ $state->id }}"
+                                            {{ old('permanent_address.state_id', $userProfiles && $userProfiles->p_state_id ? $userProfiles->p_state_id : 17) == $state->id ? 'selected' : '' }}>
+                                            {{ $state->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('permanent_address.state_id')
+                                    <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
+                            <div class="h-full flex flex-col">
+                                <label for="State" class="block mb-auto px-1 text-sm font-medium text-gray-600">
+                                    State<span class="ps-1 text-red-500">*</span>
+                                </label>
+                                <select id="p_state_id" name="permanent_address[state_id]"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                                    required>
+                                    <option value="" selected disabled>Select</option>
+                                    @foreach ($states as $state)
+                                        @if ($state->id != 17)
+                                            <!-- Exclude state with id 17 -->
+                                            <option value="{{ $state->id }}"
+                                                {{ old('permanent_address.state_id', $userProfiles && $userProfiles->p_state_id ? $userProfiles->p_state_id : '') == $state->id ? 'selected' : '' }}>
+                                                {{ $state->name }}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('permanent_address.state_id')
+                                    <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    @endif
 
                     <!-- District -->
                     <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 hidden" id="district-container">

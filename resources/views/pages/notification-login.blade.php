@@ -113,8 +113,8 @@
                 <div
                     class="my-3 bg-white shadow-md p-4 lg:py-6 rounded hover:text-red-600 transition-all border rounded-xl space-y-1 lg:space-y-3">
                     <div class="">
-                        <p class="m-0 text-xl lg:text-3xl font-Nunito">REGISTER</p>
-                        <p class="m-0 text-xs font-medium text-blue-500">click here to register & generate one time
+                        <p class="m-0 text-xl lg:text-3xl font-Nunito">CLICK HERE TO REGISTER</p>
+                        <p class="m-0 text-xs font-medium text-blue-500">Click here to register & generate one time
                             Recruitment ID.</p>
                     </div>
                     <p class="m-0 text-sm font- text-gray-500">Register in the Portal using valid mobile number.</p>
@@ -173,7 +173,7 @@
                 </div>
                 <div class="mb-6">
                     <label for="mob_no" class="block mb-2 text-sm font-medium text-gray-600">Date of Birth</label>
-                    <input type="date" id="dob" name="dob"
+                    <input type="date" id="dob" name="dob" onfocus="blur()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Password" required />
                     @error('dob')

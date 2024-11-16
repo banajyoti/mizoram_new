@@ -2,6 +2,7 @@
 
 <head>
     <!-- Include SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -63,7 +64,7 @@
         <div class="grow flex flex-col group">
             <div class="h-full flex flex-col items-center md:items-start">
                 <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
-                    href="preview.php">
+                    href="#">
                     <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
                             class="m-auto text-sm TimesNR"><i class="bi bi-eye"></i></span></div>
                     <span class="hidden lg:inline-block">Preview</span>
@@ -76,7 +77,7 @@
         <div class="grow flex flex-col group">
             <div class="h-full flex flex-col items-center md:items-start">
                 <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
-                    href="payment.php">
+                    href="#">
                     <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
                             class="m-auto text-sm TimesNR">₹</span></div>
                     <span class="hidden lg:inline-block">Payment</span>
@@ -102,7 +103,7 @@
                         <p class="text-xs">Passport size photo</p>
                     </div>
                     <div class="flex items-center justify-center w-full">
-                        <label for="pasport_photo"
+                        <label for="photo"
                             class="flex flex-col items-center justify-center h-28 md:h-54 w-32 md:w-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 p-2">
                             <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                 @if (isset($documents->photo) && !empty($documents->photo))
@@ -113,12 +114,12 @@
                                 @else
                                     <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                     <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                            class="font-semibold">Click to upload</span> or drag and drop</p>
+                                            class="font-semibold">Click to upload</span></p>
                                     <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">PNG, JPG, JPEG <br
                                             class="block md:hidden">(MAX. SIZE 200kb)</p>
                                 @endif
                             </div>
-                            <input id="pasport_photo" type="file" class="hidden" name="photo" accept="image/*" />
+                            <input id="photo" type="file" class="hidden" name="photo" accept="image/*" />
                         </label>
                     </div>
 
@@ -153,12 +154,12 @@
                                 @else
                                     <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                     <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                            class="font-semibold">Click to upload</span> or drag and drop</p>
+                                            class="font-semibold">Click to upload</span></p>
                                     <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">JPG, PNG <br
                                             class="block md:hidden">(MAX. SIZE 200kb)</p>
                                 @endif
                             </div>
-                            <input id="signature" type="file" class="hidden" name="signature" />
+                            <input id="signature" type="file" class="hidden" name="signature" accept="image/*" />
                         </label>
                     </div>
                     @if (isset($documents->signature) && !empty($documents->signature))
@@ -190,7 +191,7 @@
                                 @else
                                     <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                     <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                            class="font-semibold">Click to upload</span> or drag and drop</p>
+                                            class="font-semibold">Click to upload</span></p>
                                     <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">PDF <br
                                             class="block md:hidden">(MAX. SIZE 200kb)</p>
                                 @endif
@@ -227,7 +228,7 @@
                                 @else
                                     <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                     <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                            class="font-semibold">Click to upload</span> or drag and drop</p>
+                                            class="font-semibold">Click to upload</span></p>
                                     <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">PDF <br
                                             class="block md:hidden">(MAX. SIZE 200kb)</p>
                                 @endif
@@ -269,7 +270,7 @@
                                     @else
                                         <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                         <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                                class="font-semibold">Click to upload</span> or drag and drop</p>
+                                                class="font-semibold">Click to upload</span></p>
                                         <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">PDF <br
                                                 class="block md:hidden">(MAX. SIZE 200kb)</p>
                                     @endif
@@ -308,7 +309,7 @@
                                     @else
                                         <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                         <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                                class="font-semibold">Click to upload</span> or drag and drop</p>
+                                                class="font-semibold">Click to upload</span></p>
                                         <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">PDF <br
                                                 class="block md:hidden">(MAX. SIZE 200kb)</p>
                                     @endif
@@ -352,7 +353,7 @@
                                     @else
                                         <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                         <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                                class="font-semibold">Click to upload</span> or drag and drop</p>
+                                                class="font-semibold">Click to upload</span></p>
                                         <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">PDF <br
                                                 class="block md:hidden">(MAX. SIZE 200kb)</p>
                                     @endif
@@ -391,7 +392,7 @@
                                     @else
                                         <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                         <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                                class="font-semibold">Click to upload</span> or drag and drop</p>
+                                                class="font-semibold">Click to upload</span></p>
                                         <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">PDF <br
                                                 class="block md:hidden">(MAX. SIZE 200kb)</p>
                                     @endif
@@ -430,12 +431,12 @@
                                 @else
                                     <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                     <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                            class="font-semibold">Click to upload</span> or drag and drop</p>
+                                            class="font-semibold">Click to upload</span></p>
                                     <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">PDF <br
                                             class="block md:hidden">(MAX. SIZE 200kb)</p>
                                 @endif
                             </div>
-                            <input id="computer_cert" type="file" class="hidden" name="comp_cert" />
+                            <input id="computer_cert" type="file" class="hidden" name="comp_cert" accept="application/pdf" />
                         </label>
                     </div>
                     @if (isset($documents->comp_cert) && !empty($documents->comp_cert))
@@ -468,7 +469,7 @@
                                     @else
                                         <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                         <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                                class="font-semibold">Click to upload</span> or drag and drop</p>
+                                                class="font-semibold">Click to upload</span></p>
                                         <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">PDF <br
                                                 class="block md:hidden">(MAX. SIZE 200kb)</p>
                                     @endif
@@ -507,7 +508,7 @@
                                     @else
                                         <i class="bi bi-cloud-arrow-up text-xl md:text-3xl text-gray-500"></i>
                                         <p class="mb-2 text-[0.65rem] md:text-sm text-gray-500 text-center"><span
-                                                class="font-semibold">Click to upload</span> or drag and drop</p>
+                                                class="font-semibold">Click to upload</span></p>
                                         <p class="text-[0.65rem] md:text-xs text-gray-500 text-center">PDF <br
                                                 class="block md:hidden">(MAX. SIZE 200kb)</p>
                                     @endif

@@ -33,9 +33,10 @@ class RegisterController extends Controller
                 'dob' => 'required|date',
                 'age' => 'required',
                 'email' => 'required|email|max:255|unique:users,email', // Ensure the email is unique
-                // 'phone' => 'required|string|max:15|unique:users,phone',
+                'phone' => 'required|string|max:15|unique:users,phone',
                 'ex_ser' => 'required',
                 'X_inMizo' => 'required',
+                'permanent_residence' => 'required|in:0,1',
             ], [
                 'salutation.required' => 'Salutation is required.',
                 'salutation.string' => 'Salutation must be a valid string.',
@@ -77,13 +78,16 @@ class RegisterController extends Controller
                 'email.max' => 'Email cannot exceed 255 characters.',
                 'email.unique' => 'This email address is already registered.',
 
-                // 'phone.required' => 'Phone number is required.',
-                // 'phone.string' => 'Phone number must be a valid string.',
-                // 'phone.max' => 'Phone number cannot exceed 15 characters.',
-                // 'phone.unique' => 'This phone number is already registered.',
+                'phone.required' => 'Phone number is required.',
+                'phone.string' => 'Phone number must be a valid string.',
+                'phone.max' => 'Phone number cannot exceed 15 characters.',
+                'phone.unique' => 'This phone number is already registered.',
 
                 'ex_ser.required' => 'Please select your service experience.',
                 'X_inMizo.required' => 'The Mizo language field is required.',
+
+                'permanent_residence.required' => 'Please select if you are a permanent resident of Mizoram.',
+                'permanent_residence.in' => 'Invalid value for permanent residency.',
             ]);
 
 
@@ -95,7 +99,6 @@ class RegisterController extends Controller
             }
 
             $full_name = $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name;
-            // Create a new user (or adjust based on your data model)
             $user = User::create([
                 'registration_number' => $uniqueFormId,
                 'salutation' => $request->salutation,
@@ -114,6 +117,7 @@ class RegisterController extends Controller
                 'phone' => $request->phone,
                 'ex_ser' => $request->ex_ser,
                 'X_inMizo' => $request->X_inMizo,
+                'permanent_residence' => $request->permanent_residence,
                 // Add more fields as necessary
             ]);
 
@@ -135,13 +139,11 @@ class RegisterController extends Controller
     public function sendOtp(Request $request)
     {
         $request->validate([
-            'phone' => 'required|string|regex:/^[0-9]{10}$/', // Validate phone number
+            'phone' => 'required|string|regex:/^[0-9]{10}$/',
         ]);
 
         $phone = $request->input('phone');
-        $otp = rand(1000, 9999); // Generate a random OTP
-
-        // Here, send the OTP to the user's phone number using your SMS service
+        $otp = rand(1000, 9999);
         $this->sendSms($phone, $otp);
 
         // Store OTP in session for verification later
@@ -154,7 +156,7 @@ class RegisterController extends Controller
     public function verifyOtp(Request $request)
     {
         $request->validate([
-            'otp' => 'required|digits:4', // Validate OTP
+            'otp' => 'required|digits:4',
         ]);
 
         $otp = $request->input('otp');

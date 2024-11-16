@@ -185,7 +185,7 @@
             age = document.getElementById("age"),
             days = document.getElementById("days"),
             mons = document.getElementById("months"),
-            ddd = "2024/07/01";
+            ddd = "2025/01/01";
         today = new Date(ddd);
         console.log(today);
 
@@ -259,5 +259,15 @@
             return false;
         }
         return true;
+    }
+
+    function hideButton() {
+        // Get the Send OTP button by its ID
+        var otpButton = document.getElementById('send_OTP');
+
+        // Hide the button by setting its display property to 'none'
+        otpButton.style.display = 'none';
+
+        // Optionally, you can also add some logic here to send the OTP.
     }
 </script>

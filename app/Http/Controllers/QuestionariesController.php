@@ -145,7 +145,7 @@ class QuestionariesController extends Controller
     {
         if ($request->isMethod('GET')) {
             $questionaries = Questionary::where('user_id', Auth::user()->id)->first();
-            $preferences = Preference::where('user_id', Auth::user()->id)->get();
+            $preferences = Preference::where('user_id', Auth::user()->id)->orderBy('preferences')->get();
             $check = Preference::where('user_id', Auth::user()->id)->first();
             $postStatuses = [
                 'ab' => $preferences->where('post_id', 1)->count() > 0, // Check if AB post exists
@@ -217,7 +217,7 @@ class QuestionariesController extends Controller
 
             if ($type == 2) {
                 $p1 = Preference::where('user_id', $student->id)->where('id', $prefId)->first();
-                $p2 = Preference::where('user_id', $student->id)->where('preference', $p1->preferences + 1)->first();
+                $p2 = Preference::where('user_id', $student->id)->where('preferences', $p1->preferences + 1)->first();
                 if (Preference::where('user_id', $student->id)->count() < $p1->preferences + 1) {
                     DB::rollBack();
                     $errors['status'] = 'Error';

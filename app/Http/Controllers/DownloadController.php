@@ -42,9 +42,10 @@ class DownloadController extends Controller
         $preferences = Preference::leftJoin('posts', 'posts.id', '=', 'preferences.post_id')
             ->select('preferences', 'posts.*')
             ->where('preferences.user_id', Auth::user()->id)
+            ->orderBy('preferences.preferences')
             ->get();
 
-        $qr_code = $userDetails->full_name . "\n" . $userDetails->roll_no . "\n" . $userDetails->registration_number;
+        $qr_code = $userDetails->full_name . "\n" . $userDetails->registration_number;
         $qrcode = base64_encode(QrCode::format("svg")->size(230)
             ->errorCorrection("H")
             ->generate($qr_code));

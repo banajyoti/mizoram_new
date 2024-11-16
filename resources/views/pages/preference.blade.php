@@ -62,7 +62,7 @@
         <div class="grow flex flex-col group">
             <div class="h-full flex flex-col items-center md:items-start">
                 <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
-                    href="preview.php">
+                    href="#">
                     <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
                             class="m-auto text-sm TimesNR"><i class="bi bi-eye"></i></span></div>
                     <span class="hidden lg:inline-block">Preview</span>
@@ -75,7 +75,7 @@
         <div class="grow flex flex-col group">
             <div class="h-full flex flex-col items-center md:items-start">
                 <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
-                    href="payment.php">
+                    href="#">
                     <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
                             class="m-auto text-sm TimesNR">₹</span></div>
                     <span class="hidden lg:inline-block">Payment</span>
@@ -97,7 +97,7 @@
                 <div class="mb-2 md:mb-0 lg:w-[40vw] grid grid-cols-12" id="ab-section">
                     <div class="col-span-12 md:col-span-9 border">
                         <div class="h-full p-2 flex justify-center md:justify-start items-center">
-                            AB (ARMED BRANCH)
+                            Constable (AB)
                         </div>
                     </div>
                     <div class="col-span-12 md:col-span-3 border">
@@ -119,7 +119,7 @@
                 <div class="mb-2 md:mb-0 lg:w-[40vw] grid grid-cols-12" id="ub-section">
                     <div class="col-span-12 md:col-span-9 border">
                         <div class="h-full p-2 flex justify-center md:justify-start items-center">
-                            UB (UNARMED BRANCH)
+                            Constable (UB)
                         </div>
                     </div>
                     <div class="col-span-12 md:col-span-3 border">
@@ -142,7 +142,7 @@
                     <div class="mb-2 md:mb-0 lg:w-[40vw] grid grid-cols-12" id="constable-section">
                         <div class="col-span-12 md:col-span-9 border">
                             <div class="h-full p-2 flex justify-center md:justify-start items-center">
-                                CONSTABLE
+                                Constable (Mechanic)
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-3 border">
@@ -193,11 +193,11 @@
                             <div class="col-span-10 md:col-span-7 border">
                                 <div class="h-full p-2">
                                     @if ($preference->post_id == 1)
-                                        AB (ARMED BRANCH)
+                                        Constable (AB)
                                     @elseif ($preference->post_id == 2)
-                                        UB (UNARMED BRANCH)
+                                        Constable (UB)
                                     @else
-                                        CONSTABLE
+                                        Constable (Mechanic)
                                     @endif
                                 </div>
                             </div>

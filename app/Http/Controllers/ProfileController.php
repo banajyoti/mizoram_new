@@ -410,6 +410,7 @@ class ProfileController extends Controller
             $preferences = Preference::leftJoin('posts', 'posts.id', '=', 'preferences.post_id')
                 ->select('preferences', 'posts.*')
                 ->where('preferences.user_id', Auth::user()->id)
+                ->where('preferences.user_id', Auth::user()->id)
                 ->get();
 
             return view('pages.preview', compact('userDetails', 'preferences'));

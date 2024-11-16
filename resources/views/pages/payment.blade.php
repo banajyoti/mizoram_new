@@ -87,7 +87,7 @@
         <div class="m-auto text-center space-y-3">
             <p class="text-2xl font-medium TimesNR">" {{ $userDetails->registration_number }} "</p>
             <p class="md:text-md text-green-600 font-medium">Proceed to pay as per the post.</p>
-            <p class="text-sm">Post's</p>
+            {{-- <p class="text-sm">Post's</p>
             <div class="flex flex-wrap items-center justify-center gap-3">
                 <span class="inlone-block p-2 px-4 w-full md:w-auto border rounded-xl border-blue-600"><i
                         class="bi bi-1-circle text-blue-800 pr-2"></i>AB (ARMED BRANCH)</span>
@@ -95,14 +95,14 @@
                         class="bi bi-2-circle text-blue-800 pr-2"></i>UB (UNARMED BRANCH)</span>
                 <span class="inlone-block p-2 px-4 w-full md:w-auto border rounded-xl border-blue-600"><i
                         class="bi bi-3-circle text-blue-800 pr-2"></i>CONSTABLE</span>
-            </div>
+            </div> --}}
             <p class="text-xs font-medium text-gray-500">(Post's are displayed in respect to preference order)</p>
             <div class="text-xl">Total Amount: ₹ 200</div>
             <div class="pt-6 proceed_payment_div">
                 {{-- <button type="button" class="proceed_payment inline-block bg-blue-600 hover:bg-blue-700 text-white p-2 px-3 rounded-lg">Proceede to Pay<i class="bi bi-chevron-double-right ps-1 text-sm"></i></button> --}}
                 <button type="button"
                     class="proceed_payment inline-block bg-blue-600 hover:bg-blue-700 text-white p-2 px-3 rounded-lg"
-                    onclick="window.location='{{ route('download_ack') }}'">
+                    onclick="window.location='{{ route('dashboard') }}'">
                     Proceed to Pay <i class="bi bi-chevron-double-right ps-1 text-sm"></i>
                 </button>
 
@@ -120,10 +120,10 @@
     </div>
 </div>
 <div class="mt-auto px-4 flex items-center">
-    <a class="inline-block bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md Nunito"
-        href="#"><i class="bi bi-arrow-left-short pr-1"></i>Go Back</a>
-    <a class="ml-auto inline-block bg-green-600 hover:bg-green-700 text-white p-2 rounded-md Nunito"
-        href="{{ route('download_ack') }}"><i class="bi bi-check-all pr-1"></i>proceed</a>
+    <a class="inline-block bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md Nunito" href="#"><i
+            class="bi bi-arrow-left-short pr-1"></i>Go Back</a>
+    <a class="ml-auto inline-block bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md Nunito"
+        href="{{ route('dashboard') }}"><i class="bi bi-house pr-1"></i>Home</a>
 </div>
 
 @include('layouts.footer')

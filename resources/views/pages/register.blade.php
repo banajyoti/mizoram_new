@@ -162,7 +162,7 @@
                     <div class="col-span-3">
                         <div class="h-full flex flex-col">
                             <label for="middle_name" class="block mb-auto px-1 text-sm font-medium text-gray-600">Middle
-                                Name<span class="ps-1 text-red-500">*</span></label>
+                                Name</label>
                             <input type="text" id="middle_name" onkeydown="return /[a-z]/i.test(event.key)"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                                 name="middle_name" value="{{ old('middle_name') }}" placeholder="Middle Name"
@@ -212,6 +212,28 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-span-12">
+                        <div class="h-full flex flex-col">
+                            <label for="permanent_residence"
+                                class="block mb-auto px-1 text-sm font-medium text-gray-600">
+                                Are you a permanent resident of Mizoram? <span class="ps-1 text-red-500">*</span>
+                            </label>
+                            <div class="flex space-x-4 mt-2">
+                                <!-- Yes option -->
+                                <div class="flex items-center">
+                                    <input type="radio" id="yes" name="permanent_residence" value="1"
+                                        class="mr-2" onclick="toggleCategoryField()">
+                                    <label for="yes" class="text-sm text-gray-600">Yes</label>
+                                </div>
+                                <!-- No option -->
+                                <div class="flex items-center">
+                                    <input type="radio" id="no" name="permanent_residence" value="0"
+                                        class="mr-2" onclick="toggleCategoryField()">
+                                    <label for="no" class="text-sm text-gray-600">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-span-3">
                         <div class="h-full flex flex-col">
                             <label for="high_qual"
@@ -221,11 +243,6 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
                                 <option selected disabled>select</option>
                                 <option value="1">HSLC</option>
-                                <option value="2">HS</option>
-                                <option value="3">Diploma</option>
-                                <option value="4">Graduation</option>
-                                <option value="5">Post Graduation</option>
-                                <option value="6">Phd.</option>
                             </select>
                             @error('high_qual')
                                 <span class="text-danger">{{ $message }}</span>
@@ -249,10 +266,12 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-span-3">
+                    <!-- Category field for Permanent Residents (Yes) -->
+                    <div id="category-field" class="col-span-3 hidden">
                         <div class="h-full flex flex-col">
-                            <label for="cast_cat" class="block mb-auto px-1 text-sm font-medium text-gray-600">Cast/
-                                Category<span class="ps-1 text-red-500">*</span></label>
+                            <label for="cast_cat" class="block mb-auto px-1 text-sm font-medium text-gray-600">
+                                Cast/Category <span class="ps-1 text-red-500">*</span>
+                            </label>
                             <select id="cast_cat" name="category_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
                                 <option selected disabled>select</option>
@@ -262,6 +281,22 @@
                                 <option value="4">SC</option>
                                 <option value="5">ST (P)</option>
                                 <option value="6">ST (H)</option>
+                            </select>
+                            @error('category_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- Category field for Non-Permanent Residents (No) -->
+                    <div id="category-field-no" class="col-span-3 hidden">
+                        <div class="h-full flex flex-col">
+                            <label for="cast_cat" class="block mb-auto px-1 text-sm font-medium text-gray-600">
+                                Cast/Category <span class="ps-1 text-red-500">*</span>
+                            </label>
+                            <select id="cast_cat_no" name="category_id"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                <option selected disabled>select</option>
+                                <option value="1">General</option>
                             </select>
                             @error('category_id')
                                 <span class="text-danger">{{ $message }}</span>
@@ -286,7 +321,7 @@
                                 on 01-01-2025<span class="ps-1 text-red-500">*</span></label>
                             <input type="text" id="agee"
                                 class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                name="age" value="24 Yr, 11 Mnt, 29 D" placeholder="" readonly />
+                                name="age"  placeholder="Age as on 1st January, 2025" readonly />
                             <input type="hidden" maxlength="2" size="2" id="date2"
                                 placeholder="Date" />
                             <input type="hidden" maxlength="2" size="2" id="month2"
@@ -309,7 +344,7 @@
                             <p id="result"></p>
                         </div>
                     </div>
-                    {{-- <div class="col-span-4">
+                    <div class="col-span-4">
                         <!-- Div-1 -->
                         <div class="h-ful flex flex-col phone">
                             <div class="flex items-center justify-between">
@@ -328,7 +363,7 @@
                                     class="grow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                                     name="phone" value="" placeholder="Phone Number" required />
                                 <button type="button"
-                                    class="text-xs text-white hover:text-green-100 bg-green-600 hover:bg-green-700 rounded-lg p-2 whitespace-nowrap"
+                                    class="text-xs text-white hover:text-green-100 bg-green-600 hover:bg-green-700 rounded-lg p-2 whitespace-nowrap" onclick="hideButton()"
                                     id="send_OTP">Send OTP</button>
                             </div>
                         </div>
@@ -351,10 +386,10 @@
                                     class="text-xs text-white hover:text-green-100 bg-green-600 hover:bg-green-700 rounded-lg px-2 py-0.5"
                                     id="verified">Verify</button>
                                 <button type="button"
-                                    class="text-xs text-white hover:text-yellow-100 bg-yellow-500 hover:bg-yellow-600 rounded-lg px-2 py-0.5">Resend</button>
+                                    class="text-xs text-white hover:text-yellow-100 bg-yellow-500 hover:bg-yellow-600 rounded-lg px-2 py-0.5" id="send_OTP">Resend</button>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="col-span-4">
                         <div class="h-full flex flex-col">
                             <label for="ex-ser" class="block mb-auto px-1 text-sm font-medium text-gray-600">Are you
@@ -414,4 +449,26 @@
 @include('layouts.footer')
 @include('layouts.modals')
 @include('layouts.custom-scripts.registerScript')
-ds
+<script>
+    function toggleCategoryField() {
+        var yesRadio = document.getElementById("yes");
+        var noRadio = document.getElementById("no");
+
+        var categoryField = document.getElementById("category-field");
+        var categoryFieldNo = document.getElementById("category-field-no");
+
+        // Show/Hide based on radio button selection
+        if (yesRadio.checked) {
+            categoryField.classList.remove("hidden");
+            categoryFieldNo.classList.add("hidden");
+        } else if (noRadio.checked) {
+            categoryFieldNo.classList.remove("hidden");
+            categoryField.classList.add("hidden");
+        }
+    }
+
+    // Initial check on page load to set correct state
+    window.onload = function() {
+        toggleCategoryField(); // Ensure correct display on initial load based on any pre-selected radio button
+    };
+</script>

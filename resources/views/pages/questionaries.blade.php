@@ -61,7 +61,7 @@
         </div>
         <div class="grow flex flex-col group">
 			<div class="h-full flex flex-col items-center md:items-start">
-				<a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs" href="preview.php">
+				<a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs" href="#">
 					<div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span class="m-auto text-sm TimesNR"><i class="bi bi-eye"></i></span></div>
 					<span class="hidden lg:inline-block">Preview</span>
 				</a>
@@ -72,7 +72,7 @@
 		</div>
 		<div class="grow flex flex-col group">
 			<div class="h-full flex flex-col items-center md:items-start">
-				<a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs" href="payment.php">
+				<a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs" href="#">
 					<div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span class="m-auto text-sm TimesNR">₹</span></div>
 					<span class="hidden lg:inline-block">Payment</span>
 				</a>

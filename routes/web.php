@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentController;
@@ -40,4 +41,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/get-district', [ProfileController::class, 'getDistrict'])->name('getDistrict');
     Route::get('/update-preference/{prefId}/{type}', [\App\Http\Controllers\QuestionariesController::class, 'preferenceUpdate'])->name('candidate.preference.update');
     Route::get('download-ack', [DownloadController::class, 'download_ack'])->name('download_ack');
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 });

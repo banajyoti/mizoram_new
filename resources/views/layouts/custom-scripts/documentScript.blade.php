@@ -7,28 +7,50 @@
             let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
 
             if (file) {
-                // Check if the file is a PDF
-                if (file.type === 'image/') {
+                // Check if the file is an image
+                if (file.type.startsWith('image/')) {
                     // Check if the file size is less than or equal to 200 KB
                     if (file.size <= maxSize) {
                         let reader = new FileReader();
                         reader.onload = function() {
-                            let fileUrl = reader.result;
+                            let fileUrl = reader.result; // This is the Data URL of the image
                             // Update the "View Document" link to point to the file URL
                             fileLink.href = fileUrl;
                             // Show the "View Document" link
                             fileLink.classList.remove('hidden');
                         };
-                        reader.readAsDataURL(file); // Read the PDF as a Data URL
+                        reader.readAsDataURL(file); // Read the image as a Data URL
+
+                        // Show a SweetAlert confirming the file upload
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'File Uploaded!',
+                            text: 'You have successfully uploaded a valid image.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#2DB325',
+                        });
+
                     } else {
-                        // If the file size is larger than 200 KB, show an alert
-                        alert("File size is too large. Please select a file smaller than 200 KB.");
-                        fileLink.classList.add('hidden'); // Hide the View Document link
+                        // If the file size is larger than 200 KB, show a SweetAlert message
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File size too large',
+                            text: 'Please select a file smaller than 200 KB.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                        //fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
-                    // If the file is not a PDF, show an alert
-                    alert("Please upload a valid image file (JPG, PNG, GIF).");
-                    fileLink.classList.add('hidden'); // Hide the View Document link
+                    // If the file is not an image, show a SweetAlert message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid file type',
+                        text: 'Please upload a valid image file (JPG, PNG, GIF).',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                    //fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If no file is selected, hide the View Document link
@@ -36,6 +58,7 @@
             }
         }
     });
+
 
     // Add event listener for the Signature input
     document.getElementById('signature').addEventListener('change', function(e) {
@@ -57,22 +80,43 @@
                         fileLink.classList.remove('hidden');
                     };
                     reader.readAsDataURL(file); // Read the image as a data URL
+
+                    // Show a SweetAlert confirming the file upload
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Signature Uploaded!',
+                        text: 'You have successfully uploaded a valid image for your signature.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#2DB325'
+                    });
+
                 } else {
-                    // If the file size is larger than 200 KB, show an alert
-                    alert("File size is too large. Please select a file smaller than 200 KB.");
-                    fileLink.classList.add('hidden'); // Hide the View Document link
+                    // If the file size is larger than 200 KB, show a SweetAlert error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'File size too large',
+                        text: 'Please select a file smaller than 200 KB.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                   // fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
-                // If the file is not an image, show an alert
-                alert("Please upload a valid image file (JPG, PNG, GIF).");
-                fileLink.classList.add('hidden'); // Hide the View Document link
+                // If the file is not an image, show a SweetAlert error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid file type',
+                    text: 'Please upload a valid image file (JPG, PNG, GIF).',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#FF0000'
+                });
+                //fileLink.classList.add('hidden'); // Hide the View Document link
             }
         } else {
             // If no file is selected, hide the View Document link
             fileLink.classList.add('hidden');
         }
     });
-
 
     // Add event listener for the Age Proof Certificate input
     document.getElementById('age_proof').addEventListener('change', function(e) {
@@ -87,28 +131,50 @@
                 if (file.size <= maxSize) {
                     let reader = new FileReader();
                     reader.onload = function() {
-                        let fileUrl = reader.result;
+                        let fileUrl = reader.result; // This is the Data URL of the PDF
                         // Update the "View Document" link to point to the file URL
                         fileLink.href = fileUrl;
                         // Show the "View Document" link
                         fileLink.classList.remove('hidden');
                     };
                     reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                    // Show a SweetAlert confirming the PDF upload
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Age Proof Uploaded!',
+                        text: 'You have successfully uploaded a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#2DB325',
+                    });
+
                 } else {
-                    // If the file size is larger than 200 KB, show an alert
-                    alert("File size is too large. Please select a file smaller than 200 KB.");
-                    fileLink.classList.add('hidden'); // Hide the View Document link
+                    // If the file size is larger than 200 KB, show a SweetAlert error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'File size too large',
+                        text: 'Please select a file smaller than 200 KB.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                   // fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
-                // If the file is not a PDF, show an alert
-                alert("Please upload a valid PDF document.");
-                fileLink.classList.add('hidden'); // Hide the View Document link
+                // If the file is not a PDF, show a SweetAlert error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid file type',
+                    text: 'Please upload a valid PDF document.',
+                    confirmButtonText: 'OK'
+                });
+               // fileLink.classList.add('hidden'); // Hide the View Document link
             }
         } else {
             // If no file is selected, hide the View Document link
             fileLink.classList.add('hidden');
         }
     });
+
 
     // Add event listener for the Class X Marksheet input
     document.getElementById('x_marksheet').addEventListener('change', function(e) {
@@ -123,22 +189,44 @@
                 if (file.size <= maxSize) {
                     let reader = new FileReader();
                     reader.onload = function() {
-                        let fileUrl = reader.result;
+                        let fileUrl = reader.result; // This is the Data URL of the PDF
                         // Update the "View Document" link to point to the file URL
                         fileLink.href = fileUrl;
                         // Show the "View Document" link
                         fileLink.classList.remove('hidden');
                     };
                     reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                    // Show a SweetAlert confirming the file upload
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Marksheet Uploaded!',
+                        text: 'You have successfully uploaded a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#2DB325',
+                    });
+
                 } else {
-                    // If the file size is larger than 200 KB, show an alert
-                    alert("File size is too large. Please select a file smaller than 200 KB.");
-                    fileLink.classList.add('hidden'); // Hide the View Document link
+                    // If the file size is larger than 200 KB, show a SweetAlert error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'File size too large',
+                        text: 'Please select a file smaller than 200 KB.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                  //  fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
-                // If the file is not a PDF, show an alert
-                alert("Please upload a valid PDF document.");
-                fileLink.classList.add('hidden'); // Hide the View Document link
+                // If the file is not a PDF, show a SweetAlert error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid file type',
+                    text: 'Please upload a valid PDF document.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#FF0000'
+                });
+               // fileLink.classList.add('hidden'); // Hide the View Document link
             }
         } else {
             // If no file is selected, hide the View Document link
@@ -159,28 +247,51 @@
                 if (file.size <= maxSize) {
                     let reader = new FileReader();
                     reader.onload = function() {
-                        let fileUrl = reader.result;
+                        let fileUrl = reader.result; // This is the Data URL of the PDF
                         // Update the "View Document" link to point to the file URL
                         fileLink.href = fileUrl;
                         // Show the "View Document" link
                         fileLink.classList.remove('hidden');
                     };
                     reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                    // Show a SweetAlert confirming the file upload
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'File Uploaded!',
+                        text: 'You have successfully uploaded a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#2DB325'
+                    });
+
                 } else {
-                    // If the file size is larger than 200 KB, show an alert
-                    alert("File size is too large. Please select a file smaller than 200 KB.");
-                    fileLink.classList.add('hidden'); // Hide the View Document link
+                    // If the file size is larger than 200 KB, show a SweetAlert error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'File size too large',
+                        text: 'Please select a file smaller than 200 KB.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                   // fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
-                // If the file is not a PDF, show an alert
-                alert("Please upload a valid PDF document.");
-                fileLink.classList.add('hidden'); // Hide the View Document link
+                // If the file is not a PDF, show a SweetAlert error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid file type',
+                    text: 'Please upload a valid PDF document.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#FF0000'
+                });
+                //fileLink.classList.add('hidden'); // Hide the View Document link
             }
         } else {
             // If no file is selected, hide the View Document link
             fileLink.classList.add('hidden');
         }
     });
+
 
 
     // Add event listener for the Homeguard Certificate input
@@ -197,22 +308,44 @@
                     if (file.size <= maxSize) {
                         let reader = new FileReader();
                         reader.onload = function() {
-                            let fileUrl = reader.result;
+                            let fileUrl = reader.result; // This is the Data URL of the PDF
                             // Update the "View Document" link to point to the file URL
                             fileLink.href = fileUrl;
                             // Show the "View Document" link
                             fileLink.classList.remove('hidden');
                         };
                         reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                        // Show a SweetAlert confirming the file upload
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'File Uploaded!',
+                            text: 'You have successfully uploaded a valid PDF document.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#2DB325',
+                        });
+
                     } else {
-                        // If the file size is larger than 200 KB, show an alert
-                        alert("File size is too large. Please select a file smaller than 200 KB.");
-                        fileLink.classList.add('hidden'); // Hide the View Document link
+                        // If the file size is larger than 200 KB, show a SweetAlert error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File size too large',
+                            text: 'Please select a file smaller than 200 KB.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                        //fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
-                    // If the file is not a PDF, show an alert
-                    alert("Please upload a valid PDF document.");
-                    fileLink.classList.add('hidden'); // Hide the View Document link
+                    // If the file is not a PDF, show a SweetAlert error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid file type',
+                        text: 'Please upload a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                  //  fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If no file is selected, hide the View Document link
@@ -220,6 +353,7 @@
             }
         }
     });
+
 
     // Add event listener for the Caste Certificate input
     document.body.addEventListener('change', function(e) {
@@ -229,28 +363,58 @@
             let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
 
             if (file) {
+                // Check if the file is a PDF
                 if (file.type === 'application/pdf') {
+                    // Check if the file size is less than or equal to 200 KB
                     if (file.size <= maxSize) {
                         let reader = new FileReader();
                         reader.onload = function() {
-                            let fileUrl = reader.result;
+                            let fileUrl = reader.result; // This is the Data URL of the PDF
+                            // Update the "View Document" link to point to the file URL
                             fileLink.href = fileUrl;
+                            // Show the "View Document" link
                             fileLink.classList.remove('hidden');
                         };
                         reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                        // SweetAlert for successful file upload
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'File Uploaded!',
+                            text: 'You have successfully uploaded a valid PDF document.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#2DB325'
+                        });
+
                     } else {
-                        alert("File size is too large. Please select a file smaller than 200 KB.");
-                        fileLink.classList.add('hidden');
+                        // SweetAlert for file size too large
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File size too large',
+                            text: 'Please select a file smaller than 200 KB.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                      //  fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
-                    alert("Please upload a valid PDF document.");
-                    fileLink.classList.add('hidden');
+                    // SweetAlert for invalid file type (not a PDF)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid file type',
+                        text: 'Please upload a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                    //fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
+                // If no file is selected, hide the View Document link
                 fileLink.classList.add('hidden');
             }
         }
     });
+
 
     // Add event listener for the NCC Certificate input
     document.addEventListener('DOMContentLoaded', function() {
@@ -277,15 +441,37 @@
                                 fileLink.classList.remove('hidden');
                             };
                             reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                            // SweetAlert2 for successful file upload
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'File Uploaded!',
+                                text: 'You have successfully uploaded a valid PDF document.',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#2DB325'
+                            });
+
                         } else {
-                            // If the file size is larger than 200 KB, show an alert
-                            alert("File size is too large. Please select a file smaller than 200 KB.");
-                            fileLink.classList.add('hidden'); // Hide the View Document link
+                            // SweetAlert2 for file size too large
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'File size too large',
+                                text: 'Please select a file smaller than 200 KB.',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#FF0000'
+                            });
+                          //  fileLink.classList.add('hidden'); // Hide the View Document link
                         }
                     } else {
-                        // If the file is not a PDF, show an alert
-                        alert("Please upload a valid PDF document.");
-                        fileLink.classList.add('hidden'); // Hide the View Document link
+                        // SweetAlert2 for invalid file type (not a PDF)
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid file type',
+                            text: 'Please upload a valid PDF document.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                       // fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
                     // If no file is selected, hide the View Document link
@@ -294,6 +480,7 @@
             });
         }
     });
+
 
 
     // Add event listener for the Computer Certificate input
@@ -316,15 +503,37 @@
                         fileLink.classList.remove('hidden');
                     };
                     reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                    // SweetAlert2 for successful file upload
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'File Uploaded!',
+                        text: 'You have successfully uploaded a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#2DB325'
+                    });
+
                 } else {
-                    // If the file size is larger than 200 KB, show an alert
-                    alert("File size is too large. Please select a file smaller than 200 KB.");
-                    fileLink.classList.add('hidden'); // Hide the View Document link
+                    // SweetAlert2 for file size too large
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'File size too large',
+                        text: 'Please select a file smaller than 200 KB.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                   // fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
-                // If the file is not a PDF, show an alert
-                alert("Please upload a valid PDF document.");
-                fileLink.classList.add('hidden'); // Hide the View Document link
+                // SweetAlert2 for invalid file type (not a PDF)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid file type',
+                    text: 'Please upload a valid PDF document.',
+                    confirmButtonText: 'OK',
+                     confirmButtonColor: '#FF0000'
+                });
+               // fileLink.classList.add('hidden'); // Hide the View Document link
             }
         } else {
             // If no file is selected, hide the View Document link
@@ -354,15 +563,37 @@
                             fileLink.classList.remove('hidden');
                         };
                         reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                        // SweetAlert2 for successful file upload
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'File Uploaded!',
+                            text: 'You have successfully uploaded a valid PDF document.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#2DB325',
+                        });
+
                     } else {
-                        // If the file size is larger than 200 KB, show an alert
-                        alert("File size is too large. Please select a file smaller than 200 KB.");
-                        fileLink.classList.add('hidden'); // Hide the View Document link
+                        // SweetAlert2 for file size too large
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File size too large',
+                            text: 'Please select a file smaller than 200 KB.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                     //   fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
-                    // If the file is not a PDF, show an alert
-                    alert("Please upload a valid PDF document.");
-                    fileLink.classList.add('hidden'); // Hide the View Document link
+                    // SweetAlert2 for invalid file type (not a PDF)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid file type',
+                        text: 'Please upload a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                  //  fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If no file is selected, hide the View Document link
@@ -370,6 +601,7 @@
             }
         }
     });
+
 
     // Add event listener for the ITI Experience Certificate input
     document.body.addEventListener('change', function(e) {
@@ -392,15 +624,37 @@
                             fileLink.classList.remove('hidden');
                         };
                         reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                        // SweetAlert2 for successful file upload
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'File Uploaded!',
+                            text: 'You have successfully uploaded a valid PDF document.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#2DB325'
+                        });
+
                     } else {
-                        // If the file size is larger than 200 KB, show an alert
-                        alert("File size is too large. Please select a file smaller than 200 KB.");
-                        fileLink.classList.add('hidden'); // Hide the View Document link
+                        // SweetAlert2 for file size too large
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File size too large',
+                            text: 'Please select a file smaller than 200 KB.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                     //   fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
-                    // If the file is not a PDF, show an alert
-                    alert("Please upload a valid PDF document.");
-                    fileLink.classList.add('hidden'); // Hide the View Document link
+                    // SweetAlert2 for invalid file type (not a PDF)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid file type',
+                        text: 'Please upload a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                  //  fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If no file is selected, hide the View Document link
@@ -408,6 +662,7 @@
             }
         }
     });
+
 
     $(document).ready(function() {
         $('#save-proceed-btn').click(function(e) {
