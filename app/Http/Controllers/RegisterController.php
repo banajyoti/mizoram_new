@@ -33,7 +33,7 @@ class RegisterController extends Controller
                 'dob' => 'required|date',
                 'age' => 'required',
                 'email' => 'required|email|max:255|unique:users,email', // Ensure the email is unique
-                'phone' => 'required|string|max:15|unique:users,phone',
+                // 'phone' => 'required|string|max:15|unique:users,phone',
                 'ex_ser' => 'required',
                 'X_inMizo' => 'required',
                 'permanent_residence' => 'required|in:0,1',
@@ -96,6 +96,21 @@ class RegisterController extends Controller
             // Check if validation fails
             if ($validator->fails()) {
                 return response()->json(['status' => 'error', 'errors' => $validator->errors()], 422);
+            }
+
+
+            if ($request->category_id == '1') {
+                if ($request->dob < "1996-11-09" || $request->dob > "2006-11-09") {
+                    return response()->json(['status' => 'error', 'errors' => ['dob' => 'Age must be between 18-28 years']], 422);
+                }
+            } elseif ($request->category_id == '3' || $request->category_id == '4') {
+                if ($request->dob < "1991-11-09" || $request->dob > "2006-11-09") {
+                    return response()->json(['status' => 'error', 'errors' => ['dob' => 'Age must be between 18-28 years']], 422);
+                }
+            } elseif ($request->category_id == '2') {
+                if ($request->dob < "1993-11-09" || $request->dob > "2006-11-09") {
+                    return response()->json(['status' => 'error', 'errors' => ['dob' => 'Age must be between 18-28 years']], 422);
+                }
             }
 
             $full_name = $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name;

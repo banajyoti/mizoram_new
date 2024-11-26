@@ -273,10 +273,15 @@
                             <label for="nation"
                                 class="block mb-auto px-1 text-sm font-medium text-gray-600">Nationality<span
                                     class="ps-1 text-red-500">*</span></label>
-                            <input type="text" id="nation"
-                                class="bg-gray-50  border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                name="nationality" value="{{ old('nationality', $userProfiles->nationality ?? '') }}"
-                                placeholder="Nationality" required />
+                            <select id="nation" name="nationality"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                                required>
+                                <option value="" selected disabled>Select</option>
+                                <option value="INDIAN"
+                                    {{ old('nationality', $userProfiles->nationality ?? '') == 'INDIAN' ? 'selected' : '' }}>
+                                    INDIAN
+                                </option>
+                            </select>
                             @error('nationality')
                                 <div class="text-sm text-red-500">{{ $message }}</div>
                             @enderror
@@ -639,6 +644,7 @@
 
                 <div class="space-y-3">
                     <p class="text-md text-center">Education Qualification</p>
+                    <p class="text-md text-center">HSLC or Equivalent Details</p>
 
                     <!-- School and Education Details -->
                     <div class="grid grid-cols-12 gap-4">
@@ -707,7 +713,8 @@
                         <div class="col-span-12 md:col-span-4 lg:col-span-2 xl:col-span-2">
                             <div class="h-full flex flex-col">
                                 <label for="percentage"
-                                    class="block mb-auto px-1 text-sm font-medium text-gray-600">Percentage %<span
+                                    class="block mb-auto px-1 text-sm font-medium text-gray-600">Percentage % (CGPA
+                                    should be converted into percentage)<span
                                         class="ps-1 text-red-500">*</span></label>
                                 <input type="text" id="percentage" name="education[percentage]"
                                     value="{{ old('permanent_address.percentage', $userProfiles->percentage ?? '') }}"

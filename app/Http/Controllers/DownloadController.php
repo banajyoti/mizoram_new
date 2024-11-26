@@ -34,7 +34,8 @@ class DownloadController extends Controller
                 's1.name as pState',
                 's2.name as cState',
                 'd1.name as pDist',
-                'd2.name as cDist'
+                'd2.name as cDist',
+                'users.updated_at as up'
             )
             ->where('users.id', Auth::user()->id)
             ->first();

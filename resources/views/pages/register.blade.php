@@ -8,11 +8,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Your other scripts -->
 </head>
-<div class="grow p-4 grid grid-cols-5 gap-3">
-    <div class="col-span-3 borde">
+<div class="grow md:p-4 grid lg:grid-cols-5 gap-3">
+    <div class="lg:col-span-3 borde">
         <div class="h-full p-2 space-y-3">
             <div class=" text-center">
-                <span class="text-xs poppins font-medium bg-yellow-400 px-2 py-1 rounded-lg">
+                <span class="text-xs poppins font-medium bg-yellow-400 px-2 py-1 rounded-lg block">
                     Candidates are requested to go through the complete advertisement and read the complete instructions
                     before applying.
                     ( <a class="pl-1 text-[0.65rem] font-semibold text-blue-600 hover:text-blue-700" href="#"
@@ -111,7 +111,7 @@
                 Format: PDF </p>
         </div>
     </div>
-    <div class="col-span-2 borde border-green-500">
+    <div class="lg:col-span-2 borde border-green-500">
         <div class="h-full p-2 space-y-6">
             <div class="flex items-center justify-between">
                 <p class="m-0 text-xl text-blue-500 Nunito">Registration form</p>
@@ -127,7 +127,7 @@
             </p>
             <form id="registrationForm" method="POST">
                 @csrf
-                <div class="grid grid-cols-12 gap-x-4 gap-y-5">
+                <div class="grid grid-cols-6 sm:grid-cols-12 gap-4">
                     <div class="col-span-2">
                         <div class="h-full flex flex-col">
                             <label for="sal"
@@ -212,7 +212,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-span-12">
+                    <div class="col-span-6 sm:col-span-12">
                         <div class="h-full flex flex-col">
                             <label for="permanent_residence"
                                 class="block mb-auto px-1 text-sm font-medium text-gray-600">
@@ -277,10 +277,10 @@
                                 <option selected disabled>select</option>
                                 <option value="1">General</option>
                                 <option value="2">OBC</option>
-                                <option value="3">MOBC</option>
-                                <option value="4">SC</option>
-                                <option value="5">ST (P)</option>
-                                <option value="6">ST (H)</option>
+                                {{-- <option value="3">MOBC</option> --}}
+                                <option value="3">SC</option>
+                                <option value="4">ST</option>
+                                {{-- <option value="6">ST (H)</option> --}}
                             </select>
                             @error('category_id')
                                 <span class="text-danger">{{ $message }}</span>
@@ -307,7 +307,7 @@
                         <div class="h-full flex flex-col">
                             <label for="dob" class="block mb-auto px-1 text-sm font-medium text-gray-600">Date of
                                 Birth<span class="ps-1 text-red-500">*</span></label>
-                            <input type="date" id="dob" onchange="myFunction()"
+                            <input type="date" id="dob" onchange="myFunction()" onfocus="blur()"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 datepicker"
                                 name="dob" value="" placeholder="Date of Birth" required />
                             @error('dob')
@@ -315,7 +315,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-span-4">
+                    <div class="col-span-3 sm:col-span-4">
                         <div class="h-full flex flex-col">
                             <label for="dob" class="block mb-aut px-1 text-sm font-medium text-gray-600">Age as
                                 on 01-01-2025<span class="ps-1 text-red-500">*</span></label>
@@ -330,7 +330,7 @@
                                 placeholder="Year" />
                         </div>
                     </div>
-                    <div class="col-span-4">
+                    <div class="col-span-6 sm:col-span-4">
                         <div class="h-full flex flex-col">
                             <label for="email"
                                 class="block mb-aut px-1 text-sm font-medium text-gray-600">Email<span
@@ -344,7 +344,7 @@
                             <p id="result"></p>
                         </div>
                     </div>
-                    <div class="col-span-4">
+                    {{-- <div class="col-span-6 sm:col-span-4">
                         <!-- Div-1 -->
                         <div class="h-ful flex flex-col phone">
                             <div class="flex items-center justify-between">
@@ -389,7 +389,7 @@
                                     class="text-xs text-white hover:text-yellow-100 bg-yellow-500 hover:bg-yellow-600 rounded-lg px-2 py-0.5" id="send_OTP">Resend</button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-span-4">
                         <div class="h-full flex flex-col">
                             <label for="ex-ser" class="block mb-auto px-1 text-sm font-medium text-gray-600">Are you
@@ -405,7 +405,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-span-8">
+                    <div class="col-span-6 sm:col-span-8">
                         <div class="h-full flex flex-col">
                             <label for="X-inMizo" class="block mb-auto px-1 text-sm font-medium text-gray-600">Have
                                 you completed your Class-X Standard (HSLC) in Mizoram?<span

@@ -99,7 +99,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                   // fileLink.classList.add('hidden'); // Hide the View Document link
+                    // fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If the file is not an image, show a SweetAlert error
@@ -157,7 +157,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                   // fileLink.classList.add('hidden'); // Hide the View Document link
+                    // fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If the file is not a PDF, show a SweetAlert error
@@ -167,7 +167,7 @@
                     text: 'Please upload a valid PDF document.',
                     confirmButtonText: 'OK'
                 });
-               // fileLink.classList.add('hidden'); // Hide the View Document link
+                // fileLink.classList.add('hidden'); // Hide the View Document link
             }
         } else {
             // If no file is selected, hide the View Document link
@@ -215,7 +215,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                  //  fileLink.classList.add('hidden'); // Hide the View Document link
+                    //  fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If the file is not a PDF, show a SweetAlert error
@@ -226,7 +226,7 @@
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#FF0000'
                 });
-               // fileLink.classList.add('hidden'); // Hide the View Document link
+                // fileLink.classList.add('hidden'); // Hide the View Document link
             }
         } else {
             // If no file is selected, hide the View Document link
@@ -273,7 +273,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                   // fileLink.classList.add('hidden'); // Hide the View Document link
+                    // fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If the file is not a PDF, show a SweetAlert error
@@ -345,7 +345,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                  //  fileLink.classList.add('hidden'); // Hide the View Document link
+                    //  fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If no file is selected, hide the View Document link
@@ -395,7 +395,7 @@
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#FF0000'
                         });
-                      //  fileLink.classList.add('hidden'); // Hide the View Document link
+                        //  fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
                     // SweetAlert for invalid file type (not a PDF)
@@ -460,7 +460,7 @@
                                 confirmButtonText: 'OK',
                                 confirmButtonColor: '#FF0000'
                             });
-                          //  fileLink.classList.add('hidden'); // Hide the View Document link
+                            //  fileLink.classList.add('hidden'); // Hide the View Document link
                         }
                     } else {
                         // SweetAlert2 for invalid file type (not a PDF)
@@ -471,7 +471,7 @@
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#FF0000'
                         });
-                       // fileLink.classList.add('hidden'); // Hide the View Document link
+                        // fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
                     // If no file is selected, hide the View Document link
@@ -522,7 +522,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                   // fileLink.classList.add('hidden'); // Hide the View Document link
+                    // fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // SweetAlert2 for invalid file type (not a PDF)
@@ -531,9 +531,9 @@
                     title: 'Invalid file type',
                     text: 'Please upload a valid PDF document.',
                     confirmButtonText: 'OK',
-                     confirmButtonColor: '#FF0000'
+                    confirmButtonColor: '#FF0000'
                 });
-               // fileLink.classList.add('hidden'); // Hide the View Document link
+                // fileLink.classList.add('hidden'); // Hide the View Document link
             }
         } else {
             // If no file is selected, hide the View Document link
@@ -582,7 +582,7 @@
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#FF0000'
                         });
-                     //   fileLink.classList.add('hidden'); // Hide the View Document link
+                        //   fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
                     // SweetAlert2 for invalid file type (not a PDF)
@@ -593,7 +593,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                  //  fileLink.classList.add('hidden'); // Hide the View Document link
+                    //  fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If no file is selected, hide the View Document link
@@ -643,7 +643,7 @@
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#FF0000'
                         });
-                     //   fileLink.classList.add('hidden'); // Hide the View Document link
+                        //   fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
                     // SweetAlert2 for invalid file type (not a PDF)
@@ -654,7 +654,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                  //  fileLink.classList.add('hidden'); // Hide the View Document link
+                    //  fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If no file is selected, hide the View Document link

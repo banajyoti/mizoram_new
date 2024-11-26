@@ -153,6 +153,12 @@ class ProfileController extends Controller
                 $data
             );
 
+            if ($userProfile) {
+                $user = Auth::user();
+                $user->stage = 3;
+                $user->save();
+            }
+
             // Return a response (JSON in case of AJAX submission)
             return response()->json([
                 'success' => true,
@@ -367,11 +373,16 @@ class ProfileController extends Controller
             ];
 
             // Update or Create the Document record
-            Document::updateOrCreate(
+            $doc = Document::updateOrCreate(
                 ['user_id' => $reg_id->id],
                 $data
             );
 
+            if ($doc) {
+                $user = Auth::user();
+                $user->stage = 4;
+                $user->save();
+            }
             return response()->json([
                 'message' => 'Documents uploaded successfully.'
             ]);
@@ -418,6 +429,7 @@ class ProfileController extends Controller
 
             $user = Auth::user();
             $user->final_submit = 1;
+            $user->stage = 5;
             $user->save();
             return response()->json([
                 'status' => 'success',

@@ -42,6 +42,9 @@ class QuestionariesController extends Controller
                         'home_guard' => 'required',
                         'iti_eqi' => 'required',
                         'auto_mobile' => 'required',
+                        'm_status' => 'required',
+                        'm_question' => 'required_if:m_status,1',
+                        'mech_experience' => 'required_if:auto_mobile,1'
                     ],
                 );
                 if ($validate->fails()) {
@@ -65,6 +68,9 @@ class QuestionariesController extends Controller
                             'home_guard' => $request->home_guard,
                             'iti_eqi' => $request->iti_eqi,
                             'auto_mobile' => $request->auto_mobile,
+                            'm_status' => $request->m_status,
+                            'm_question' => $request->m_question,
+                            'mech_experience' => $request->mech_experience
                         ]);
 
                 } else {
@@ -80,8 +86,17 @@ class QuestionariesController extends Controller
                     $questionary->home_guard = $request->home_guard;
                     $questionary->iti_eqi = $request->iti_eqi;
                     $questionary->auto_mobile = $request->auto_mobile;
+                    $questionary->m_status = $request->m_status;
+                    $questionary->m_question = $request->m_question;
+                    $questionary->mech_experience = $request->mech_experience;
                     $save = $questionary->save();
                 }
+                if ($questionary) {
+                    $user = Auth::user();
+                    $user->stage = 1;
+                    $user->save();
+                }
+
                 DB::commit();
                 return response()->json([
                     'status' => 200,
@@ -184,6 +199,11 @@ class QuestionariesController extends Controller
                 ]);
             }
             $preferences = Preference::where('user_id', Auth::user()->id)->get();
+            if ($preferences) {
+                $user = Auth::user();
+                $user->stage = 2;
+                $user->save();
+            }
             return response()->json([
                 'success' => true,
                 'preferences' => $preferences

@@ -413,7 +413,6 @@
 
 
 <body class="">
-
     <table class="t-100 bor-0-0">
         <tr>
             <td class="text-s text-m fw-600" style="width: 15%!important; padding: 2px 0px 0px 0px!important;">
@@ -427,6 +426,11 @@
             <td class="text-e text-m fw-600" style="width: 15%!important; padding: 0px 0px 0px 0px!important;">
                 <img src="img/SJ-yellow.png" style="height: 50px!important;" alt="" class="">
             </td>
+        </tr>
+    </table>
+    <table class="t-100 bor-0-0">
+        <tr>
+            <td style="width: 50%!important;" class="fs-08 text-e">Generated On - {{ $userDetails->up }}</td>
         </tr>
     </table>
 
@@ -765,17 +769,17 @@
             <!-- Table Headers for Preferences -->
             @if ($preferences->contains('preferences', 1))
                 <td class="p-1" style="width: 33.33%!important" colspan="">
-                    <p class="m-0 fs-12 fw-600 text-gray-700 text-c">Preference 1, Post:</p>
+                    <p class="m-0 fs-12 fw-600 text-gray-700 text-c">Preference 1:</p>
                 </td>
             @endif
             @if ($preferences->contains('preferences', 2))
                 <td class="p-1" style="width: 33.33%!important" colspan="">
-                    <p class="m-0 fs-12 fw-600 text-gray-700 text-c">Preference 2, Post:</p>
+                    <p class="m-0 fs-12 fw-600 text-gray-700 text-c">Preference 2:</p>
                 </td>
             @endif
             @if ($preferences->contains('preferences', 3))
                 <td class="p-1" style="width: 33.33%!important" colspan="">
-                    <p class="m-0 fs-12 fw-600 text-gray-700 text-c">Preference 3, Post:</p>
+                    <p class="m-0 fs-12 fw-600 text-gray-700 text-c">Preference 3:</p>
                 </td>
             @endif
         </tr>
@@ -801,7 +805,8 @@
         </tr>
     </table>
 
-
+    <p class="fs-10 fw-600 text-uppercase text-gray-700" style="margin: 10px 0px 0px 0px!important;">Uploaded
+        Documents</p>
     <table class="t-100 bor-sin" style="margin: 10px 0px 0px 0px!important;">
         <tr>
             <td class="p-1" style="width: 20%!important" colspan="">
@@ -869,6 +874,26 @@
                 @else
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
                 @endif
+            </td>
+        </tr>
+    </table>
+
+    <p class="fs-10 fw-600 text-uppercase text-gray-700" style="margin: 10px 0px 0px 0px!important;">Payment Details
+    </p>
+    <table class="t-100 bor-sin" style="margin: 10px 0px 0px 0px!important;">
+        <tr>
+            <td class="p-1" style="width: 20%!important" colspan="">
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Transaction ID</p>
+                <p class="m-0 fs-12 fw-500 text-e">TRANStest</p>
+            </td>
+            <td class="p-1" style="width: 20%!important" colspan="">
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Ammount</p>
+                <p class="m-0 fs-12 fw-500 text-e">200</p>
+
+            </td>
+            <td class="p-1" style="width: 20%!important" colspan="">
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Date</p>
+                <p class="m-0 fs-12 fw-500 text-e">26-11-2024</p>
             </td>
         </tr>
     </table>

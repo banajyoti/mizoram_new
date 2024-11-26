@@ -50,11 +50,35 @@ class LoginController extends Controller
                     'message' => 'Login successful!',
                     'redirect_url' => route('getPayment')
                 ]);
-            } else {
+            } elseif ($user->stage == 0) {
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Login successful!',
                     'redirect_url' => route('questionaries')
+                ]);
+            } elseif ($user->stage == 1) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Login successful!',
+                    'redirect_url' => route('preference')
+                ]);
+            } elseif ($user->stage == 2) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Login successful!',
+                    'redirect_url' => route('profile')
+                ]);
+            } elseif ($user->stage == 3) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Login successful!',
+                    'redirect_url' => route('document')
+                ]);
+            } elseif ($user->stage == 4) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Login successful!',
+                    'redirect_url' => route('preview')
                 ]);
             }
         }

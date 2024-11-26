@@ -38,11 +38,18 @@
                 const classXMizo = $('input[name="class_x_mizo"]:checked').val();
                 const mizoAsMil = $('input[name="mizo_as_mil"]:checked').val();
                 const compCert = $('input[name="comp_cert"]:checked').val();
+                const mQuestion = $('input[name="m_question"]:checked').val();
 
                 if ((minScoreMizo === '1' || classXMizo === '1' || mizoAsMil === '1') && compCert == '1') {
                     $('#save_button').show();
                 } else {
                     $('#save_button').hide();
+                }
+
+                if (mQuestion === '1') {
+                    $('#save_button').hide();
+                } else {
+                    $('#save_button').show();
                 }
             }
 
@@ -50,6 +57,20 @@
                 $('.choose_ncc_div').removeClass('hidden');
             } else {
                 $('.choose_ncc_div').addClass('hidden');
+            }
+
+            if (formData['m_status'] === '1') {
+                console.log('Showing element');
+                $('.choose_m_status').removeClass('hidden');
+            } else {
+                console.log('Hiding element');
+                $('.choose_m_status').addClass('hidden');
+            }
+
+            if (formData['auto_mobile'] === '1') {
+                $('.mechExperience').removeClass('hidden');
+            } else {
+                $('.mechExperience').addClass('hidden');
             }
         }
 
@@ -145,6 +166,18 @@
             submitRadioData('ncc_grade');
         });
 
+        $('input[name="m_status"]').change(function() {
+            submitRadioData('m_status');
+        });
+
+        $('input[name="m_question"]').change(function() {
+            submitRadioData('m_question');
+        });
+
+        $('input[name="mech_experience"]').change(function() {
+            submitRadioData('mech_experience');
+        });
+
         $('#save_button').click(function() {
             submitAllData();
         });
@@ -162,5 +195,23 @@
 
             toggleSaveButton();
         });
+
+        if ($('input[name="m_status"]:checked').val() === '1') {
+            $('.choose_m_status').removeClass('hidden');
+        } else {
+            $('.choose_m_status').addClass('hidden');
+        }
+
+        if ($('input[name="m_status"]:checked').val() === '1') {
+            $('.choose_m_status').removeClass('hidden');
+        } else {
+            $('.choose_m_status').addClass('hidden');
+        }
+
+        if ($('input[name="auto_mobile"]:checked').val() === '1') {
+            $('.mechExperience').removeClass('hidden');
+        } else {
+            $('.mechExperience').addClass('hidden');
+        }
     });
 </script>
