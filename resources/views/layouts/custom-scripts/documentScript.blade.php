@@ -4,7 +4,7 @@
         if (e.target && e.target.id === 'photo') {
             let file = e.target.files[0];
             let fileLink = document.getElementById('photo_view');
-            let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
+            let maxSize = 450 * 1024; // Maximum file size: 450 KB (in bytes)
 
             if (file) {
                 // Check if the file is an image
@@ -39,7 +39,7 @@
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#FF0000'
                         });
-                        //fileLink.classList.add('hidden'); // Hide the View Document link
+                        fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
                     // If the file is not an image, show a SweetAlert message
@@ -50,7 +50,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                    //fileLink.classList.add('hidden'); // Hide the View Document link
+                    fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If no file is selected, hide the View Document link
@@ -64,7 +64,7 @@
     document.getElementById('signature').addEventListener('change', function(e) {
         let file = e.target.files[0];
         let fileLink = document.getElementById('signature_view');
-        let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
+        let maxSize = 100 * 1024; // Maximum file size: 200 KB (in bytes)
 
         if (file) {
             // Check if the file is an image (JPG, PNG, GIF, etc.)
@@ -99,7 +99,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                    // fileLink.classList.add('hidden'); // Hide the View Document link
+                    fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If the file is not an image, show a SweetAlert error
@@ -157,7 +157,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                    // fileLink.classList.add('hidden'); // Hide the View Document link
+                    fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If the file is not a PDF, show a SweetAlert error
@@ -165,7 +165,8 @@
                     icon: 'error',
                     title: 'Invalid file type',
                     text: 'Please upload a valid PDF document.',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#FF0000'
                 });
                 // fileLink.classList.add('hidden'); // Hide the View Document link
             }
@@ -215,7 +216,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                    //  fileLink.classList.add('hidden'); // Hide the View Document link
+                    fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
                 // If the file is not a PDF, show a SweetAlert error
@@ -235,63 +236,302 @@
     });
 
     // Add event listener for the Mizo Language Proficiency Cert input
-    document.getElementById('mizo_lang_prof').addEventListener('change', function(e) {
-        let file = e.target.files[0];
-        let fileLink = document.getElementById('mizo_lang_prof_view');
-        let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
+    // document.getElementById('mizo_lang_prof').addEventListener('change', function(e) {
+    //     let file = e.target.files[0];
+    //     let fileLink = document.getElementById('mizo_lang_prof_view');
+    //     let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
 
-        if (file) {
-            // Check if the file is a PDF
-            if (file.type === 'application/pdf') {
-                // Check if the file size is less than or equal to 200 KB
-                if (file.size <= maxSize) {
-                    let reader = new FileReader();
-                    reader.onload = function() {
-                        let fileUrl = reader.result; // This is the Data URL of the PDF
-                        // Update the "View Document" link to point to the file URL
-                        fileLink.href = fileUrl;
-                        // Show the "View Document" link
-                        fileLink.classList.remove('hidden');
-                    };
-                    reader.readAsDataURL(file); // Read the PDF as a Data URL
+    //     if (file) {
+    //         // Check if the file is a PDF
+    //         if (file.type === 'application/pdf') {
+    //             // Check if the file size is less than or equal to 200 KB
+    //             if (file.size <= maxSize) {
+    //                 let reader = new FileReader();
+    //                 reader.onload = function() {
+    //                     let fileUrl = reader.result; // This is the Data URL of the PDF
+    //                     // Update the "View Document" link to point to the file URL
+    //                     fileLink.href = fileUrl;
+    //                     // Show the "View Document" link
+    //                     fileLink.classList.remove('hidden');
+    //                 };
+    //                 reader.readAsDataURL(file); // Read the PDF as a Data URL
 
-                    // Show a SweetAlert confirming the file upload
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'File Uploaded!',
-                        text: 'You have successfully uploaded a valid PDF document.',
-                        confirmButtonText: 'OK',
-                        confirmButtonColor: '#2DB325'
-                    });
+    //                 // Show a SweetAlert confirming the file upload
+    //                 Swal.fire({
+    //                     icon: 'success',
+    //                     title: 'File Uploaded!',
+    //                     text: 'You have successfully uploaded a valid PDF document.',
+    //                     confirmButtonText: 'OK',
+    //                     confirmButtonColor: '#2DB325'
+    //                 });
 
+    //             } else {
+    //                 // If the file size is larger than 200 KB, show a SweetAlert error
+    //                 Swal.fire({
+    //                     icon: 'error',
+    //                     title: 'File size too large',
+    //                     text: 'Please select a file smaller than 200 KB.',
+    //                     confirmButtonText: 'OK',
+    //                     confirmButtonColor: '#FF0000'
+    //                 });
+    //                 // fileLink.classList.add('hidden'); // Hide the View Document link
+    //             }
+    //         } else {
+    //             // If the file is not a PDF, show a SweetAlert error
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Invalid file type',
+    //                 text: 'Please upload a valid PDF document.',
+    //                 confirmButtonText: 'OK',
+    //                 confirmButtonColor: '#FF0000'
+    //             });
+    //             //fileLink.classList.add('hidden'); // Hide the View Document link
+    //         }
+    //     } else {
+    //         // If no file is selected, hide the View Document link
+    //         fileLink.classList.add('hidden');
+    //     }
+    // });
+    document.body.addEventListener('change', function(e) {
+        if (e.target && e.target.id === 'mizo_lang_prof') {
+            let file = e.target.files[0];
+            let fileLink = document.getElementById('mizo_lang_prof_view');
+            let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
+
+            if (file) {
+                // Check if the file is a PDF
+                if (file.type === 'application/pdf') {
+                    // Check if the file size is less than or equal to 200 KB
+                    if (file.size <= maxSize) {
+                        let reader = new FileReader();
+                        reader.onload = function() {
+                            let fileUrl = reader.result; // This is the Data URL of the PDF
+                            // Update the "View Document" link to point to the file URL
+                            fileLink.href = fileUrl;
+                            // Show the "View Document" link
+                            fileLink.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                        // Show a SweetAlert confirming the file upload
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'File Uploaded!',
+                            text: 'You have successfully uploaded a valid PDF document.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#2DB325',
+                        });
+
+                    } else {
+                        // If the file size is larger than 200 KB, show a SweetAlert error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File size too large',
+                            text: 'Please select a file smaller than 200 KB.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                        fileLink.classList.add('hidden'); // Hide the View Document link
+                    }
                 } else {
-                    // If the file size is larger than 200 KB, show a SweetAlert error
+                    // If the file is not a PDF, show a SweetAlert error
                     Swal.fire({
                         icon: 'error',
-                        title: 'File size too large',
-                        text: 'Please select a file smaller than 200 KB.',
+                        title: 'Invalid file type',
+                        text: 'Please upload a valid PDF document.',
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#FF0000'
                     });
-                    // fileLink.classList.add('hidden'); // Hide the View Document link
+                    //  fileLink.classList.add('hidden'); // Hide the View Document link
                 }
             } else {
-                // If the file is not a PDF, show a SweetAlert error
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Invalid file type',
-                    text: 'Please upload a valid PDF document.',
-                    confirmButtonText: 'OK',
-                    confirmButtonColor: '#FF0000'
-                });
-                //fileLink.classList.add('hidden'); // Hide the View Document link
+                // If no file is selected, hide the View Document link
+                fileLink.classList.add('hidden');
             }
-        } else {
-            // If no file is selected, hide the View Document link
-            fileLink.classList.add('hidden');
         }
     });
 
+
+    // Add event listener for the Mizo class x prof Cert input
+    document.addEventListener('DOMContentLoaded', function() {
+        let fileInput = document.getElementById('mizu_class_x_prof');
+        let fileLink = document.getElementById('mizu_class_x_view');
+
+        if (fileInput && fileLink) {
+            fileInput.addEventListener('change', function(e) {
+                let file = e.target.files[0];
+                let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
+
+                if (file) {
+                    // Check if the file is a PDF
+                    if (file.type === 'application/pdf') {
+                        // Check if the file size is less than or equal to 200 KB
+                        if (file.size <= maxSize) {
+                            let reader = new FileReader();
+                            reader.onload = function() {
+                                let fileUrl = reader.result; // This is the Data URL of the PDF
+                                // Update the "View Document" link to point to the file URL
+                                fileLink.href = fileUrl;
+                                // Show the "View Document" link
+                                fileLink.classList.remove('hidden');
+                            };
+                            reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                            // Show a SweetAlert confirming the file upload
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'File Uploaded!',
+                                text: 'You have successfully uploaded a valid PDF document.',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#2DB325'
+                            });
+
+                        } else {
+                            // If the file size is larger than 200 KB, show a SweetAlert error
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'File size too large',
+                                text: 'Please select a file smaller than 200 KB.',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#FF0000'
+                            });
+                            fileLink.classList.add('hidden'); // Hide the View Document link
+                        }
+                    } else {
+                        // If the file is not a PDF, show a SweetAlert error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid file type',
+                            text: 'Please upload a valid PDF document.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                        //fileLink.classList.add('hidden'); // Hide the View Document link
+                    }
+                } else {
+                    // If no file is selected, hide the View Document link
+                    fileLink.classList.add('hidden');
+                }
+            });
+        }
+    });
+
+
+    // Add event listener for the Mizo class x prof Cert input outside mizuram
+    // document.getElementById('mizu_class_x_outside_prof').addEventListener('change', function(e) {
+    //     let file = e.target.files[0];
+    //     let fileLink = document.getElementById('mizu_class_x_outside_view');
+    //     let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
+
+    //     if (file) {
+    //         // Check if the file is a PDF
+    //         if (file.type === 'application/pdf') {
+    //             // Check if the file size is less than or equal to 200 KB
+    //             if (file.size <= maxSize) {
+    //                 let reader = new FileReader();
+    //                 reader.onload = function() {
+    //                     let fileUrl = reader.result; // This is the Data URL of the PDF
+    //                     // Update the "View Document" link to point to the file URL
+    //                     fileLink.href = fileUrl;
+    //                     // Show the "View Document" link
+    //                     fileLink.classList.remove('hidden');
+    //                 };
+    //                 reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+    //                 // Show a SweetAlert confirming the file upload
+    //                 Swal.fire({
+    //                     icon: 'success',
+    //                     title: 'File Uploaded!',
+    //                     text: 'You have successfully uploaded a valid PDF document.',
+    //                     confirmButtonText: 'OK',
+    //                     confirmButtonColor: '#2DB325'
+    //                 });
+
+    //             } else {
+    //                 // If the file size is larger than 200 KB, show a SweetAlert error
+    //                 Swal.fire({
+    //                     icon: 'error',
+    //                     title: 'File size too large',
+    //                     text: 'Please select a file smaller than 200 KB.',
+    //                     confirmButtonText: 'OK',
+    //                     confirmButtonColor: '#FF0000'
+    //                 });
+    //                 // fileLink.classList.add('hidden'); // Hide the View Document link
+    //             }
+    //         } else {
+    //             // If the file is not a PDF, show a SweetAlert error
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Invalid file type',
+    //                 text: 'Please upload a valid PDF document.',
+    //                 confirmButtonText: 'OK',
+    //                 confirmButtonColor: '#FF0000'
+    //             });
+    //             //fileLink.classList.add('hidden'); // Hide the View Document link
+    //         }
+    //     } else {
+    //         // If no file is selected, hide the View Document link
+    //         fileLink.classList.add('hidden');
+    //     }
+    // });
+    document.body.addEventListener('change', function(e) {
+        if (e.target && e.target.id === 'mizu_class_x_outside_prof') {
+            let file = e.target.files[0];
+            let fileLink = document.getElementById('mizu_class_x_outside_view');
+            let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
+
+            if (file) {
+                // Check if the file is a PDF
+                if (file.type === 'application/pdf') {
+                    // Check if the file size is less than or equal to 200 KB
+                    if (file.size <= maxSize) {
+                        let reader = new FileReader();
+                        reader.onload = function() {
+                            let fileUrl = reader.result; // This is the Data URL of the PDF
+                            // Update the "View Document" link to point to the file URL
+                            fileLink.href = fileUrl;
+                            // Show the "View Document" link
+                            fileLink.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                        // Show a SweetAlert confirming the file upload
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'File Uploaded!',
+                            text: 'You have successfully uploaded a valid PDF document.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#2DB325',
+                        });
+
+                    } else {
+                        // If the file size is larger than 200 KB, show a SweetAlert error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File size too large',
+                            text: 'Please select a file smaller than 200 KB.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                        fileLink.classList.add('hidden'); // Hide the View Document link
+                    }
+                } else {
+                    // If the file is not a PDF, show a SweetAlert error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid file type',
+                        text: 'Please upload a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                    //  fileLink.classList.add('hidden'); // Hide the View Document link
+                }
+            } else {
+                // If no file is selected, hide the View Document link
+                fileLink.classList.add('hidden');
+            }
+        }
+    });
 
 
     // Add event listener for the Homeguard Certificate input
@@ -334,7 +574,7 @@
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#FF0000'
                         });
-                        //fileLink.classList.add('hidden'); // Hide the View Document link
+                        fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
                     // If the file is not a PDF, show a SweetAlert error
@@ -395,7 +635,7 @@
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#FF0000'
                         });
-                        //  fileLink.classList.add('hidden'); // Hide the View Document link
+                        fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
                     // SweetAlert for invalid file type (not a PDF)
@@ -460,7 +700,7 @@
                                 confirmButtonText: 'OK',
                                 confirmButtonColor: '#FF0000'
                             });
-                            //  fileLink.classList.add('hidden'); // Hide the View Document link
+                            fileLink.classList.add('hidden'); // Hide the View Document link
                         }
                     } else {
                         // SweetAlert2 for invalid file type (not a PDF)
@@ -480,7 +720,6 @@
             });
         }
     });
-
 
 
     // Add event listener for the Computer Certificate input
@@ -533,7 +772,7 @@
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#FF0000'
                 });
-                // fileLink.classList.add('hidden'); // Hide the View Document link
+                fileLink.classList.add('hidden'); // Hide the View Document link
             }
         } else {
             // If no file is selected, hide the View Document link
@@ -582,7 +821,7 @@
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#FF0000'
                         });
-                        //   fileLink.classList.add('hidden'); // Hide the View Document link
+                        fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
                     // SweetAlert2 for invalid file type (not a PDF)
@@ -643,10 +882,128 @@
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#FF0000'
                         });
-                        //   fileLink.classList.add('hidden'); // Hide the View Document link
+                        fileLink.classList.add('hidden'); // Hide the View Document link
                     }
                 } else {
                     // SweetAlert2 for invalid file type (not a PDF)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid file type',
+                        text: 'Please upload a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                    //  fileLink.classList.add('hidden'); // Hide the View Document link
+                }
+            } else {
+                // If no file is selected, hide the View Document link
+                fileLink.classList.add('hidden');
+            }
+        }
+    });
+
+    document.body.addEventListener('change', function(e) {
+        if (e.target && e.target.id === 'sports_cert') {
+            let file = e.target.files[0];
+            let fileLink = document.getElementById('sports_cert_view');
+            let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
+
+            if (file) {
+                // Check if the file is a PDF
+                if (file.type === 'application/pdf') {
+                    // Check if the file size is less than or equal to 200 KB
+                    if (file.size <= maxSize) {
+                        let reader = new FileReader();
+                        reader.onload = function() {
+                            let fileUrl = reader.result; // This is the Data URL of the PDF
+                            // Update the "View Document" link to point to the file URL
+                            fileLink.href = fileUrl;
+                            // Show the "View Document" link
+                            fileLink.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                        // Show a SweetAlert confirming the file upload
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'File Uploaded!',
+                            text: 'You have successfully uploaded a valid PDF document.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#2DB325',
+                        });
+
+                    } else {
+                        // If the file size is larger than 200 KB, show a SweetAlert error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File size too large',
+                            text: 'Please select a file smaller than 200 KB.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                        fileLink.classList.add('hidden'); // Hide the View Document link
+                    }
+                } else {
+                    // If the file is not a PDF, show a SweetAlert error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid file type',
+                        text: 'Please upload a valid PDF document.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#FF0000'
+                    });
+                    //  fileLink.classList.add('hidden'); // Hide the View Document link
+                }
+            } else {
+                // If no file is selected, hide the View Document link
+                fileLink.classList.add('hidden');
+            }
+        }
+    });
+
+    document.body.addEventListener('change', function(e) {
+        if (e.target && e.target.id === 'ex_service') {
+            let file = e.target.files[0];
+            let fileLink = document.getElementById('ex_service_view');
+            let maxSize = 200 * 1024; // Maximum file size: 200 KB (in bytes)
+
+            if (file) {
+                // Check if the file is a PDF
+                if (file.type === 'application/pdf') {
+                    // Check if the file size is less than or equal to 200 KB
+                    if (file.size <= maxSize) {
+                        let reader = new FileReader();
+                        reader.onload = function() {
+                            let fileUrl = reader.result; // This is the Data URL of the PDF
+                            // Update the "View Document" link to point to the file URL
+                            fileLink.href = fileUrl;
+                            // Show the "View Document" link
+                            fileLink.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file); // Read the PDF as a Data URL
+
+                        // Show a SweetAlert confirming the file upload
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'File Uploaded!',
+                            text: 'You have successfully uploaded a valid PDF document.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#2DB325',
+                        });
+
+                    } else {
+                        // If the file size is larger than 200 KB, show a SweetAlert error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File size too large',
+                            text: 'Please select a file smaller than 200 KB.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                        fileLink.classList.add('hidden'); // Hide the View Document link
+                    }
+                } else {
+                    // If the file is not a PDF, show a SweetAlert error
                     Swal.fire({
                         icon: 'error',
                         title: 'Invalid file type',

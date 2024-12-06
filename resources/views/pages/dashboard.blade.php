@@ -11,7 +11,7 @@
             </div>
             <div class="mb-4 text-right">
                 <button type="button" data-modal-target="edit_profile" data-modal-toggle="edit_profile"
-                    class="h-8 w-8 rounded-full border border-gray-200 hover:border-gray-300 bg-gray-100 hover:bg-gray-200"
+                    class="h-8 w-8"
                     title="edit profile"></button>
             </div>
             <div class="space-y-1">

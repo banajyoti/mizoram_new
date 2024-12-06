@@ -321,7 +321,7 @@
                                 on 01-01-2025<span class="ps-1 text-red-500">*</span></label>
                             <input type="text" id="agee"
                                 class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                name="age"  placeholder="Age as on 1st January, 2025" readonly />
+                                name="age" placeholder="Age as on 1st January, 2025" readonly />
                             <input type="hidden" maxlength="2" size="2" id="date2"
                                 placeholder="Date" />
                             <input type="hidden" maxlength="2" size="2" id="month2"
@@ -344,7 +344,7 @@
                             <p id="result"></p>
                         </div>
                     </div>
-                    {{-- <div class="col-span-6 sm:col-span-4">
+                    <div class="col-span-6 sm:col-span-4">
                         <!-- Div-1 -->
                         <div class="h-ful flex flex-col phone">
                             <div class="flex items-center justify-between">
@@ -361,10 +361,11 @@
                                 <input type="text" id="p_number" onkeypress="return isNumber(event)"
                                     minlength="10" maxlength="10"
                                     class="grow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                    name="phone" value="" placeholder="Phone Number" required />
+                                    name="phone" value="" maxlength="4" minlength="4"
+                                    placeholder="Phone Number" required />
                                 <button type="button"
-                                    class="text-xs text-white hover:text-green-100 bg-green-600 hover:bg-green-700 rounded-lg p-2 whitespace-nowrap" onclick="hideButton()"
-                                    id="send_OTP">Send OTP</button>
+                                    class="text-xs text-white hover:text-green-100 bg-green-600 hover:bg-green-700 rounded-lg p-2 whitespace-nowrap"
+                                    onclick="hideButton()" id="send_OTP">Send OTP</button>
                             </div>
                         </div>
                         <!-- Div-2 -->
@@ -381,15 +382,20 @@
                             <div class="flex gap-1 mt-auto">
                                 <input type="text" id="otp"
                                     class="grow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 text-center"
-                                    name="otp" value="" placeholder="X X X X" required />
+                                    name="otp" value="" minlength="4" maxlength="4"
+                                    placeholder="X X X X" required />
+                                @error('otp')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                                 <button type="button"
                                     class="text-xs text-white hover:text-green-100 bg-green-600 hover:bg-green-700 rounded-lg px-2 py-0.5"
                                     id="verified">Verify</button>
                                 <button type="button"
-                                    class="text-xs text-white hover:text-yellow-100 bg-yellow-500 hover:bg-yellow-600 rounded-lg px-2 py-0.5" id="send_OTP">Resend</button>
+                                    class="text-xs text-white hover:text-yellow-100 bg-yellow-500 hover:bg-yellow-600 rounded-lg px-2 py-0.5"
+                                    id="resend_OTP">Resend</button>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="col-span-4">
                         <div class="h-full flex flex-col">
                             <label for="ex-ser" class="block mb-auto px-1 text-sm font-medium text-gray-600">Are you
@@ -405,7 +411,19 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-span-6 sm:col-span-8">
+
+                    <!-- This is where the additional text box will be appended -->
+                    <div id="ex_ser_textbox" class="col-span-4 hidden">
+                        <div class="h-full flex flex-col">
+                            <label for="total_ex"
+                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Please provide details
+                                if you are an Ex-Serviceman</label>
+                            <input type="text" name="total_ex" id="total_ex" onkeypress="return isNumber(event)" minlength="1" maxlength="2"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
+                        </div>
+                    </div>
+
+                    {{-- <div class="col-span-6 sm:col-span-8">
                         <div class="h-full flex flex-col">
                             <label for="X-inMizo" class="block mb-auto px-1 text-sm font-medium text-gray-600">Have
                                 you completed your Class-X Standard (HSLC) in Mizoram?<span
@@ -417,6 +435,75 @@
                                 <option value="2">NO</option>
                             </select>
                             @error('X_inMizo')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div> --}}
+                    <div class="col-span-4 sm:col-span-6" id="ms">
+                        <div class="h-full flex flex-col">
+                            <label for="m_sport" class="block mb-auto px-1 text-sm font-medium text-gray-600">
+                                Are you a Meritorious Sportspersons?<span class="ps-1 text-red-500">*</span>
+                            </label>
+                            <select id="m_sport" name="m_sport"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                <option selected disabled>select</option>
+                                <option value="1">YES</option>
+                                <option value="2">NO</option>
+                            </select>
+                            @error('m_sport')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div id="sports-section" class="col-span-4 sm:col-span-6 hidden">
+                        <div class="h-full flex flex-col">
+                            <label for="games" class="block mb-auto px-1 text-sm font-medium text-gray-600">
+                                Represented Games /Sports<span class="ps-1 text-red-500">*</span>
+                            </label>
+                            <select id="g_id" name="g_id"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                <option selected disabled>select</option>s
+                                @foreach ($games as $game)
+                                    <option value="{{ $game->id }}"
+                                        {{ old('name') == $game->id ? 'selected' : '' }}>
+                                        {{ $game->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('g_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div id="categories-section" class="col-span-6 sm:col-span-12 hidden">
+                        <div class="h-full flex flex-col">
+                            <label for="X_inMizo" class="block mb-auto px-1 text-sm font-medium text-gray-600">
+                                Categories of Meritorious Sportspersons <span class="ps-1 text-red-500">*</span>
+                            </label>
+                            {{-- <select id="c_ms_id" name="c_ms_id"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                <option selected disabled>select</option>
+                                @foreach ($gameCategoires as $gc)
+                                    <option value="{{ $gc->id }}"
+                                        {{ old('name') == $gc->id ? 'selected' : '' }}>
+                                        {{ $gc->name }}
+                                    </option>
+                                @endforeach
+                            </select> --}}
+                            <select id="c_ms_id" name="c_ms_id"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 overflow-hidden text-ellipsis">
+                                <option selected disabled>select</option>
+                                @foreach ($gameCategoires as $gc)
+                                    <option value="{{ $gc->id }}"
+                                        {{ old('name') == $gc->id ? 'selected' : '' }} title="{{ $gc->name }}">
+                                        {{ Str::limit($gc->name, 30) }}
+                                        <!-- Limit the text here, you can adjust the number -->
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('c_ms_id')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -450,25 +537,34 @@
 @include('layouts.modals')
 @include('layouts.custom-scripts.registerScript')
 <script>
-    function toggleCategoryField() {
-        var yesRadio = document.getElementById("yes");
-        var noRadio = document.getElementById("no");
+    document.getElementById('m_sport').addEventListener('change', function() {
+        var sportValue = this.value;
 
-        var categoryField = document.getElementById("category-field");
-        var categoryFieldNo = document.getElementById("category-field-no");
+        // Get the divs for games and categories sections
+        var sportsSection = document.getElementById('sports-section');
+        var categoriesSection = document.getElementById('categories-section');
 
-        // Show/Hide based on radio button selection
-        if (yesRadio.checked) {
-            categoryField.classList.remove("hidden");
-            categoryFieldNo.classList.add("hidden");
-        } else if (noRadio.checked) {
-            categoryFieldNo.classList.remove("hidden");
-            categoryField.classList.add("hidden");
+        // Show or hide based on the value selected
+        if (sportValue === '1') { // YES
+            sportsSection.classList.remove('hidden');
+            categoriesSection.classList.remove('hidden');
+        } else if (sportValue === '2') { // NO
+            sportsSection.classList.add('hidden');
+            categoriesSection.classList.add('hidden');
         }
-    }
+    });
 
-    // Initial check on page load to set correct state
-    window.onload = function() {
-        toggleCategoryField(); // Ensure correct display on initial load based on any pre-selected radio button
-    };
+    // Listen for the change event on the "Are you an Ex-Serviceman?" dropdown
+    document.getElementById('ex_ser').addEventListener('change', function() {
+        const selectedValue = this.value;
+        const textBox = document.getElementById('ex_ser_textbox');
+
+        // If 'YES' is selected, show the text box
+        if (selectedValue === '1') {
+            textBox.classList.remove('hidden');
+        } else {
+            // If 'NO' is selected, hide the text box
+            textBox.classList.add('hidden');
+        }
+    });
 </script>

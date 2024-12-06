@@ -38,18 +38,26 @@
                 const classXMizo = $('input[name="class_x_mizo"]:checked').val();
                 const mizoAsMil = $('input[name="mizo_as_mil"]:checked').val();
                 const compCert = $('input[name="comp_cert"]:checked').val();
+                const mStatus = $('input[name="m_status"]:checked').val();
                 const mQuestion = $('input[name="m_question"]:checked').val();
 
-                if ((minScoreMizo === '1' || classXMizo === '1' || mizoAsMil === '1') && compCert == '1') {
+                if ((minScoreMizo === '1' || classXMizo === '1' || mizoAsMil === '1') && compCert === '1' &&
+                    mStatus === '0' || mQuestion === '0') {
                     $('#save_button').show();
                 } else {
                     $('#save_button').hide();
                 }
 
-                if (mQuestion === '1') {
-                    $('#save_button').hide();
+                if (classXMizo === '0') {
+                    $('#x2').removeClass('hidden');
                 } else {
-                    $('#save_button').show();
+                    $('#x2').addClass('hidden');
+                }
+
+                if (mizoAsMil === '0') {
+                    $('#x3').removeClass('hidden');
+                } else {
+                    $('#x3').addClass('hidden');
                 }
             }
 
@@ -214,4 +222,15 @@
             $('.mechExperience').addClass('hidden');
         }
     });
+</script>
+<script>
+    /** jQUERY for phone number validation **/
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
 </script>

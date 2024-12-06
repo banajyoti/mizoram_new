@@ -375,7 +375,6 @@
 
 
                 <div class="rounded-md p-1 col-span-12 bg-gray-200"></div>
-
                 <div
                     class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2 flex flex-col gap-2">
                     <p class="text-xs uppercase font-semibold text-gray-600 mb-auto">Photo</p>
@@ -416,17 +415,49 @@
                             target="_blank"><i class="bi bi-eye"></i></a>
                     </div>
                 </div>
-                <div
-                    class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2 flex flex-col gap-2">
-                    <p class="text-xs uppercase font-semibold text-gray-600 mb-auto">Mizo Language Profeciency Cert.
-                    </p>
-                    <div class="bg-gray-200 rounded p-1 text-sm flex items-center justify-between">
-                        <span class="inline-block text-green-700 font-medium">UPLOADED</span>
-                        <a type="button" class="inline-block py-0.5 px-1.5 rounded bg-white hover:bg-gray-50"
-                            href="{{ asset('storage/public/uploads/mechanic_ex_cert/' . $userDetails->mizu_lang_cert) }}"
-                            target="_blank"><i class="bi bi-eye"></i></a>
+                @if ($userDetails->ms == 1)
+                    <div
+                        class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2 flex flex-col gap-2">
+                        <p class="text-xs uppercase font-semibold text-gray-600 mb-auto">Mizo Language Proficiency Test
+                            Cert
+                        </p>
+                        <div class="bg-gray-200 rounded p-1 text-sm flex items-center justify-between">
+                            <span class="inline-block text-green-700 font-medium">UPLOADED</span>
+                            <a type="button" class="inline-block py-0.5 px-1.5 rounded bg-white hover:bg-gray-50"
+                                href="{{ asset('storage/public/uploads/mizu_lang_cert/' . $userDetails->mizu_lang_cert) }}"
+                                target="_blank"><i class="bi bi-eye"></i></a>
+                        </div>
                     </div>
-                </div>
+                @endif
+                @if ($userDetails->mx == 1)
+                    <div
+                        class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2 flex flex-col gap-2">
+                        <p class="text-xs uppercase font-semibold text-gray-600 mb-auto">Mizo subject in Class-X
+                            standard
+                            (HSLC)
+                        </p>
+                        <div class="bg-gray-200 rounded p-1 text-sm flex items-center justify-between">
+                            <span class="inline-block text-green-700 font-medium">UPLOADED</span>
+                            <a type="button" class="inline-block py-0.5 px-1.5 rounded bg-white hover:bg-gray-50"
+                                href="{{ asset('storage/public/uploads/mizu_class_x/' . $userDetails->mizu_class_x) }}"
+                                target="_blank"><i class="bi bi-eye"></i></a>
+                        </div>
+                    </div>
+                @endif
+                @if ($userDetails->mm == 1)
+                    <div
+                        class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2 flex flex-col gap-2">
+                        <p class="text-xs uppercase font-semibold text-gray-600 mb-auto">Mizo subject as MIL in Class-X
+                            standard in outside Mizoram
+                        </p>
+                        <div class="bg-gray-200 rounded p-1 text-sm flex items-center justify-between">
+                            <span class="inline-block text-green-700 font-medium">UPLOADED</span>
+                            <a type="button" class="inline-block py-0.5 px-1.5 rounded bg-white hover:bg-gray-50"
+                                href="{{ asset('storage/public/uploads/mizu_class_x_outside/' . $userDetails->mizu_class_x_outside) }}"
+                                target="_blank"><i class="bi bi-eye"></i></a>
+                        </div>
+                    </div>
+                @endif
                 @if ($userDetails->home_guard == 1)
                     <div
                         class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2 flex flex-col gap-2">
@@ -504,6 +535,20 @@
                             <span class="inline-block text-green-700 font-medium">UPLOADED</span>
                             <a type="button" class="inline-block py-0.5 px-1.5 rounded bg-white hover:bg-gray-50"
                                 href="{{ asset('storage/public/uploads/mechanic_ex_cert/' . $userDetails->mechanic_ex_cert) }}"
+                                target="_blank"><i class="bi bi-eye"></i></a>
+                        </div>
+                    </div>
+                @endif
+                @if ($userDetails->ex_ser == 1)
+                    <div
+                        class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2 flex flex-col gap-2">
+                        <p class="text-xs uppercase font-semibold text-gray-600 mb-auto">Ex-Serviceman
+                            Certificate
+                        </p>
+                        <div class="bg-gray-200 rounded p-1 text-sm flex items-center justify-between">
+                            <span class="inline-block text-green-700 font-medium">UPLOADED</span>
+                            <a type="button" class="inline-block py-0.5 px-1.5 rounded bg-white hover:bg-gray-50"
+                                href="{{ asset('storage/public/uploads/ex_service/' . $userDetails->ex_service) }}"
                                 target="_blank"><i class="bi bi-eye"></i></a>
                         </div>
                     </div>

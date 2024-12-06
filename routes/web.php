@@ -28,6 +28,7 @@ Route::get('/home', [RegisterController::class, 'index'])->name('home');
 Route::match(['get', 'post'],'/login', [LoginController::class, 'login'])->name('login');
 Route::match(['get', 'post'], '/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/send-otp', [RegisterController::class, 'sendOtp'])->name('send.otp');
+Route::post('/resend-otp', [RegisterController::class, 'resendOtp'])->name('resend.otp');
 Route::post('/verify-otp', [RegisterController::class, 'verifyOtp'])->name('verify.otp');
 
 Route::group(['middleware' => 'auth'], function () {

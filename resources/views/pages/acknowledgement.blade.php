@@ -826,8 +826,30 @@
                 @endif
             </td>
             <td class="p-1" style="width: 20%!important" colspan="">
-                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Mizo Language Profeciency Cert.</p>
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Mizo Language Proficiency Test
+                    Cert.</p>
                 @if (is_null($userDetails->mizu_lang_cert))
+                    <p class="m-0 fs-12 fw-500 text-e">Not Uploaded</p>
+                @else
+                    <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
+                @endif
+            </td>
+            <td class="p-1" style="width: 20%!important" colspan="">
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Mizo subject in Class-X
+                    standard
+                    (HSLC).</p>
+                @if (is_null($userDetails->mizu_class_x))
+                    <p class="m-0 fs-12 fw-500 text-e">Not Uploaded</p>
+                @else
+                    <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
+                @endif
+            </td>
+        </tr>
+        <tr>
+            <td class="p-1" style="width: 20%!important" colspan="">
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Mizo subject as MIL in Class-X
+                    standard in outside Mizoram.</p>
+                @if (is_null($userDetails->mizu_class_x_outside))
                     <p class="m-0 fs-12 fw-500 text-e">Not Uploaded</p>
                 @else
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
@@ -841,8 +863,6 @@
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
                 @endif
             </td>
-        </tr>
-        <tr>
             <td class="p-1" style="width: 20%!important" colspan="">
                 <p class="m-0 fs-10 fw-600 text-gray-700 text-">Cast Certificate</p>
                 @if (is_null($userDetails->caste_cert))
@@ -859,6 +879,8 @@
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
                 @endif
             </td>
+        </tr>
+        <tr>
             <td class="p-1" style="width: 20%!important" colspan="">
                 <p class="m-0 fs-10 fw-600 text-gray-700 text-">Computer Certificate</p>
                 @if (is_null($userDetails->comp))
@@ -875,6 +897,15 @@
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
                 @endif
             </td>
+            <td class="p-1" style="width: 20%!important" colspan="">
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Ex-Serviceman Certificate</p>
+                @if (is_null($userDetails->ex_service))
+                    <p class="m-0 fs-12 fw-500 text-e">Not Uploaded</p>
+                @else
+                    <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
+                @endif
+            </td>
+            <td></td>
         </tr>
     </table>
 

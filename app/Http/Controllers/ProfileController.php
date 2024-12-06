@@ -320,14 +320,19 @@ class ProfileController extends Controller
                 'age_prof_cert' => 'uploads/age_prof_cert',
                 'class_x_cert' => 'uploads/class_x_cert',
                 'mizu_lang_cert' => 'uploads/mizu_lang_cert',
+                'mizu_class_x' => 'uploads/mizu_class_x',
+                'mizu_class_x_outside' => 'uploads/mizu_class_x_outside',
                 'homeguard_cert' => 'uploads/homeguard_cert',
                 'caste_cert' => 'uploads/caste_cert',
                 'ncc_cert' => 'uploads/ncc_cert',
                 'comp_cert' => 'uploads/comp_cert',
                 'mechanic_ex_cert' => 'uploads/mechanic_ex_cert',
                 'iti_ex_cert' => 'uploads/iti_ex_cert',
+                'ex_service' => 'uploads/ex_service',
+                'sports_cert' => 'uploads/sports_cert',
             ];
 
+            $userDetails = User::where('id', $reg_id->id)->first();
             $existingDocument = Document::where('user_id', $reg_id->id)->first();
             $questionaries = Questionary::where('user_id', $reg_id->id)->first();
 
@@ -337,7 +342,12 @@ class ProfileController extends Controller
                     ($field == 'ncc_cert' && $questionaries->ncc_cert == 0) ||
                     ($field == 'homeguard_cert' && $questionaries->home_guard == 0) ||
                     ($field == 'mechanic_ex_cert' && $questionaries->auto_mobile == 0) ||
-                    ($field == 'iti_ex_cert' && $questionaries->iti_eqi == 0)
+                    ($field == 'iti_ex_cert' && $questionaries->iti_eqi == 0) ||
+                    ($field == 'mizu_lang_cert' && $questionaries->min_score_mizo == 0) ||
+                    ($field == 'mizu_class_x' && $questionaries->class_x_mizo == 0) ||
+                    ($field == 'mizu_class_x_outside' && $questionaries->mizo_as_mil == 0) ||
+                    ($field == 'ex_service' && $userDetails->ex_ser == 0) ||
+                    ($field == 'sports_cert' && $userDetails->m_sport == 0)
                 ) {
                     $uploadedFiles[$field] = $existingDocument && !is_null($existingDocument->$field) ? $existingDocument->$field : null;
                 } else {
@@ -363,13 +373,17 @@ class ProfileController extends Controller
                 'signature' => $uploadedFiles['signature'],
                 'age_prof_cert' => $uploadedFiles['age_prof_cert'],
                 'class_x_cert' => $uploadedFiles['class_x_cert'],
-                'mizu_lang_cert' => $uploadedFiles['mizu_lang_cert'],
+                'mizu_lang_cert' => $uploadedFiles['mizu_lang_cert'], // This will be skipped if min_score_mizo == 0
+                'mizu_class_x' => $uploadedFiles['mizu_class_x'], // This will be skipped if class_x_mizo == 0
+                'mizu_class_x_outside' => $uploadedFiles['mizu_class_x_outside'], // This will be skipped if mizo_as_mil == 0
                 'homeguard_cert' => $uploadedFiles['homeguard_cert'], // This will be skipped if home_guard == 0
                 'caste_cert' => $uploadedFiles['caste_cert'], // This will be skipped if category_id == 1
                 'ncc_cert' => $uploadedFiles['ncc_cert'], // This will be skipped if ncc_cert == 0
+                'ex_service' => $uploadedFiles['ex_service'], // This will be skipped if ex_ser == 0
                 'comp_cert' => $uploadedFiles['comp_cert'],
                 'mechanic_ex_cert' => $uploadedFiles['mechanic_ex_cert'],
                 'iti_ex_cert' => $uploadedFiles['iti_ex_cert'],
+                'sports_cert' => $uploadedFiles['sports_cert'], // This will be skipped if m_sport == 0
             ];
 
             // Update or Create the Document record
@@ -406,6 +420,9 @@ class ProfileController extends Controller
                     'questionaries.*',
                     'questionaries.comp_cert as comp',
                     'questionaries.ncc_cert as ncc',
+                    'questionaries.min_score_mizo as ms',
+                    'questionaries.class_x_mizo as mx',
+                    'questionaries.mizo_as_mil as mm',
                     'preferences.*',
                     'profiles.*',
                     'documents.*',

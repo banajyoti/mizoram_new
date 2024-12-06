@@ -98,7 +98,101 @@
                         dt.09.04.024 issue No. 247)</p>
                     <div class="grid gap-4">
                         <!-- card 1 -->
-                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300">
+                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300" id="x1">
+                            <div class="h-full">
+                                <div class="md:my-2 md:mt-2 flex flex-col sm:flex-row items-end sm:items-center">
+                                    <div class="flex items-center flex-grow w-full">
+                                        <i class="bi bi-grip-vertical pr-2 hidden md:block"></i>
+                                        <div
+                                            class="grow p-2 md:px-4 md:py-3 bg-gray-100 rounded-t-lg md:rounded-lg space-y-2">
+                                            <div class="flex lg:items-start 2xl:items-center">
+                                                <i class="text-blue-600 text-xl mr-2"></i>
+                                                <p class="text-md">Have you studied Mizo subject in Class-X standard
+                                                    (HSLC) or above within Mizoram?<span class="text-red-600">*</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2 items-center justify-end p-2">
+                                        <div>
+                                            <input id="yes_class_x_mizo"
+                                                {{ ($data->class_x_mizo ?? '') == 1 ? 'checked' : '' }} value="1"
+                                                type="radio" name="class_x_mizo" class="hidden peer">
+                                            <label for="yes_class_x_mizo"
+                                                class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">Yes</label>
+                                        </div>
+                                        <div>
+                                            <input id="no_class_x_mizo"
+                                                {{ ($data->class_x_mizo ?? '') == 0 ? 'checked' : '' }} value="0"
+                                                type="radio" name="class_x_mizo" class="hidden peer">
+                                            <label for="no_class_x_mizo"
+                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <p class="px-6 text-gray-500 hidden md:block" id="class_x_mizo_display">
+                                    Answer:
+                                    @if ($data && isset($data->class_x_mizo))
+                                        @if ($data->class_x_mizo == 1)
+                                            I have
+                                        @else
+                                            I haven't
+                                        @endif
+                                    @else
+                                        Data not available
+                                    @endif
+                                </p> --}}
+                            </div>
+                        </div>
+                        <!-- card 2 -->
+                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300 hidden" id="x2">
+                            <div class="h-full">
+                                <div class="md:my-2 md:mt-2 flex flex-col sm:flex-row items-end sm:items-center">
+                                    <div class="flex items-center flex-grow w-full">
+                                        <i class="bi bi-grip-vertical pr-2 hidden md:block"></i>
+                                        <div
+                                            class="grow p-2 md:px-4 md:py-3 bg-gray-100 rounded-t-lg md:rounded-lg space-y-2">
+                                            <div class="flex lg:items-start 2xl:items-center">
+                                                <i class="text-blue-600 text-xl mr-2"></i>
+                                                <p class="text-md">Have you studied Mizo subject as MIL in Class-X
+                                                    standard in outside Mizoram?<span class="text-red-600">*</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2 items-center justify-end p-2">
+                                        <div>
+                                            <input id="yes_mizo_as_mil"
+                                                {{ ($data->mizo_as_mil ?? '') == 1 ? 'checked' : '' }} value="1"
+                                                type="radio" name="mizo_as_mil" class="hidden peer">
+                                            <label for="yes_mizo_as_mil"
+                                                class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">Yes</label>
+                                        </div>
+                                        <div>
+                                            <input id="no_mizo_as_mil"
+                                                {{ ($data->mizo_as_mil ?? '') == 0 ? 'checked' : '' }} value="0"
+                                                type="radio" name="mizo_as_mil" class="hidden peer">
+                                            <label for="no_mizo_as_mil"
+                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <p class="px-6 text-gray-500 hidden md:block" id="mizo_as_mil_display">
+                                    Answer:
+                                    @if ($data && isset($data->mizo_as_mil))
+                                        @if ($data->mizo_as_mil == 1)
+                                            I have
+                                        @else
+                                            I haven't
+                                        @endif
+                                    @else
+                                        Data not available
+                                    @endif
+                                </p> --}}
+                            </div>
+                        </div>
+                        <!-- card 3 -->
+                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300 hidden" id="x3">
                             <div class="h-full">
                                 <div class="md:my-2 md:mt-2 flex flex-col sm:flex-row items-end sm:items-center">
                                     <div class="flex items-center flex-grow">
@@ -127,13 +221,6 @@
                                     </div>
                                     <div class="flex gap-2 items-center justify-end p-2">
                                         <div class="">
-                                            <input id="no_min_score_mizo"
-                                                {{ ($data->min_score_mizo ?? '') == 0 ? 'checked' : '' }} value="0"
-                                                type="radio" name="min_score_mizo" class="hidden peer">
-                                            <label for="no_min_score_mizo"
-                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">No</label>
-                                        </div>
-                                        <div class="">
                                             <input id="yes_min_score_mizo"
                                                 {{ ($data->min_score_mizo ?? '') == 1 ? 'checked' : '' }}
                                                 value="1" type="radio" name="min_score_mizo"
@@ -141,106 +228,20 @@
                                             <label for="yes_min_score_mizo"
                                                 class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">Yes</label>
                                         </div>
+                                        <div class="">
+                                            <input id="no_min_score_mizo"
+                                                {{ ($data->min_score_mizo ?? '') == 0 ? 'checked' : '' }}
+                                                value="0" type="radio" name="min_score_mizo"
+                                                class="hidden peer">
+                                            <label for="no_min_score_mizo"
+                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">No</label>
+                                        </div>
                                     </div>
                                 </div>
                                 {{-- <p class="px-6 text-gray-500 hidden md:block" id="min_score_display">
                                     Answer:
                                     @if ($data && isset($data->min_score_mizo))
                                         @if ($data->min_score_mizo == 1)
-                                            I have
-                                        @else
-                                            I haven't
-                                        @endif
-                                    @else
-                                        Data not available
-                                    @endif
-                                </p> --}}
-                            </div>
-                        </div>
-                        <!-- card 2 -->
-                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300">
-                            <div class="h-full">
-                                <div class="md:my-2 md:mt-2 flex flex-col sm:flex-row items-end sm:items-center">
-                                    <div class="flex items-center flex-grow w-full">
-                                        <i class="bi bi-grip-vertical pr-2 hidden md:block"></i>
-                                        <div
-                                            class="grow p-2 md:px-4 md:py-3 bg-gray-100 rounded-t-lg md:rounded-lg space-y-2">
-                                            <div class="flex lg:items-start 2xl:items-center">
-                                                <i class="text-blue-600 text-xl mr-2"></i>
-                                                <p class="text-md">Have you studied Mizo subject in Class-X standard
-                                                    (HSLC) or above within Mizoram?<span class="text-red-600">*</span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-2 items-center justify-end p-2">
-                                        <div>
-                                            <input id="no_class_x_mizo"
-                                                {{ ($data->class_x_mizo ?? '') == 0 ? 'checked' : '' }} value="0"
-                                                type="radio" name="class_x_mizo" class="hidden peer">
-                                            <label for="no_class_x_mizo"
-                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">No</label>
-                                        </div>
-                                        <div>
-                                            <input id="yes_class_x_mizo"
-                                                {{ ($data->class_x_mizo ?? '') == 1 ? 'checked' : '' }} value="1"
-                                                type="radio" name="class_x_mizo" class="hidden peer">
-                                            <label for="yes_class_x_mizo"
-                                                class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">Yes</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <p class="px-6 text-gray-500 hidden md:block" id="class_x_mizo_display">
-                                    Answer:
-                                    @if ($data && isset($data->class_x_mizo))
-                                        @if ($data->class_x_mizo == 1)
-                                            I have
-                                        @else
-                                            I haven't
-                                        @endif
-                                    @else
-                                        Data not available
-                                    @endif
-                                </p> --}}
-                            </div>
-                        </div>
-                        <!-- card 3 -->
-                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300">
-                            <div class="h-full">
-                                <div class="md:my-2 md:mt-2 flex flex-col sm:flex-row items-end sm:items-center">
-                                    <div class="flex items-center flex-grow w-full">
-                                        <i class="bi bi-grip-vertical pr-2 hidden md:block"></i>
-                                        <div
-                                            class="grow p-2 md:px-4 md:py-3 bg-gray-100 rounded-t-lg md:rounded-lg space-y-2">
-                                            <div class="flex lg:items-start 2xl:items-center">
-                                                <i class="text-blue-600 text-xl mr-2"></i>
-                                                <p class="text-md">Have you studied Mizo subject as MIL in Class-X
-                                                    standard in outside Mizoram?<span class="text-red-600">*</span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-2 items-center justify-end p-2">
-                                        <div>
-                                            <input id="no_mizo_as_mil"
-                                                {{ ($data->mizo_as_mil ?? '') == 0 ? 'checked' : '' }} value="0"
-                                                type="radio" name="mizo_as_mil" class="hidden peer">
-                                            <label for="no_mizo_as_mil"
-                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">No</label>
-                                        </div>
-                                        <div>
-                                            <input id="yes_mizo_as_mil"
-                                                {{ ($data->mizo_as_mil ?? '') == 1 ? 'checked' : '' }} value="1"
-                                                type="radio" name="mizo_as_mil" class="hidden peer">
-                                            <label for="yes_mizo_as_mil"
-                                                class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">Yes</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <p class="px-6 text-gray-500 hidden md:block" id="mizo_as_mil_display">
-                                    Answer:
-                                    @if ($data && isset($data->mizo_as_mil))
-                                        @if ($data->mizo_as_mil == 1)
                                             I have
                                         @else
                                             I haven't
@@ -274,17 +275,17 @@
                                     </div>
                                     <div class="flex gap-2 items-center justify-end p-2">
                                         <div>
-                                            <input id="no_m_status" {{ ($data->m_status ?? '') == 0 ? 'checked' : '' }}
-                                                value="0" type="radio" name="m_status" class="hidden peer">
-                                            <label for="no_m_status"
-                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">No</label>
-                                        </div>
-                                        <div>
                                             <input id="yes_m_status"
                                                 {{ ($data->m_status ?? '') == 1 ? 'checked' : '' }} value="1"
                                                 type="radio" name="m_status" class="hidden peer">
                                             <label for="yes_m_status"
                                                 class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">Yes</label>
+                                        </div>
+                                        <div>
+                                            <input id="no_m_status" {{ ($data->m_status ?? '') == 0 ? 'checked' : '' }}
+                                                value="0" type="radio" name="m_status" class="hidden peer">
+                                            <label for="no_m_status"
+                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -319,21 +320,21 @@
                                     </div>
                                     <div class="flex gap-2 items-center justify-end p-2">
                                         <div>
-                                            <input id="no_m_question"
-                                                {{ ($data->m_question ?? '') == 0 ? 'checked' : '' }} value="0"
-                                                type="radio" name="m_question" class="hidden peer">
-                                            <label for="no_m_question"
-                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
-                                                No
-                                            </label>
-                                        </div>
-                                        <div>
                                             <input id="yes_m_question"
                                                 {{ ($data->m_question ?? '') == 1 ? 'checked' : '' }} value="1"
                                                 type="radio" name="m_question" class="hidden peer">
                                             <label for="yes_m_question"
                                                 class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
                                                 Yes
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input id="no_m_question"
+                                                {{ ($data->m_question ?? '') == 0 ? 'checked' : '' }} value="0"
+                                                type="radio" name="m_question" class="hidden peer">
+                                            <label for="no_m_question"
+                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
+                                                No
                                             </label>
                                         </div>
                                     </div>
@@ -367,18 +368,18 @@
                                     </div>
                                     <div class="flex gap-2 items-center justify-end p-2">
                                         <div>
-                                            <input id="no_comp_cert"
-                                                {{ ($data->comp_cert ?? '') == 0 ? 'checked' : '' }} value="0"
-                                                type="radio" name="comp_cert" class="hidden peer">
-                                            <label for="no_comp_cert"
-                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">No</label>
-                                        </div>
-                                        <div>
                                             <input id="yes_comp_cert"
                                                 {{ ($data->comp_cert ?? '') == 1 ? 'checked' : '' }} value="1"
                                                 type="radio" name="comp_cert" class="hidden peer">
                                             <label for="yes_comp_cert"
                                                 class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">Yes</label>
+                                        </div>
+                                        <div>
+                                            <input id="no_comp_cert"
+                                                {{ ($data->comp_cert ?? '') == 0 ? 'checked' : '' }} value="0"
+                                                type="radio" name="comp_cert" class="hidden peer">
+                                            <label for="no_comp_cert"
+                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -413,21 +414,21 @@
                                     </div>
                                     <div class="flex gap-2 items-center justify-end p-2">
                                         <div>
-                                            <input id="no_ncc_cert"
-                                                {{ ($data->ncc_cert ?? '') == 0 ? 'checked' : '' }} value="0"
-                                                type="radio" name="ncc_cert" class="hidden peer">
-                                            <label for="no_ncc_cert"
-                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
-                                                No
-                                            </label>
-                                        </div>
-                                        <div>
                                             <input id="yes_ncc_cert"
                                                 {{ ($data->ncc_cert ?? '') == 1 ? 'checked' : '' }} value="1"
                                                 type="radio" name="ncc_cert" class="hidden peer">
                                             <label for="yes_ncc_cert"
                                                 class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
                                                 Yes
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input id="no_ncc_cert"
+                                                {{ ($data->ncc_cert ?? '') == 0 ? 'checked' : '' }} value="0"
+                                                type="radio" name="ncc_cert" class="hidden peer">
+                                            <label for="no_ncc_cert"
+                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
+                                                No
                                             </label>
                                         </div>
                                     </div>
@@ -512,6 +513,15 @@
                                     </div>
                                     <div class="flex gap-2 items-center justify-end p-2">
                                         <div>
+                                            <input id="yes_home_guard"
+                                                {{ ($data->home_guard ?? '') == 1 ? 'checked' : '' }} value="1"
+                                                type="radio" name="home_guard" class="hidden peer">
+                                            <label for="yes_home_guard"
+                                                class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div>
                                             <input id="no_home_guard"
                                                 {{ ($data->home_guard ?? '') == 0 ? 'checked' : '' }} value="0"
                                                 type="radio" name="home_guard" class="hidden peer">
@@ -520,6 +530,37 @@
                                                 No
                                             </label>
                                         </div>
+                                    </div>
+                                </div>
+                                {{-- <p class="px-6 text-gray-500 hidden md:block" id="home_guard_display">
+                                    Answer:
+                                    @if ($data && isset($data->home_guard))
+                                        @if ($data->home_guard == 1)
+                                            I'm.
+                                        @else
+                                            I'm not.
+                                        @endif
+                                    @else
+                                        Data not available.
+                                    @endif
+                                </p> --}}
+                            </div>
+                        </div>
+                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300">
+                            <div class="h-full">
+                                <div class="md:my-2 md:mt-2 flex flex-col sm:flex-row items-end sm:items-center">
+                                    <div class="flex items-center flex-grow w-full">
+                                        <i class="bi bi-grip-vertical pr-2 hidden md:block"></i>
+                                        <div
+                                            class="grow p-2 md:px-4 md:py-3 bg-gray-100 rounded-t-lg md:rounded-lg space-y-2">
+                                            <div class="flex lg:items-start 2xl:items-center">
+                                                <i class="text-blue-600 text-xl mr-2"></i>
+                                                <p class="text-md">Are you a Meritorious Sportsperson ? <span
+                                                        class="text-red-600">*</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2 items-center justify-end p-2">
                                         <div>
                                             <input id="yes_home_guard"
                                                 {{ ($data->home_guard ?? '') == 1 ? 'checked' : '' }} value="1"
@@ -527,6 +568,15 @@
                                             <label for="yes_home_guard"
                                                 class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
                                                 Yes
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input id="no_home_guard"
+                                                {{ ($data->home_guard ?? '') == 0 ? 'checked' : '' }} value="0"
+                                                type="radio" name="home_guard" class="hidden peer">
+                                            <label for="no_home_guard"
+                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
+                                                No
                                             </label>
                                         </div>
                                     </div>
@@ -570,19 +620,19 @@
                                     </div>
                                     <div class="flex gap-2 items-center justify-end p-2">
                                         <div>
-                                            <input id="no_iti_eqi" {{ ($data->iti_eqi ?? '') == 0 ? 'checked' : '' }}
-                                                value="0" type="radio" name="iti_eqi" class="hidden peer">
-                                            <label for="no_iti_eqi"
-                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
-                                                No
-                                            </label>
-                                        </div>
-                                        <div>
                                             <input id="yes_iti_eqi" {{ ($data->iti_eqi ?? '') == 1 ? 'checked' : '' }}
                                                 value="1" type="radio" name="iti_eqi" class="hidden peer">
                                             <label for="yes_iti_eqi"
                                                 class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
                                                 Yes
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input id="no_iti_eqi" {{ ($data->iti_eqi ?? '') == 0 ? 'checked' : '' }}
+                                                value="0" type="radio" name="iti_eqi" class="hidden peer">
+                                            <label for="no_iti_eqi"
+                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
+                                                No
                                             </label>
                                         </div>
                                     </div>
@@ -621,15 +671,6 @@
                                     </div>
                                     <div class="flex gap-2 items-center justify-end p-2">
                                         <div>
-                                            <input id="no_auto_mobile"
-                                                {{ ($data->auto_mobile ?? '') == 0 ? 'checked' : '' }} value="0"
-                                                type="radio" name="auto_mobile" class="hidden peer">
-                                            <label for="no_auto_mobile"
-                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
-                                                No
-                                            </label>
-                                        </div>
-                                        <div>
                                             <input id="yes_auto_mobile"
                                                 {{ ($data->auto_mobile ?? '') == 1 ? 'checked' : '' }} value="1"
                                                 type="radio" name="auto_mobile" class="hidden peer">
@@ -638,12 +679,22 @@
                                                 Yes
                                             </label>
                                         </div>
+                                        <div>
+                                            <input id="no_auto_mobile"
+                                                {{ ($data->auto_mobile ?? '') == 0 ? 'checked' : '' }} value="0"
+                                                type="radio" name="auto_mobile" class="hidden peer">
+                                            <label for="no_auto_mobile"
+                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
+                                                No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div
                                     class="m-2 flex w-full lg:flex-col xl:flex-row items-center mechExperience hidden">
                                     <p class="px-6 text-black-500 md:block ml-auto">Enter Total experience in years
                                         <input type="text" id="mech_experience" name="mech_experience"
+                                            onkeypress="return isNumber(event)" maxlength="2"
                                             value="{{ old('mech_experience', $data->mech_experience ?? '') }}"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                             placeholder="Enter your experience" required />

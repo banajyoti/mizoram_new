@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
+use App\Models\GameCategory;
 use Illuminate\Http\Request;
 use App\Models\User; // Adjust the model based on your application
 use Validator;
@@ -18,7 +20,9 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         if ($request->isMethod('GET')) {
-            return view('pages.register');
+            $games = Game::orderBy('name')->get();
+            $gameCategoires = GameCategory::get();
+            return view('pages.register', compact('games', 'gameCategoires'));
         } else {
             // Validate the incoming request data
             $validator = Validator::make($request->all(), [
@@ -33,10 +37,15 @@ class RegisterController extends Controller
                 'dob' => 'required|date',
                 'age' => 'required',
                 'email' => 'required|email|max:255|unique:users,email', // Ensure the email is unique
-                // 'phone' => 'required|string|max:15|unique:users,phone',
+                'phone' => 'required|string|max:15|unique:users,phone',
                 'ex_ser' => 'required',
-                'X_inMizo' => 'required',
+                // 'X_inMizo' => 'required',
                 'permanent_residence' => 'required|in:0,1',
+                'otp' => 'required|numeric|digits:4',
+                'total_ex' => 'required_if:ex_ser,1',
+                // 'm_sport' => 'required',
+                'g_id' => 'required_if:m_sport,1',
+                'c_ms_id' => 'required_if:m_sport,1',
             ], [
                 'salutation.required' => 'Salutation is required.',
                 'salutation.string' => 'Salutation must be a valid string.',
@@ -88,8 +97,20 @@ class RegisterController extends Controller
 
                 'permanent_residence.required' => 'Please select if you are a permanent resident of Mizoram.',
                 'permanent_residence.in' => 'Invalid value for permanent residency.',
+
+                'total_ex.required' => 'Please enter your total experience.',
+                'g_id.required' => 'Please select a game.',
+                'c_ms_id.required' => 'Please select a game category.'
+
             ]);
 
+            $otp = $request->input('otp');
+            $storedOtp = Session::get('otp');
+
+            // Verify OTP from session before proceeding with registration
+            if ($otp != $storedOtp) {
+                return response()->json(['status' => 'error', 'errors' => ['otp' => ['Invalid OTP. Please try again.']]], 422);
+            }
 
             $uniqueFormId = $this->generateUniqueFormId();
 
@@ -98,18 +119,61 @@ class RegisterController extends Controller
                 return response()->json(['status' => 'error', 'errors' => $validator->errors()], 422);
             }
 
+            if ($request->ex_ser == '1') {
+                if ($request->category_id == '1') {
+                    $minAge = "1996-11-09";
+                    $maxAge = "2006-11-09";
+                } elseif ($request->category_id == '3' || $request->category_id == '4') {
+                    $minAge = "1991-11-09";
+                    $maxAge = "2006-11-09";
 
-            if ($request->category_id == '1') {
-                if ($request->dob < "1996-11-09" || $request->dob > "2006-11-09") {
-                    return response()->json(['status' => 'error', 'errors' => ['dob' => 'Age must be between 18-28 years']], 422);
+                } elseif ($request->category_id == '2') {
+                    $minAge = "1993-11-09";
+                    $maxAge = "2006-11-09";
                 }
-            } elseif ($request->category_id == '3' || $request->category_id == '4') {
-                if ($request->dob < "1991-11-09" || $request->dob > "2006-11-09") {
-                    return response()->json(['status' => 'error', 'errors' => ['dob' => 'Age must be between 18-28 years']], 422);
+
+                if (isset($request->total_ex) && is_numeric($request->total_ex)) {
+                    $minAge = date('Y-m-d', strtotime($minAge . ' -' . $request->total_ex . ' years'));
                 }
-            } elseif ($request->category_id == '2') {
-                if ($request->dob < "1993-11-09" || $request->dob > "2006-11-09") {
-                    return response()->json(['status' => 'error', 'errors' => ['dob' => 'Age must be between 18-28 years']], 422);
+            } else if ($request->m_sport == '1') {
+                if ($request->category_id == '1') {
+                    $minAge = "1996-11-09";
+                    $maxAge = "2006-11-09";
+
+                    $minAge = date('Y-m-d', strtotime($minAge . ' -5 years'));
+                    if ($request->dob < $minAge || $request->dob > $maxAge) {
+                        return response()->json(['status' => 'error', 'errors' => ['dob' => ['Age must be between 18-33 years']]], 422);
+                    }
+                } elseif ($request->category_id == '3' || $request->category_id == '4') {
+                    $minAge = "1991-11-09";
+                    $maxAge = "2006-11-09";
+
+                    $minAge = date('Y-m-d', strtotime($minAge . ' -10 years'));
+                    if ($request->dob < $minAge || $request->dob > $maxAge) {
+                        return response()->json(['status' => 'error', 'errors' => ['dob' => ['Age must be between 18-43 years']]], 422);
+                    }
+                } elseif ($request->category_id == '2') {
+                    $minAge = "1993-11-09";
+                    $maxAge = "2006-11-09";
+
+                    $minAge = date('Y-m-d', strtotime($minAge . ' -5 years'));
+                    if ($request->dob < $minAge || $request->dob > $maxAge) {
+                        return response()->json(['status' => 'error', 'errors' => ['dob' => ['Age must be between 18-36 years']]], 422);
+                    }
+                }
+            } else {
+                if ($request->category_id == '1') {
+                    if ($request->dob < "1996-11-09" || $request->dob > "2006-11-09") {
+                        return response()->json(['status' => 'error', 'errors' => ['dob' => ['Age must be between 18-28 years']]], 422);
+                    }
+                } elseif ($request->category_id == '3' || $request->category_id == '4') {
+                    if ($request->dob < "1991-11-09" || $request->dob > "2006-11-09") {
+                        return response()->json(['status' => 'error', 'errors' => ['dob' => ['Age must be between 18-33 years']]], 422);
+                    }
+                } elseif ($request->category_id == '2') {
+                    if ($request->dob < "1993-11-09" || $request->dob > "2006-11-09") {
+                        return response()->json(['status' => 'error', 'errors' => ['dob' => ['Age must be between 18-31 years']]], 422);
+                    }
                 }
             }
 
@@ -131,8 +195,12 @@ class RegisterController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'ex_ser' => $request->ex_ser,
-                'X_inMizo' => $request->X_inMizo,
+                // 'X_inMizo' => $request->X_inMizo,
                 'permanent_residence' => $request->permanent_residence,
+                'total_ex' => $request->total_ex,
+                'm_sport' => $request->m_sport,
+                'g_id' => $request->g_id,
+                'c_ms_id' => $request->c_ms_id
                 // Add more fields as necessary
             ]);
 
@@ -164,6 +232,30 @@ class RegisterController extends Controller
         // Store OTP in session for verification later
         Session::put('otp', $otp);
         Session::put('phone', $phone);
+        Session::put('otp_sent_at', now());  // Store the time when OTP was sent
+
+        return response()->json([
+            'success' => true,
+            'message' => 'OTP sent to your phone.',
+            'otp_sent_at' => now(),
+            'otp_expiration_time' => 2 // expiration time in minutes
+        ]);
+    }
+
+    public function resendOtp(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|string|regex:/^[0-9]{10}$/',
+        ]);
+
+        $phone = $request->input('phone');
+        $otp = rand(1000, 9999);
+        $this->sendSms($phone, $otp);
+
+        // Store OTP in session for verification later
+        Session::put('otp', $otp);
+        Session::put('phone', $phone);
+        Session::put('otp_sent_at', now());  // Store the time when OTP was sent
 
         return response()->json(['success' => true, 'message' => 'OTP sent successfully!']);
     }
@@ -179,9 +271,18 @@ class RegisterController extends Controller
         // Retrieve OTP from session
         $storedOtp = Session::get('otp');
         $phone = Session::get('phone');
+        $otpSentAt = Session::get('otp_sent_at');
+
+        // if (!$storedOtp || !$phone || !$otpSentAt) {
+        //     return response()->json(['success' => false, 'message' => 'OTP session has expired. Please request a new OTP.']);
+        // }
+
+        // // Check if OTP has expired (e.g., 5 minutes)
+        // if (now()->diffInMinutes($otpSentAt) > 2) {
+        //     return response()->json(['success' => false, 'message' => 'OTP has expired. Please request a new OTP.']);
+        // }
 
         if ($otp == $storedOtp) {
-            // OTP is verified
             // Here you might want to proceed with the registration or other logic
             return response()->json(['success' => true, 'message' => 'OTP verified successfully!']);
         }

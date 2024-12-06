@@ -42,6 +42,8 @@
                     try {
                         const jsonResponse = JSON.parse(xhr.responseText);
                         var errorMessages = '';
+                        console.log(jsonResponse.errors)
+
                         if (jsonResponse.errors) {
                             $.each(jsonResponse.errors, function(field, messages) {
                                 errorMessages +=
@@ -50,6 +52,7 @@
             <p class="text-red-500 text-sm">${messages[0]}</p>
         </div>`;
                             });
+                            console.log(errorMessages)
 
                             $('#model-content').html(
                                 `<h3 class="mb-5 text-lg font-normal text-gray-500">There were some errors with your registration:</h3>`
@@ -122,6 +125,41 @@
                 });
         });
 
+        // Event listener for Resend OTP button
+        document.getElementById('resend_OTP').addEventListener('click', function() {
+            const phoneNumber = document.getElementById('p_number').value;
+
+            if (!phoneNumber) {
+                alert('Please enter your phone number.');
+                return;
+            }
+
+            // Create FormData object for resending OTP
+            const formData = new FormData();
+            formData.append('phone', phoneNumber);
+
+            fetch('/resend-otp', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('OTP resent successfully!');
+                    } else {
+                        alert('Error resending OTP. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while resending the OTP.');
+                });
+        });
+
         // Handle OTP verification
         document.getElementById('verified').addEventListener('click', function() {
             const otp = document.getElementById('otp').value;
@@ -151,6 +189,9 @@
 
                         // Show the submit button
                         document.getElementById('submitButton').classList.remove('hidden');
+
+                        // Make the phone number field readonly
+                        document.getElementById('p_number').setAttribute('readonly', true);
                     } else {
                         alert('Invalid OTP. Please try again.');
                     }
@@ -270,4 +311,34 @@
 
         // Optionally, you can also add some logic here to send the OTP.
     }
+</script>
+<script>
+    function toggleCategoryField() {
+        var yesRadio = document.getElementById("yes");
+        var noRadio = document.getElementById("no");
+
+        var categoryField = document.getElementById("category-field");
+        var categoryFieldNo = document.getElementById("category-field-no");
+        var mSport = document.getElementById("ms");
+
+        // Show/Hide based on radio button selection
+        if (yesRadio.checked) {
+            categoryField.classList.remove("hidden");
+            categoryFieldNo.classList.add("hidden");
+            mSport.classList.remove("hidden");
+        } else if (noRadio.checked) {
+            categoryFieldNo.classList.remove("hidden");
+            categoryField.classList.add("hidden");
+            mSport.classList.add("hidden");
+        }
+    }
+
+    // Initial check on page load to set correct state
+    window.onload = function() {
+        // Hide mSport initially
+        var mSport = document.getElementById("ms");
+        mSport.classList.add("hidden");
+
+        toggleCategoryField(); // Ensure correct display based on the selected radio button
+    };
 </script>
