@@ -11,6 +11,7 @@ use App\Models\State;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Storage;
 
 class ProfileController extends Controller
 {
@@ -167,241 +168,105 @@ class ProfileController extends Controller
         }
     }
 
+    // public function document(Request $request)
+    // {
+    //     if ($request->isMethod('GET')) {
+    //         $userDetails = User::where('id', Auth::user()->id)->first();
+    //         $questionaries = Questionary::where('user_id', $userDetails->id)->first();
+    //         $documents = Document::where('user_id', $userDetails->id)->first();
+    //         return view('pages.document', compact('userDetails', 'questionaries', 'documents'));
+    //     } else {
+    //         $reg_id = Auth::user();
+    //         $uploadedFiles = [];
 
-    public function document_old(Request $request)
-    {
-        if ($request->isMethod('GET')) {
-            return view('pages.document');
-        } else {
+    //         $fields = [
+    //             'photo' => 'uploads/upload_photo',
+    //             'signature' => 'uploads/upload_signature',
+    //             'age_prof_cert' => 'uploads/age_prof_cert',
+    //             'class_x_cert' => 'uploads/class_x_cert',
+    //             'mizu_lang_cert' => 'uploads/mizu_lang_cert',
+    //             'mizu_class_x' => 'uploads/mizu_class_x',
+    //             'mizu_class_x_outside' => 'uploads/mizu_class_x_outside',
+    //             'homeguard_cert' => 'uploads/homeguard_cert',
+    //             'caste_cert' => 'uploads/caste_cert',
+    //             'ncc_cert' => 'uploads/ncc_cert',
+    //             'comp_cert' => 'uploads/comp_cert',
+    //             'mechanic_ex_cert' => 'uploads/mechanic_ex_cert',
+    //             'iti_ex_cert' => 'uploads/iti_ex_cert',
+    //             'ex_service' => 'uploads/ex_service',
+    //             'sports_cert' => 'uploads/sports_cert',
+    //         ];
 
-            $reg_id = User::select('id')->where(['id' => Auth::user()->id])->first();
-            // $final_submit = User::where(['final_submit' => 0])->where(['id' => Auth::user()->id])->first();
+    //         $userDetails = User::where('id', $reg_id->id)->first();
+    //         $existingDocument = Document::where('user_id', $reg_id->id)->first();
+    //         $questionaries = Questionary::where('user_id', $reg_id->id)->first();
 
-            // if ($final_submit) {
-            if ($request->hasFile('photo')) {
-                $fileName1 = $reg_id->id . "_" . time() . "." . $request->photo->getClientOriginalExtension();
-                $request->photo->storeAs('/public/uploads/upload_photo', $fileName1);
-            } else {
-                return response()->json([
-                    'errors' => ['photo' => 'Please Upload Your Photo.']
-                ], 422);  // Unprocessable Entity
-            }
+    //         foreach ($fields as $field => $path) {
+    //             if (
+    //                 ($reg_id->category_id == 1 && $field == 'caste_cert') ||
+    //                 ($field == 'ncc_cert' && $questionaries->ncc_cert == 0) ||
+    //                 ($field == 'homeguard_cert' && $questionaries->home_guard == 0) ||
+    //                 ($field == 'mechanic_ex_cert' && $questionaries->auto_mobile == 0) ||
+    //                 ($field == 'iti_ex_cert' && $questionaries->iti_eqi == 0) ||
+    //                 ($field == 'mizu_lang_cert' && $questionaries->min_score_mizo == 0) ||
+    //                 ($field == 'mizu_class_x' && $questionaries->class_x_mizo == 0) ||
+    //                 ($field == 'mizu_class_x_outside' && $questionaries->mizo_as_mil == 0) ||
+    //                 ($field == 'ex_service' && $userDetails->ex_ser == 0) ||
+    //                 ($field == 'sports_cert' && $userDetails->m_sport == 0)
+    //             ) {
+    //                 $uploadedFiles[$field] = $existingDocument && !is_null($existingDocument->$field) ? $existingDocument->$field : null;
+    //             } else {
+    //                 if ($request->hasFile($field)) {
+    //                     $fileName = $reg_id->id . "_" . time() . "." . $request->$field->getClientOriginalExtension();
+    //                     $request->$field->storeAs('public/' . $path, $fileName);
+    //                     $uploadedFiles[$field] = $fileName;
+    //                 } else {
+    //                     if ($existingDocument && !is_null($existingDocument->$field)) {
+    //                         $uploadedFiles[$field] = $existingDocument->$field;
+    //                     } else {
+    //                         return response()->json([
+    //                             'errors' => [$field => 'Please Upload Your ' . ucfirst(str_replace('_', ' ', $field)) . '.']
+    //                         ], 422);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         // Prepare the data for insert/update
+    //         $data = [
+    //             'user_id' => $reg_id->id,
+    //             'photo' => $uploadedFiles['photo'],
+    //             'signature' => $uploadedFiles['signature'],
+    //             'age_prof_cert' => $uploadedFiles['age_prof_cert'],
+    //             'class_x_cert' => $uploadedFiles['class_x_cert'],
+    //             'mizu_lang_cert' => $uploadedFiles['mizu_lang_cert'], // This will be skipped if min_score_mizo == 0
+    //             'mizu_class_x' => $uploadedFiles['mizu_class_x'], // This will be skipped if class_x_mizo == 0
+    //             'mizu_class_x_outside' => $uploadedFiles['mizu_class_x_outside'], // This will be skipped if mizo_as_mil == 0
+    //             'homeguard_cert' => $uploadedFiles['homeguard_cert'], // This will be skipped if home_guard == 0
+    //             'caste_cert' => $uploadedFiles['caste_cert'], // This will be skipped if category_id == 1
+    //             'ncc_cert' => $uploadedFiles['ncc_cert'], // This will be skipped if ncc_cert == 0
+    //             'ex_service' => $uploadedFiles['ex_service'], // This will be skipped if ex_ser == 0
+    //             'comp_cert' => $uploadedFiles['comp_cert'],
+    //             'mechanic_ex_cert' => $uploadedFiles['mechanic_ex_cert'],
+    //             'iti_ex_cert' => $uploadedFiles['iti_ex_cert'],
+    //             'sports_cert' => $uploadedFiles['sports_cert'], // This will be skipped if m_sport == 0
+    //         ];
 
-            if ($request->hasFile('signature')) {
-                $fileName2 = $reg_id->id . "_" . time() . "." . $request->signature->getClientOriginalExtension();
-                $request->signature->storeAs('/public/uploads/upload_signature', $fileName2);
-            } else {
-                return response()->json([
-                    'errors' => ['signature' => 'Please Upload Your signature.']
-                ], 422);  // Unprocessable Entity
-            }
+    //         // Update or Create the Document record
+    //         $doc = Document::updateOrCreate(
+    //             ['user_id' => $reg_id->id],
+    //             $data
+    //         );
 
-            if ($request->hasFile('age_prof_cert')) {
-                $fileName3 = $reg_id->id . "_" . time() . "." . $request->age_prof_cert->getClientOriginalExtension();
-                $request->age_prof_cert->storeAs('/public/uploads/age_prof_cert', $fileName3);
-            } else {
-                return response()->json([
-                    'errors' => ['age_prof_cert' => 'Please Upload Your Age Prof Certificate.']
-                ], 422);  // Unprocessable Entity
-            }
-
-            if ($request->hasFile('class_x_cert')) {
-                $fileName4 = $reg_id->id . "_" . time() . "." . $request->class_x_cert->getClientOriginalExtension();
-                $request->class_x_cert->storeAs('/public/uploads/class_x_cert', $fileName4);
-            } else {
-                return response()->json([
-                    'errors' => ['class_x_cert' => 'Please Upload Your Class X Certificate.']
-                ], 422);  // Unprocessable Entity
-            }
-
-            if ($request->hasFile('mizu_lang_cert')) {
-                $fileName5 = $reg_id->id . "_" . time() . "." . $request->mizu_lang_cert->getClientOriginalExtension();
-                $request->mizu_lang_cert->storeAs('/public/uploads/mizu_lang_cert', $fileName5);
-            } else {
-                return response()->json([
-                    'errors' => ['mizu_lang_cert' => 'Please Upload Your Mizu Language Certificate.']
-                ], 422);  // Unprocessable Entity
-            }
-
-
-            if ($request->hasFile('homeguard_cert')) {
-                $fileName6 = $reg_id->id . "_" . time() . "." . $request->homeguard_cert->getClientOriginalExtension();
-                $request->homeguard_cert->storeAs('/public/uploads/homeguard_cert', $fileName6);
-            } else {
-                return response()->json([
-                    'errors' => ['homeguard_cert' => 'Please Upload Your Homeguard Certificate.']
-                ], 422);  // Unprocessable Entity
-            }
-
-
-            if ($request->hasFile('caste_cert')) {
-                $fileName7 = $reg_id->id . "_" . time() . "." . $request->caste_cert->getClientOriginalExtension();
-                $request->caste_cert->storeAs('/public/uploads/caste_cert', $fileName7);
-            } else {
-                return response()->json([
-                    'errors' => ['caste_cert' => 'Please Upload Your Caste Certificate.']
-                ], 422);  // Unprocessable Entity
-            }
-
-
-            if ($request->hasFile('ncc_cert')) {
-                $fileName8 = $reg_id->id . "_" . time() . "." . $request->ncc_cert->getClientOriginalExtension();
-                $request->ncc_cert->storeAs('/public/uploads/ncc_cert', $fileName8);
-            } else {
-                return response()->json([
-                    'errors' => ['ncc_cert' => 'Please Upload Your NCC Certificate.']
-                ], 422);  // Unprocessable Entity
-            }
-
-            if ($request->hasFile('comp_cert')) {
-                $fileName9 = $reg_id->id . "_" . time() . "." . $request->comp_cert->getClientOriginalExtension();
-                $request->comp_cert->storeAs('/public/uploads/comp_cert', $fileName9);
-            } else {
-                return response()->json([
-                    'errors' => ['comp_cert' => 'Please Upload Your Computer Certificate.']
-                ], 422);  // Unprocessable Entity
-            }
-
-            if ($request->hasFile('mechanic_ex_cert')) {
-                $fileName10 = $reg_id->id . "_" . time() . "." . $request->mechanic_ex_cert->getClientOriginalExtension();
-                $request->mechanic_ex_cert->storeAs('/public/uploads/mechanic_ex_cert', $fileName10);
-            } else {
-                return response()->json([
-                    'errors' => ['mechanic_ex_cert' => 'Please Upload Your Mechanic Ex Certificate.']
-                ], 422);  // Unprocessable Entity
-            }
-
-            $data = [
-                'user_id' => Auth::user()->id,
-                'photo' => $fileName1,
-                'signature' => $fileName2,
-                'age_prof_cert' => $fileName3,
-                'class_x_cert' => $fileName4,
-                'mizu_lang_cert' => $fileName5,
-                'homeguard_cert' => $fileName6,
-                'caste_cert' => $fileName7,
-                'ncc_cert' => $fileName8,
-                'comp_cert' => $fileName9,
-                'mechanic_ex_cert' => $fileName10
-
-            ];
-
-
-            Document::updateOrCreate(
-                ['user_id' => Auth::user()->id],
-                $data
-            );
-
-            // Respond with a success message
-            return response()->json([
-                'message' => 'Documents uploaded successfully.'
-            ]);
-
-
-            // } else {
-            //     return redirect()->route('document')->with(['error' => 'You Have Already Fill up Your Form.']);
-            // }
-        }
-    }
-    public function document(Request $request)
-    {
-        if ($request->isMethod('GET')) {
-            $userDetails = User::where('id', Auth::user()->id)->first();
-            $questionaries = Questionary::where('user_id', $userDetails->id)->first();
-            $documents = Document::where('user_id', $userDetails->id)->first();
-            return view('pages.document', compact('userDetails', 'questionaries', 'documents'));
-        } else {
-            $reg_id = Auth::user();
-            $uploadedFiles = [];
-
-            $fields = [
-                'photo' => 'uploads/upload_photo',
-                'signature' => 'uploads/upload_signature',
-                'age_prof_cert' => 'uploads/age_prof_cert',
-                'class_x_cert' => 'uploads/class_x_cert',
-                'mizu_lang_cert' => 'uploads/mizu_lang_cert',
-                'mizu_class_x' => 'uploads/mizu_class_x',
-                'mizu_class_x_outside' => 'uploads/mizu_class_x_outside',
-                'homeguard_cert' => 'uploads/homeguard_cert',
-                'caste_cert' => 'uploads/caste_cert',
-                'ncc_cert' => 'uploads/ncc_cert',
-                'comp_cert' => 'uploads/comp_cert',
-                'mechanic_ex_cert' => 'uploads/mechanic_ex_cert',
-                'iti_ex_cert' => 'uploads/iti_ex_cert',
-                'ex_service' => 'uploads/ex_service',
-                'sports_cert' => 'uploads/sports_cert',
-            ];
-
-            $userDetails = User::where('id', $reg_id->id)->first();
-            $existingDocument = Document::where('user_id', $reg_id->id)->first();
-            $questionaries = Questionary::where('user_id', $reg_id->id)->first();
-
-            foreach ($fields as $field => $path) {
-                if (
-                    ($reg_id->category_id == 1 && $field == 'caste_cert') ||
-                    ($field == 'ncc_cert' && $questionaries->ncc_cert == 0) ||
-                    ($field == 'homeguard_cert' && $questionaries->home_guard == 0) ||
-                    ($field == 'mechanic_ex_cert' && $questionaries->auto_mobile == 0) ||
-                    ($field == 'iti_ex_cert' && $questionaries->iti_eqi == 0) ||
-                    ($field == 'mizu_lang_cert' && $questionaries->min_score_mizo == 0) ||
-                    ($field == 'mizu_class_x' && $questionaries->class_x_mizo == 0) ||
-                    ($field == 'mizu_class_x_outside' && $questionaries->mizo_as_mil == 0) ||
-                    ($field == 'ex_service' && $userDetails->ex_ser == 0) ||
-                    ($field == 'sports_cert' && $userDetails->m_sport == 0)
-                ) {
-                    $uploadedFiles[$field] = $existingDocument && !is_null($existingDocument->$field) ? $existingDocument->$field : null;
-                } else {
-                    if ($request->hasFile($field)) {
-                        $fileName = $reg_id->id . "_" . time() . "." . $request->$field->getClientOriginalExtension();
-                        $request->$field->storeAs('public/' . $path, $fileName);
-                        $uploadedFiles[$field] = $fileName;
-                    } else {
-                        if ($existingDocument && !is_null($existingDocument->$field)) {
-                            $uploadedFiles[$field] = $existingDocument->$field;
-                        } else {
-                            return response()->json([
-                                'errors' => [$field => 'Please Upload Your ' . ucfirst(str_replace('_', ' ', $field)) . '.']
-                            ], 422);
-                        }
-                    }
-                }
-            }
-            // Prepare the data for insert/update
-            $data = [
-                'user_id' => $reg_id->id,
-                'photo' => $uploadedFiles['photo'],
-                'signature' => $uploadedFiles['signature'],
-                'age_prof_cert' => $uploadedFiles['age_prof_cert'],
-                'class_x_cert' => $uploadedFiles['class_x_cert'],
-                'mizu_lang_cert' => $uploadedFiles['mizu_lang_cert'], // This will be skipped if min_score_mizo == 0
-                'mizu_class_x' => $uploadedFiles['mizu_class_x'], // This will be skipped if class_x_mizo == 0
-                'mizu_class_x_outside' => $uploadedFiles['mizu_class_x_outside'], // This will be skipped if mizo_as_mil == 0
-                'homeguard_cert' => $uploadedFiles['homeguard_cert'], // This will be skipped if home_guard == 0
-                'caste_cert' => $uploadedFiles['caste_cert'], // This will be skipped if category_id == 1
-                'ncc_cert' => $uploadedFiles['ncc_cert'], // This will be skipped if ncc_cert == 0
-                'ex_service' => $uploadedFiles['ex_service'], // This will be skipped if ex_ser == 0
-                'comp_cert' => $uploadedFiles['comp_cert'],
-                'mechanic_ex_cert' => $uploadedFiles['mechanic_ex_cert'],
-                'iti_ex_cert' => $uploadedFiles['iti_ex_cert'],
-                'sports_cert' => $uploadedFiles['sports_cert'], // This will be skipped if m_sport == 0
-            ];
-
-            // Update or Create the Document record
-            $doc = Document::updateOrCreate(
-                ['user_id' => $reg_id->id],
-                $data
-            );
-
-            if ($doc) {
-                $user = Auth::user();
-                $user->stage = 4;
-                $user->save();
-            }
-            return response()->json([
-                'message' => 'Documents uploaded successfully.'
-            ]);
-        }
-    }
+    //         if ($doc) {
+    //             $user = Auth::user();
+    //             $user->stage = 4;
+    //             $user->save();
+    //         }
+    //         return response()->json([
+    //             'message' => 'Documents uploaded successfully.'
+    //         ]);
+    //     }
+    // }
 
     public function preview(Request $request)
     {
@@ -451,6 +316,86 @@ class ProfileController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Application successfully submitted.',
+            ]);
+        }
+    }
+
+    public function document(Request $request)
+    {
+        if ($request->isMethod('GET')) {
+            $userDetails = User::where('id', Auth::user()->id)->first();
+            $questionaries = Questionary::where('user_id', $userDetails->id)->first();
+            $documents = Document::where('user_id', $userDetails->id)->first();
+
+            return view('pages.document', compact('userDetails', 'questionaries', 'documents'));
+        } else {
+            $reg_id = Auth::user();
+            $documentTypes = [
+                'photo' => ['max_size' => 450, 'mime_types' => 'image|mimes:jpg,jpeg,png'],
+                'signature' => ['max_size' => 100, 'mime_types' => 'image|mimes:jpg,jpeg,png'],
+                // Only accept PDF for these document types
+                'age_prof_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'class_x_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'mizu_lang_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'mizu_class_x' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'mizu_class_x_outside' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'homeguard_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'caste_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'ncc_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'comp_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'mechanic_ex_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'iti_ex_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'ex_service' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                'sports_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+            ];
+
+            $fields = [
+                'photo' => 'uploads/upload_photo',
+                'signature' => 'uploads/upload_signature',
+                'age_prof_cert' => 'uploads/age_prof_cert',
+                'class_x_cert' => 'uploads/class_x_cert',
+                'mizu_lang_cert' => 'uploads/mizu_lang_cert',
+                'mizu_class_x' => 'uploads/mizu_class_x',
+                'mizu_class_x_outside' => 'uploads/mizu_class_x_outside',
+                'homeguard_cert' => 'uploads/homeguard_cert',
+                'caste_cert' => 'uploads/caste_cert',
+                'ncc_cert' => 'uploads/ncc_cert',
+                'comp_cert' => 'uploads/comp_cert',
+                'mechanic_ex_cert' => 'uploads/mechanic_ex_cert',
+                'iti_ex_cert' => 'uploads/iti_ex_cert',
+                'ex_service' => 'uploads/ex_service',
+                'sports_cert' => 'uploads/sports_cert',
+            ];
+
+            $documents = Document::firstOrNew(['user_id' => $reg_id->id]);
+
+            foreach ($documentTypes as $fileType => $rules) {
+                if ($request->hasFile($fileType)) {
+                    $file = $request->file($fileType);
+                    $request->validate([
+                        $fileType => "required|{$rules['mime_types']}|max:{$rules['max_size']}",
+                    ]);
+
+                    if ($file && $file->isValid()) {
+
+                        $fileName = $reg_id->id . "_" . time() . "." . $file->getClientOriginalExtension();
+                        $folderPath = $fields[$fileType];
+                        $path = $file->storeAs('public/' . $folderPath, $fileName);
+                        $documents->$fileType = $fileName;
+                    }
+                }
+            }
+
+            $checkSave = $documents->save();
+            if ($checkSave) {
+                $user = Auth::user();
+                $user->stage = 4;
+                $user->save();
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Documents uploaded successfully!',
             ]);
         }
     }
