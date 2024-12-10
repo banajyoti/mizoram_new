@@ -342,3 +342,47 @@
         toggleCategoryField(); // Ensure correct display based on the selected radio button
     };
 </script>
+
+<script>
+    document.getElementById('m_sport').addEventListener('change', function() {
+        var sportValue = this.value;
+
+        // Get the divs for games and categories sections
+        var sportsSection = document.getElementById('sports-section');
+        var categoriesSection = document.getElementById('categories-section');
+
+        // Show or hide based on the value selected
+        if (sportValue === '1') { // YES
+            sportsSection.classList.remove('hidden');
+            categoriesSection.classList.remove('hidden');
+        } else if (sportValue === '2') { // NO
+            sportsSection.classList.add('hidden');
+            categoriesSection.classList.add('hidden');
+        }
+    });
+
+    // Listen for the change event on the "Are you an Ex-Serviceman?" dropdown
+    document.getElementById('ex_ser').addEventListener('change', function() {
+        const selectedValue = this.value;
+        const textBox = document.getElementById('ex_ser_textbox');
+
+        // If 'YES' is selected, show the text box
+        if (selectedValue === '1') {
+            textBox.classList.remove('hidden');
+        } else {
+            // If 'NO' is selected, hide the text box
+            textBox.classList.add('hidden');
+        }
+    });
+</script>
+{{-- <script>
+    // Initialize Flatpickr on the input with the id 'dob'
+    flatpickr("#dob", {
+        dateFormat: "Y-m-d",  // Format the selected date (e.g., 2024-12-10)
+        disableMobile: true,   // Disable the mobile native date picker on mobile devices
+        inline: false,         // The calendar is shown as an overlay (set true to make it inline)
+        placeholder: "Select Date",  // Placeholder text
+        minDate: "1900-01-01", // Set minimum allowed date
+        maxDate: "2024-12-31", // Set maximum allowed date
+    });
+</script> --}}

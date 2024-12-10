@@ -104,13 +104,9 @@
                     @elseif ($userDetails->category_id == 2)
                         <p class="text-sm font-medium">OBC</p>
                     @elseif ($userDetails->category_id == 3)
-                        <p class="text-sm font-medium">MOBC</p>
-                    @elseif ($userDetails->category_id == 4)
                         <p class="text-sm font-medium">SC</p>
-                    @elseif ($userDetails->category_id == 5)
-                        <p class="text-sm font-medium">ST(P)</p>
-                    @else
-                        <p class="text-sm font-medium">ST(H)</p>
+                    @elseif ($userDetails->category_id == 4)
+                        <p class="text-sm font-medium">ST</p>
                     @endif
                 </div>
                 <div class="border border-1 rounded-md p-2 col-span-6 md:col-span-3 lg::col-span-4 xl:col-span-3">
@@ -549,6 +545,20 @@
                             <span class="inline-block text-green-700 font-medium">UPLOADED</span>
                             <a type="button" class="inline-block py-0.5 px-1.5 rounded bg-white hover:bg-gray-50"
                                 href="{{ asset('storage/public/uploads/ex_service/' . $userDetails->ex_service) }}"
+                                target="_blank"><i class="bi bi-eye"></i></a>
+                        </div>
+                    </div>
+                @endif
+                @if ($userDetails->m_sport == 1)
+                    <div
+                        class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2 flex flex-col gap-2">
+                        <p class="text-xs uppercase font-semibold text-gray-600 mb-auto">Sports
+                            Certificate
+                        </p>
+                        <div class="bg-gray-200 rounded p-1 text-sm flex items-center justify-between">
+                            <span class="inline-block text-green-700 font-medium">UPLOADED</span>
+                            <a type="button" class="inline-block py-0.5 px-1.5 rounded bg-white hover:bg-gray-50"
+                                href="{{ asset('storage/public/uploads/sports_cert/' . $userDetails->sports_cert) }}"
                                 target="_blank"><i class="bi bi-eye"></i></a>
                         </div>
                     </div>

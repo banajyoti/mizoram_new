@@ -2,6 +2,14 @@
 
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+     <!-- Include Flatpickr CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+
+     <!-- Tailwind CSS (via CDN) -->
+     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+     <!-- Include Flatpickr JS -->
+     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <div class="grow p-4 grid md:grid-cols-12 xl:grid-cols-8 gap-3">
     <div class="md:col-span-6 xl:col-span-4 md:order-2 xl:order-1">
@@ -163,7 +171,8 @@
                     <div class="h-[0.08rem] bg-gray-300 w-full"></div>
                 </div>
                 <div class="mb-6">
-                    <label for="mob_no" class="block mb-2 text-sm font-medium text-gray-600">Registared Mobile Number</label>
+                    <label for="mob_no" class="block mb-2 text-sm font-medium text-gray-600">Registared Mobile
+                        Number</label>
                     <input type="text" id="mob_no" name="mobile_no" maxlength="10" minlength="10"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Mobile Number" required />
@@ -171,11 +180,22 @@
                         <div class="text-red-500">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="mb-6">
-                    <label for="mob_no" class="block mb-2 text-sm font-medium text-gray-600">Date of Birth</label>
-                    <input type="date" id="dob" name="dob" onfocus="blur()"
+                {{-- <div class="mb-6">
+                    <label for="dob" class="block mb-2 text-sm font-medium text-gray-600">Date of Birth</label>
+                    <input type="date" id="dob" name="dob"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Password" required />
+                    @error('dob')
+                        <div class="text-red-500">{{ $message }}</div>
+                    @enderror
+                </div> --}}
+                <div class="mb-6">
+                    <label for="dob" class="block mb-2 text-sm font-medium text-gray-600">Date of Birth</label>
+                    <input type="text" id="dob" name="dob"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Select Date" required />
+
+                    <!-- Validation Error Message (if any) -->
                     @error('dob')
                         <div class="text-red-500">{{ $message }}</div>
                     @enderror
@@ -204,3 +224,15 @@
 </div>
 @include('layouts.footer')
 @include('layouts.custom-scripts.loginScript')
+<script>
+    // Initialize Flatpickr on the input with the id 'dob'
+    flatpickr("#dob", {
+        dateFormat: "Y-m-d",  // Format the selected date (e.g., 2024-12-10)
+        disableMobile: true,   // Disable the mobile native date picker on mobile devices
+        inline: false,         // The calendar is shown as an overlay (set true to make it inline)
+        placeholder: "Select Date",  // Placeholder text
+        minDate: "1900-01-01", // Set minimum allowed date
+        maxDate: "2024-12-31", // Set maximum allowed date
+    });
+</script>
+

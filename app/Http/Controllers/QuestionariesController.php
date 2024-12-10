@@ -34,9 +34,9 @@ class QuestionariesController extends Controller
                     [
                         'user_id' => 'required|exists:users,id',
                         'ncc_grade' => 'required_if:ncc_cert,1',
-                        'min_score_mizo' => 'required',
                         'class_x_mizo' => 'required',
-                        'mizo_as_mil' => 'required',
+                        'mizo_as_mil' => 'required_if:class_x_mizo,0',
+                        'min_score_mizo' => 'required_if:mizo_as_mil,0|required_if:class_x_mizo,0',
                         'comp_cert' => 'required',
                         'ncc_cert' => 'required',
                         'home_guard' => 'required',

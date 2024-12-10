@@ -546,55 +546,6 @@
                                 </p> --}}
                             </div>
                         </div>
-                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300">
-                            <div class="h-full">
-                                <div class="md:my-2 md:mt-2 flex flex-col sm:flex-row items-end sm:items-center">
-                                    <div class="flex items-center flex-grow w-full">
-                                        <i class="bi bi-grip-vertical pr-2 hidden md:block"></i>
-                                        <div
-                                            class="grow p-2 md:px-4 md:py-3 bg-gray-100 rounded-t-lg md:rounded-lg space-y-2">
-                                            <div class="flex lg:items-start 2xl:items-center">
-                                                <i class="text-blue-600 text-xl mr-2"></i>
-                                                <p class="text-md">Are you a Meritorious Sportsperson ? <span
-                                                        class="text-red-600">*</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-2 items-center justify-end p-2">
-                                        <div>
-                                            <input id="yes_home_guard"
-                                                {{ ($data->home_guard ?? '') == 1 ? 'checked' : '' }} value="1"
-                                                type="radio" name="home_guard" class="hidden peer">
-                                            <label for="yes_home_guard"
-                                                class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
-                                                Yes
-                                            </label>
-                                        </div>
-                                        <div>
-                                            <input id="no_home_guard"
-                                                {{ ($data->home_guard ?? '') == 0 ? 'checked' : '' }} value="0"
-                                                type="radio" name="home_guard" class="hidden peer">
-                                            <label for="no_home_guard"
-                                                class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
-                                                No
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <p class="px-6 text-gray-500 hidden md:block" id="home_guard_display">
-                                    Answer:
-                                    @if ($data && isset($data->home_guard))
-                                        @if ($data->home_guard == 1)
-                                            I'm.
-                                        @else
-                                            I'm not.
-                                        @endif
-                                    @else
-                                        Data not available.
-                                    @endif
-                                </p> --}}
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="">

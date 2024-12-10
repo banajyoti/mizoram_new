@@ -485,13 +485,9 @@
                 @elseif ($userDetails->category_id == 2)
                     <p class="m-0 fs-14 fw-500">OBC</p>
                 @elseif ($userDetails->category_id == 3)
-                    <p class="m-0 fs-14 fw-500">MOBC</p>
-                @elseif ($userDetails->category_id == 4)
                     <p class="m-0 fs-14 fw-500">SC</p>
-                @elseif ($userDetails->category_id == 5)
-                    <p class="m-0 fs-14 fw-500">ST(P)</p>
-                @else
-                    <p class="m-0 fs-14 fw-500">ST(H)</p>
+                @elseif ($userDetails->category_id == 4)
+                    <p class="m-0 fs-14 fw-500">ST</p>
                 @endif
             </td>
             <td colspan="" class="p-1 text-m">
@@ -905,7 +901,14 @@
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
                 @endif
             </td>
-            <td></td>
+            <td class="p-1" style="width: 20%!important" colspan="">
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Sports Certificate</p>
+                @if (is_null($userDetails->sports_cert))
+                    <p class="m-0 fs-12 fw-500 text-e">Not Uploaded</p>
+                @else
+                    <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
+                @endif
+            </td>
         </tr>
     </table>
 
@@ -918,7 +921,7 @@
                 <p class="m-0 fs-12 fw-500 text-e">TRANStest</p>
             </td>
             <td class="p-1" style="width: 20%!important" colspan="">
-                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Ammount</p>
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Amount</p>
                 <p class="m-0 fs-12 fw-500 text-e">200</p>
 
             </td>

@@ -6,6 +6,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Registration Form</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!-- Include Flatpickr CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+
+     <!-- Tailwind CSS (via CDN) -->
+     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+     <!-- Include Flatpickr JS -->
+     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- Your other scripts -->
 </head>
 <div class="grow md:p-4 grid lg:grid-cols-5 gap-3">
@@ -315,6 +323,18 @@
                             @enderror
                         </div>
                     </div>
+                    {{-- <div class="col-span-3">
+                        <div class="h-full flex flex-col">
+                            <label for="dob" class="block mb-auto px-1 text-sm font-medium text-gray-600">Date of
+                                Birth<span class="ps-1 text-red-500">*</span></label>
+                            <input type="text" id="dob" onchange="myFunction()" onfocus="blur()"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 datepicker"
+                                name="dob" value="" placeholder="Date of Birth" required />
+                            @error('dob')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div> --}}
                     <div class="col-span-3 sm:col-span-4">
                         <div class="h-full flex flex-col">
                             <label for="dob" class="block mb-aut px-1 text-sm font-medium text-gray-600">Age as
@@ -483,7 +503,7 @@
                                 Categories of Meritorious Sportspersons <span class="ps-1 text-red-500">*</span>
                             </label>
                             {{-- <select id="c_ms_id" name="c_ms_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 overflow-hidden truncate w-2">
                                 <option selected disabled>select</option>
                                 @foreach ($gameCategoires as $gc)
                                     <option value="{{ $gc->id }}"
@@ -498,7 +518,7 @@
                                 @foreach ($gameCategoires as $gc)
                                     <option value="{{ $gc->id }}"
                                         {{ old('name') == $gc->id ? 'selected' : '' }} title="{{ $gc->name }}">
-                                        {{ Str::limit($gc->name, 30) }}
+                                        {{ Str::limit($gc->name, 90) }}
                                         <!-- Limit the text here, you can adjust the number -->
                                     </option>
                                 @endforeach
@@ -519,7 +539,7 @@
                 <div class="flex items-center justify-between">
                     <a type="button"
                         class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-3xl text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-                        href="#">
+                        href="{{ route('home') }}">
                         Back
                     </a>
                     <button type="button" data-modal-target="save-reg-form" data-modal-toggle="save-reg-form"
@@ -536,35 +556,3 @@
 @include('layouts.footer')
 @include('layouts.modals')
 @include('layouts.custom-scripts.registerScript')
-<script>
-    document.getElementById('m_sport').addEventListener('change', function() {
-        var sportValue = this.value;
-
-        // Get the divs for games and categories sections
-        var sportsSection = document.getElementById('sports-section');
-        var categoriesSection = document.getElementById('categories-section');
-
-        // Show or hide based on the value selected
-        if (sportValue === '1') { // YES
-            sportsSection.classList.remove('hidden');
-            categoriesSection.classList.remove('hidden');
-        } else if (sportValue === '2') { // NO
-            sportsSection.classList.add('hidden');
-            categoriesSection.classList.add('hidden');
-        }
-    });
-
-    // Listen for the change event on the "Are you an Ex-Serviceman?" dropdown
-    document.getElementById('ex_ser').addEventListener('change', function() {
-        const selectedValue = this.value;
-        const textBox = document.getElementById('ex_ser_textbox');
-
-        // If 'YES' is selected, show the text box
-        if (selectedValue === '1') {
-            textBox.classList.remove('hidden');
-        } else {
-            // If 'NO' is selected, hide the text box
-            textBox.classList.add('hidden');
-        }
-    });
-</script>
