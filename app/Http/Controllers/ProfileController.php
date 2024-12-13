@@ -38,21 +38,25 @@ class ProfileController extends Controller
         } else {
             // Custom validation rules
             $rules = [
-                'religion' => 'required',
+                // 'religion' => 'required',
                 'nationality' => 'required',
                 'permanent_address.street1' => 'required|string|max:255',
-                'permanent_address.street2' => 'nullable|string|max:255',
+                // 'permanent_address.street2' => 'nullable|string|max:255',
                 'permanent_address.pincode' => 'required|numeric|digits:6',
-                'permanent_address.state_id' => 'required',
+               // 'permanent_address.state_id' => 'required',
+                //'permanent_address.police_station' => 'required',
+                //'correspondence_address.police_station' => 'required',
+               // 'correspondence_address.post_office' => 'required',
+               // 'permanent_address.post_office' => 'required',
                 'correspondence_address.street1' => 'required|string|max:255',
-                'correspondence_address.street2' => 'nullable|string|max:255',
+                // 'correspondence_address.street2' => 'nullable|string|max:255',
                 'correspondence_address.pincode' => 'required|numeric|digits:6',
-                'correspondence_address.state_id' => 'required',
+                //'correspondence_address.state_id' => 'required',
                 'education.board_school' => 'required|string|max:255',
                 'education.school_name' => 'nullable|string|max:255',
-                'education.roll_no' => 'required|string|max:50',
+                //'education.roll_no' => 'required|string|max:50',
                 'education.yop' => 'required|integer|digits:4',
-                'education.percentage' => 'required|numeric|between:0,100',
+                //'education.percentage' => 'required|numeric|between:0,100',
             ];
 
             // Add district requirements if state_id is 17
@@ -70,7 +74,7 @@ class ProfileController extends Controller
 
             // Custom validation messages
             $messages = [
-                'religion.required' => 'Religion is required.',
+                // 'voter_no.required' => 'Religion is required.',
                 'nationality.required' => 'Nationality is required.',
                 'permanent_address.street1.required' => 'Permanent address (Street 1) is required.',
                 'permanent_address.pincode.required' => 'Permanent address pincode is required.',
@@ -109,11 +113,13 @@ class ProfileController extends Controller
             // Prepare data for update
             $data = [
                 'alt_mobile' => $request->input('alt_mobile'),
-                'religion' => $request->input('religion'),
+                'voter_no' => $request->input('voter_no'),
                 'nationality' => $request->input('nationality'),
                 'adhar_no' => $request->input('adhar_no'),
+                'identity_mark' => $request->input('identity_mark'),
                 'p_address1' => $request->input('permanent_address.street1'),
                 'p_address2' => $request->input('permanent_address.street2'),
+                'p_village' => $request->input('permanent_address.p_village'),
                 'p_pin' => $request->input('permanent_address.pincode'),
                 'p_state_id' => $p_state_id,
                 'p_district_id' => $p_district_id,
@@ -122,6 +128,7 @@ class ProfileController extends Controller
                 'p_post_office' => $request->input('permanent_address.post_office'),
                 'c_address1' => $request->input('correspondence_address.street1'),
                 'c_address2' => $request->input('correspondence_address.street2'),
+                'c_village' => $request->input('correspondence_address.c_village'),
                 'c_pin' => $request->input('correspondence_address.pincode'),
                 'c_state_id' => $c_state_id,
                 'c_district_id' => $c_district_id,
@@ -129,10 +136,10 @@ class ProfileController extends Controller
                 'c_police_id' => $request->input('correspondence_address.police_station'),
                 'c_post_office' => $request->input('correspondence_address.post_office'),
                 'board_id' => $request->input('education.board_school'),
-                'school_name' => $request->input('education.school_name'),
-                'roll_no' => $request->input('education.roll_no'),
+                // 'school_name' => $request->input('education.school_name'),
+                // 'roll_no' => $request->input('education.roll_no'),
                 'year_of_passing' => $request->input('education.yop'),
-                'percentage' => $request->input('education.percentage'),
+                // 'percentage' => $request->input('education.percentage'),
             ];
 
             // Handle state and district logic
@@ -311,7 +318,7 @@ class ProfileController extends Controller
 
             $user = Auth::user();
             $user->final_submit = 1;
-            $user->stage = 5;
+            $user->stage = 6;
             $user->save();
             return response()->json([
                 'status' => 'success',
@@ -336,8 +343,8 @@ class ProfileController extends Controller
                 // Only accept PDF for these document types
                 'age_prof_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
                 'class_x_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
-                'mizu_lang_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
-                'mizu_class_x' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                // 'mizu_lang_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
+                // 'mizu_class_x' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
                 'mizu_class_x_outside' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
                 'homeguard_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
                 'caste_cert' => ['max_size' => 200, 'mime_types' => 'mimes:pdf'],
@@ -354,8 +361,8 @@ class ProfileController extends Controller
                 'signature' => 'uploads/upload_signature',
                 'age_prof_cert' => 'uploads/age_prof_cert',
                 'class_x_cert' => 'uploads/class_x_cert',
-                'mizu_lang_cert' => 'uploads/mizu_lang_cert',
-                'mizu_class_x' => 'uploads/mizu_class_x',
+                // 'mizu_lang_cert' => 'uploads/mizu_lang_cert',
+                // 'mizu_class_x' => 'uploads/mizu_class_x',
                 'mizu_class_x_outside' => 'uploads/mizu_class_x_outside',
                 'homeguard_cert' => 'uploads/homeguard_cert',
                 'caste_cert' => 'uploads/caste_cert',
@@ -389,7 +396,7 @@ class ProfileController extends Controller
             $checkSave = $documents->save();
             if ($checkSave) {
                 $user = Auth::user();
-                $user->stage = 4;
+                $user->stage = 5;
                 $user->save();
             }
 

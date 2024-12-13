@@ -27,7 +27,7 @@
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#2DB325'
                         }).then(() => {
-                            window.location.href = '/document';
+                            window.location.href = '/centre-preference';
                         });
                     }
                 },
@@ -68,7 +68,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Get elements for permanent and correspondence district containers
+        // Get elements for permanent and correspondence district containers\
         const pStateId = document.getElementById('p_state_id');
         const cStateId = document.getElementById('c_state_id');
         const checkBox = document.getElementById('checkBox');
@@ -115,6 +115,8 @@
                     .value;
                 document.getElementById('c_address2').value = document.getElementById('p_address2')
                     .value;
+                document.getElementById('c_village').value = document.getElementById('p_village')
+                    .value;
                 document.getElementById('c_post_office').value = document.getElementById(
                     'p_post_office').value;
                 document.getElementById('c_police_id').value = document.getElementById('p_police_id')
@@ -141,6 +143,7 @@
                 // Clear Correspondence fields if checkbox is unchecked
                 document.getElementById('c_address1').value = '';
                 document.getElementById('c_address2').value = '';
+                document.getElementById('c_village').value = '';
                 document.getElementById('c_post_office').value = '';
                 document.getElementById('c_state_id').value = '';
                 document.getElementById('c_district_id').value = '';
@@ -161,7 +164,7 @@
         // Helper function to make fields readonly
         function makeFieldsReadonly(isReadonly) {
             const fields = [
-                'c_address1', 'c_address2', 'c_post_office', 'c_police_id', 'c_pin', 'c_district-text'
+                'c_address1', 'c_address2', 'c_village', 'c_post_office', 'c_police_id', 'c_pin', 'c_district-text'
             ];
 
             fields.forEach(function(fieldId) {

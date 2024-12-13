@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MechanicExperience;
 use App\Models\Post;
 use App\Models\Preference;
 use App\Models\Questionary;
@@ -21,8 +22,10 @@ class QuestionariesController extends Controller
         if ($request->isMethod('GET')) {
             $userId = $request->input('user_id');
             $questionary = Questionary::where('user_id', Auth::user()->id)->first();
+            $experienceDates = MechanicExperience::where('user_id', Auth::user()->id)->get();
             return view('pages.questionaries', [
-                'data' => $questionary
+                'data' => $questionary,
+                'experienceDates' => $experienceDates
             ]);
         } else {
             $questionary = Questionary::where('user_id', Auth::user()->id)->first();
@@ -36,7 +39,7 @@ class QuestionariesController extends Controller
                         'ncc_grade' => 'required_if:ncc_cert,1',
                         'class_x_mizo' => 'required',
                         'mizo_as_mil' => 'required_if:class_x_mizo,0',
-                        'min_score_mizo' => 'required_if:mizo_as_mil,0|required_if:class_x_mizo,0',
+                        // 'min_score_mizo' => 'required_if:mizo_as_mil,0|required_if:class_x_mizo,0',
                         'comp_cert' => 'required',
                         'ncc_cert' => 'required',
                         'home_guard' => 'required',
@@ -44,7 +47,14 @@ class QuestionariesController extends Controller
                         'auto_mobile' => 'required',
                         'm_status' => 'required',
                         'm_question' => 'required_if:m_status,1',
-                        'mech_experience' => 'required_if:auto_mobile,1'
+                        // 'mech_experience' => 'required_if:auto_mobile,1',
+
+                        // Validation for experience_dates array
+                        // 'experience_dates' => 'array',
+                        // 'experience_dates.*.organization_name' => 'required_if:auto_mobile,1|string|max:255',
+                        // 'experience_dates.*.start_date' => 'required_if:auto_mobile,1|date|before_or_equal:today',
+                        // 'experience_dates.*.end_date' => 'required_if:auto_mobile,1|date|after_or_equal:start_date',
+                        // 'experience_dates.*.document_upload' => 'required_if:auto_mobile,1|file|mimes:pdf,doc,docx,jpeg,jpg,png|max:2048', // Optional, file validation when auto_mobile is 1
                     ],
                 );
                 if ($validate->fails()) {
@@ -54,6 +64,25 @@ class QuestionariesController extends Controller
                         'message' => 'All fields are required',
                     ]);
                 }
+
+                // Process experience dates
+                // if ($request->has('experience_dates')) {
+                //     foreach ($request->experience_dates as $experience) {
+                //         // Check if the experience has an ID, indicating an update
+                //         $experienceData = MechanicExperience::updateOrCreate(
+                //             ['user_id' => Auth::user()->id, 'id' => $experience['id'] ?? null], // If ID is provided, update the existing record, otherwise insert new one
+                //             [
+                //                 'org_name' => $experience['organization_name'],
+                //                 'start_date' => $experience['start_date'],
+                //                 'end_date' => $experience['end_date'],
+                //                 // Handle file upload if present
+                //                 'document' => isset($experience['document_upload'])
+                //                     ? $this->uploadDocument($experience['document_upload']) // Calling a method to handle file upload
+                //                     : null,
+                //             ]
+                //         );
+                //     }
+                // }
 
                 $formData = $request->input('formData');
                 if ($questionary) {
@@ -91,6 +120,7 @@ class QuestionariesController extends Controller
                     $questionary->mech_experience = $request->mech_experience;
                     $save = $questionary->save();
                 }
+
                 if ($questionary) {
                     $user = Auth::user();
                     $user->stage = 1;
@@ -109,6 +139,16 @@ class QuestionariesController extends Controller
                 DB::rollBack();
             }
         }
+    }
+
+    protected function uploadDocument($document)
+    {
+        // Generate a unique file name using the user ID and current time
+        $fileName = Auth::user()->id . "_" . time() . "." . $document->getClientOriginalExtension();
+        // Define the folder path
+        $folderPath = 'experience_documents';
+        // Store the file and return the file name
+        return $document->storeAs('public/' . $folderPath, $fileName);
     }
 
 

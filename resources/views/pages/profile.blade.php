@@ -54,6 +54,19 @@
         </div>
         <div class="grow flex flex-col group">
             <div class="h-full flex flex-col items-center md:items-start">
+                <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-1 sm:p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
+                    href="#">
+                    <div class="h-6 w-6 sm:h-8 sm:w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
+                            class="m-auto text-sm TimesNR"><i class="bi bi-file-building"></i></span></div>
+                    <span class="hidden lg:inline-block">Exam Centre Preference</span>
+                </a>
+                <div class="flex h-6 sm:ml-6">
+                    <div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grow flex flex-col group">
+            <div class="h-full flex flex-col items-center md:items-start">
                 <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
                     href="#">
                     <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
@@ -113,7 +126,7 @@
                         <div class="h-full flex flex-col">
                             <label for="can_name" class="block mb-auto px-1 text-sm font-medium text-gray-600">Candidate
                                 Name</label>
-                            <input type="text" id="can_name" value="{{ $registerDetails->first_name }}"
+                            <input type="text" id="can_name" value="{{ $registerDetails->full_name }}"
                                 class="bg-gray-200  border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                                 name="" value="Xyaa Triwedi Shriwastav" required disabled />
                         </div>
@@ -233,7 +246,7 @@
                                 name="" value="NO" required disabled />
                         </div>
                     </div>
-                    <div class="col-span-12 md:col-span-4 lg:col-span-3 xl:col-span-2">
+                    {{-- <div class="col-span-12 md:col-span-4 lg:col-span-3 xl:col-span-2">
                         <div class="h-full flex flex-col">
                             <label for="religion"
                                 class="block mb-auto px-1 text-sm font-medium text-gray-600">Religion<span
@@ -267,7 +280,7 @@
                                 <div class="text-sm text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-span-12 md:col-span-4 lg:col-span-3 xl:col-span-2">
                         <div class="h-full flex flex-col">
                             <label for="nation"
@@ -297,6 +310,31 @@
                                 name="adhar_no" value="{{ old('adhar_no', $userProfiles->adhar_no ?? '') }}"
                                 placeholder="Aadhaar Number" required />
                             @error('adhar_no')
+                                <div class="text-sm text-red-500">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-4 lg:col-span-3 xl:col-span-2">
+                        <div class="h-full flex flex-col">
+                            <label for="voter_no" class="block mb-auto px-1 text-sm font-medium text-gray-600">Voter ID
+                                Number (EPIC)</label>
+                            <input type="text" id="voter_no" minlength="12" maxlength="12"
+                                class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                                name="voter_no" value="{{ old('voter_no', $userProfiles->voter_no ?? '') }}"
+                                placeholder="EPIC Number"/>
+                            @error('voter_no')
+                                <div class="text-sm text-red-500">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-4 lg:col-span-3 xl:col-span-6">
+                        <div class="h-full flex flex-col">
+                            <label for="identity_mark" class="block mb-auto px-1 text-sm font-medium text-gray-600">Identification Marks</label>
+                            <input type="text" id="identity_mark"
+                                class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                                name="identity_mark" value="{{ old('identity_mark', $userProfiles->identity_mark ?? '') }}"
+                                placeholder="Identification Marks"/>
+                            @error('identity_mark')
                                 <div class="text-sm text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
@@ -344,9 +382,22 @@
                             @enderror
                         </div>
                     </div>
+
+                    <div class="col-span-12 md:col-span-12 lg:col-span-6 xl:col-span-3">
+                        <div class="h-full flex flex-col">
+                            <label for="p_village" class="block mb-auto px-1 text-sm font-medium text-gray-600">Village / Locality</label>
+                            <input type="text" id="p_village" name="permanent_address[p_village]"
+                                value="{{ old('permanent_address.p_village', $userProfiles->p_village ?? '') }}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                                placeholder="Village / Locality" />
+                            @error('permanent_address.p_village')
+                                <div class="text-sm text-red-500">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                     @if ($registerDetails->permanent_residence == 1)
                         <!-- State -->
-                        <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
+                        <div class="col-span-12 md:col-span-12 lg:col-span-6 xl:col-span-3">
                             <div class="h-full flex flex-col">
                                 <label for="State" class="block mb-auto px-1 text-sm font-medium text-gray-600">
                                     State <span class="ps-1 text-red-500">*</span>
@@ -368,7 +419,7 @@
                             </div>
                         </div>
                     @else
-                        <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
+                        <div class="col-span-12 md:col-span-12 lg:col-span-6 xl:col-span-3">
                             <div class="h-full flex flex-col">
                                 <label for="State" class="block mb-auto px-1 text-sm font-medium text-gray-600">
                                     State<span class="ps-1 text-red-500">*</span>
@@ -395,7 +446,7 @@
                     @endif
 
                     <!-- District -->
-                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 hidden" id="district-container">
+                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3 hidden" id="district-container">
                         <div class="h-full flex flex-col">
                             <label for="district" class="block mb-auto px-1 text-sm font-medium text-gray-600">
                                 District<span class="ps-1 text-red-500">*</span>
@@ -418,7 +469,7 @@
                     </div>
 
                     <!-- Text box for District (initially hidden) -->
-                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 hidden"
+                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3 hidden"
                         id="district-textbox-container">
                         <div class="h-full flex flex-col">
                             <label for="district-text" class="block mb-auto px-1 text-sm font-medium text-gray-600">
@@ -433,16 +484,15 @@
                     </div>
 
                     <!-- Police Station -->
-                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
+                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3">
                         <div class="h-full flex flex-col">
                             <label for="police_station"
-                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Police Station<span
-                                    class="ps-1 text-red-500">*</span></label>
+                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Police Station</label>
                             <input type="text" id="p_police_id" name="permanent_address[police_station]"
                                 onkeydown="return /[a-z ]/i.test(event.key)"
                                 value="{{ old('permanent_address.police_station', $userProfiles->p_police_id ?? '') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Police Station" required />
+                                placeholder="Police Station"/>
                             @error('permanent_address.police_station')
                                 <div class="text-sm text-red-500">{{ $message }}</div>
                             @enderror
@@ -453,12 +503,12 @@
                     <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3">
                         <div class="h-full flex flex-col">
                             <label for="post_office" class="block mb-auto px-1 text-sm font-medium text-gray-600">Post
-                                Office<span class="ps-1 text-red-500">*</span></label>
+                                Office</label>
                             <input type="text" id="p_post_office" name="permanent_address[post_office]"
                                 onkeydown="return /[a-z ]/i.test(event.key)"
                                 value="{{ old('permanent_address.post_office', $userProfiles->p_post_office ?? '') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Post Office" required />
+                                placeholder="Post Office"/>
                             @error('permanent_address.post_office')
                                 <div class="text-sm text-red-500">{{ $message }}</div>
                             @enderror
@@ -521,7 +571,7 @@
                                 class="block mb-auto px-1 text-sm font-medium text-gray-600">Address Line
                                 2</label>
                             <input type="text" id="c_address2" name="correspondence_address[street2]"
-                                value="{{ old('permanent_address.street2', $userProfiles->c_address2 ?? '') }}"
+                                value="{{ old('correspondence_address.street2', $userProfiles->c_address2 ?? '') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                                 placeholder="Street 2" />
                             @error('correspondence_address.street2')
@@ -530,8 +580,21 @@
                         </div>
                     </div>
 
+                    <div class="col-span-12 md:col-span-12 lg:col-span-6 xl:col-span-3">
+                        <div class="h-full flex flex-col">
+                            <label for="c_village" class="block mb-auto px-1 text-sm font-medium text-gray-600">Village / Locality</label>
+                            <input type="text" id="c_village" name="correspondence_address[c_village]"
+                                value="{{ old('correspondence_address.c_village', $userProfiles->c_village ?? '') }}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                                placeholder="Village / Locality" />
+                            @error('correspondence_address.c_village')
+                                <div class="text-sm text-red-500">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
                     <!-- State -->
-                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
+                    <div class="col-span-12 md:col-span-12 lg:col-span-6 xl:col-span-3">
                         <div class="h-full flex flex-col">
                             <label for="State"
                                 class="block mb-auto px-1 text-sm font-medium text-gray-600">State<span
@@ -554,7 +617,7 @@
                     </div>
 
                     <!-- District -->
-                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2" id="c_district-container">
+                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3" id="c_district-container">
                         <div class="h-full flex flex-col">
                             <label for="district" class="block mb-auto px-1 text-sm font-medium text-gray-600">
                                 District<span class="ps-1 text-red-500">*</span>
@@ -577,7 +640,7 @@
                     </div>
 
                     <!-- Text box for District (initially hidden) -->
-                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 hidden"
+                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3 hidden"
                         id="c_district-textbox-container">
                         <div class="h-full flex flex-col">
                             <label for="district-text" class="block mb-auto px-1 text-sm font-medium text-gray-600">
@@ -591,16 +654,15 @@
                     </div>
 
                     <!-- Correspondence Police Station -->
-                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
+                    <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3">
                         <div class="h-full flex flex-col">
                             <label for="C-police_station"
-                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Police Station<span
-                                    class="ps-1 text-red-500">*</span></label>
+                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Police Station</label>
                             <input type="text" id="c_police_id" name="correspondence_address[police_station]"
                                 onkeydown="return /[a-z ]/i.test(event.key)"
                                 value="{{ old('permanent_address.police_station', $userProfiles->c_police_id ?? '') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Police Station" required />
+                                placeholder="Police Station"/>
                             @error('correspondence_address.police_station')
                                 <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
                             @enderror
@@ -611,13 +673,12 @@
                     <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3">
                         <div class="h-full flex flex-col">
                             <label for="C-post_office"
-                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Post Office<span
-                                    class="ps-1 text-red-500">*</span></label>
+                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Post Office</label>
                             <input type="text" id="c_post_office" name="correspondence_address[post_office]"
                                 onkeydown="return /[a-z ]/i.test(event.key)"
                                 value="{{ old('permanent_address.post_office', $userProfiles->c_post_office ?? '') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Post Office" required />
+                                placeholder="Post Office"/>
                             @error('correspondence_address.post_office')
                                 <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
                             @enderror
@@ -640,30 +701,32 @@
                             @enderror
                         </div>
                     </div>
-                </div>
+                </div><br>
 
                 <div class="space-y-3">
-                    <p class="text-md text-center">Education Qualification</p>
-                    <p class="text-md text-center">HSLC or Equivalent Details</p>
+                    <p class="text-md text-center">Education Qualification (HSLC or Equivalent Details)</p>
+                    {{-- <p class="text-md text-center">HSLC or Equivalent Details</p> --}}
 
                     <!-- School and Education Details -->
                     <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3">
+                        <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-1">
+                        </div>
+                        <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-5">
                             <div class="h-full flex flex-col">
                                 <label for="board_school"
-                                    class="block mb-auto px-1 text-sm font-medium text-gray-600">Board/ School<span
+                                    class="block mb-auto px-1 text-sm font-medium text-gray-600">Board<span
                                         class="ps-1 text-red-500">*</span></label>
                                 <input type="text" id="board_school" name="education[board_school]"
                                     onkeydown="return /[a-z ]/i.test(event.key)"
                                     value="{{ old('permanent_address.board_school', $userProfiles->board_id ?? '') }}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                    placeholder="Board/ School" required />
+                                    placeholder="Board" required />
                                 @error('education.board_school')
                                     <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+{{--
                         <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3">
                             <div class="h-full flex flex-col">
                                 <label for="school_name"
@@ -677,9 +740,9 @@
                                     <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-span-12 md:col-span-4 lg:col-span-2 xl:col-span-2">
+                        {{-- <div class="col-span-12 md:col-span-4 lg:col-span-2 xl:col-span-2">
                             <div class="h-full flex flex-col">
                                 <label for="roll_no"
                                     class="block mb-auto px-1 text-sm font-medium text-gray-600">Roll
@@ -692,9 +755,8 @@
                                     <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="col-span-12 md:col-span-4 lg:col-span-2 xl:col-span-2">
+                        </div> --}}
+                        <div class="col-span-12 md:col-span-4 lg:col-span-2 xl:col-span-5">
                             <div class="h-full flex flex-col">
                                 <label for="yop"
                                     class="block mb-auto px-1 text-sm font-medium text-gray-600">Year of
@@ -709,8 +771,10 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-1">
+                        </div>
 
-                        <div class="col-span-12 md:col-span-4 lg:col-span-2 xl:col-span-2">
+                        {{-- <div class="col-span-12 md:col-span-4 lg:col-span-2 xl:col-span-2">
                             <div class="h-full flex flex-col">
                                 <label for="percentage"
                                     class="block mb-auto px-1 text-sm font-medium text-gray-600">Percentage % (CGPA
@@ -724,7 +788,7 @@
                                     <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

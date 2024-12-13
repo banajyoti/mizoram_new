@@ -320,16 +320,22 @@
         var categoryField = document.getElementById("category-field");
         var categoryFieldNo = document.getElementById("category-field-no");
         var mSport = document.getElementById("ms");
+        var sportsSection = document.getElementById('sports-section');
+        var categoriesSection = document.getElementById('categories-section');
 
         // Show/Hide based on radio button selection
         if (yesRadio.checked) {
             categoryField.classList.remove("hidden");
             categoryFieldNo.classList.add("hidden");
             mSport.classList.remove("hidden");
+            // sportsSection.classList.remove("hidden");
+            // categoriesSection.classList.remove("hidden");
         } else if (noRadio.checked) {
             categoryFieldNo.classList.remove("hidden");
             categoryField.classList.add("hidden");
             mSport.classList.add("hidden");
+            sportsSection.classList.add("hidden");
+            categoriesSection.classList.add("hidden");
         }
     }
 
@@ -362,18 +368,18 @@
     });
 
     // Listen for the change event on the "Are you an Ex-Serviceman?" dropdown
-    document.getElementById('ex_ser').addEventListener('change', function() {
-        const selectedValue = this.value;
-        const textBox = document.getElementById('ex_ser_textbox');
+    // document.getElementById('ex_ser').addEventListener('change', function() {
+    //     const selectedValue = this.value;
+    //     const textBox = document.getElementById('ex_ser_textbox');
 
-        // If 'YES' is selected, show the text box
-        if (selectedValue === '1') {
-            textBox.classList.remove('hidden');
-        } else {
-            // If 'NO' is selected, hide the text box
-            textBox.classList.add('hidden');
-        }
-    });
+    //     // If 'YES' is selected, show the text box
+    //     if (selectedValue === '1') {
+    //         textBox.classList.remove('hidden');
+    //     } else {
+    //         // If 'NO' is selected, hide the text box
+    //         textBox.classList.add('hidden');
+    //     }
+    // });
 </script>
 {{-- <script>
     // Initialize Flatpickr on the input with the id 'dob'

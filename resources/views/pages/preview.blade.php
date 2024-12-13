@@ -48,6 +48,19 @@
         </div>
         <div class="grow flex flex-col group">
             <div class="h-full flex flex-col items-center md:items-start">
+                <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-1 sm:p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
+                    href="#">
+                    <div class="h-6 w-6 sm:h-8 sm:w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
+                            class="m-auto text-sm TimesNR"><i class="bi bi-file-building"></i></span></div>
+                    <span class="hidden lg:inline-block">Exam Centre Preference</span>
+                </a>
+                <div class="flex h-6 sm:ml-6">
+                    <div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grow flex flex-col group">
+            <div class="h-full flex flex-col items-center md:items-start">
                 <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
                     href="{{ route('document') }}">
                     <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
@@ -170,7 +183,7 @@
                         <p class="text-sm font-medium">NO</p>
                     @endif
                 </div>
-                <div class="border border-1 rounded-md p-2 col-span-6 md:col-span-2 lg::col-span-4 xl:col-span-3">
+                {{-- <div class="border border-1 rounded-md p-2 col-span-6 md:col-span-2 lg::col-span-4 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">Religion</p>
                     @if ($userDetails->religion == 1)
                         <p class="text-sm font-medium">Hindu</p>
@@ -187,7 +200,7 @@
                     @else
                         <p class="text-sm font-medium">Other Religions</p>
                     @endif
-                </div>
+                </div> --}}
                 <div class="border border-1 rounded-md p-2 col-span-6 md:col-span-2 lg::col-span-4 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">Nationality</p>
                     <p class="text-sm font-medium">{{ $userDetails->nationality }}</p>
@@ -196,103 +209,124 @@
                     <p class="text-xs uppercase font-semibold text-gray-600">Aadhaar Number</p>
                     <p class="text-sm font-medium">{{ $userDetails->adhar_no ?? 'N/A' }}</p>
                 </div>
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-3 lg::col-span-4 xl:col-span-3">
+                    <p class="text-xs uppercase font-semibold text-gray-600">Voter ID
+                        Number (EPIC)</p>
+                    <p class="text-sm font-medium">{{ $userDetails->voter_no ?? 'N/A' }}</p>
+                </div>
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-3 lg::col-span-4 xl:col-span-3">
+                    <p class="text-xs uppercase font-semibold text-gray-600">Identification Marks</p>
+                    <p class="text-sm font-medium">{{ $userDetails->identity_mark ?? 'N/A' }}</p>
+                </div>
 
                 <div class="rounded-md p-1 col-span-12 bg-gray-200"></div>
 
-                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-8 lg:col-span-8 xl:col-span-3">
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">Permanent Address</p>
                     <p class="text-sm font-medium">{{ $userDetails->p_address1 }} , {{ $userDetails->p_address2 }}
                     </p>
                 </div>
-                <div class="border border-1 rounded-md p-2 col-span-4 md:col-span-4 mlgcol-span-4 xl:col-span-1">
-                    <p class="text-xs uppercase font-semibold text-gray-600">Pincode</p>
-                    <p class="text-sm font-medium">{{ $userDetails->p_pin }}</p>
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-3">
+                    <p class="text-xs uppercase font-semibold text-gray-600">Village</p>
+                    <p class="text-sm font-medium">{{ $userDetails->p_village }}
+                    </p>
                 </div>
-                <div class="border border-1 rounded-md p-2 col-span-4 md:col-span-4 mlgcol-span-4 xl:col-span-2">
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">state</p>
                     <p class="text-sm font-medium">{{ $userDetails->pState }}</p>
                 </div>
                 @if ($userDetails->p_state_id == 17)
-                    <div class="border border-1 rounded-md p-2 col-span-8 md:col-span-4 mlgcol-span-4 xl:col-span-2">
+                    <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-3">
                         <p class="text-xs uppercase font-semibold text-gray-600">District</p>
                         <p class="text-sm font-medium">{{ $userDetails->pDist }}</p>
                     </div>
                 @else
-                    <div class="border border-1 rounded-md p-2 col-span-8 md:col-span-4 mlgcol-span-4 xl:col-span-2">
+                    <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-3">
                         <p class="text-xs uppercase font-semibold text-gray-600">District</p>
                         <p class="text-sm font-medium">{{ $userDetails->p_other_district }}</p>
                     </div>
                 @endif
-                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2">
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">Police Station</p>
                     <p class="text-sm font-medium">{{ $userDetails->p_police_id }}</p>
                 </div>
-                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2">
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">Post Office</p>
                     <p class="text-sm font-medium">{{ $userDetails->p_post_office }}</p>
                 </div>
-                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-8 lg:col-span-8 xl:col-span-3">
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 mlgcol-span-4 xl:col-span-1">
+                    <p class="text-xs uppercase font-semibold text-gray-600">Pincode</p>
+                    <p class="text-sm font-medium">{{ $userDetails->p_pin }}</p>
+                </div>
+                <div
+                    class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-5 hidden xl:block">
+                </div>
+
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">Correspondance Address</p>
                     <p class="text-sm font-medium">{{ $userDetails->c_address1 }} , {{ $userDetails->c_address2 }}
                     </p>
                 </div>
-                <div class="border border-1 rounded-md p-2 col-span-4 md:col-span-4 mlgcol-span-4 xl:col-span-1">
-                    <p class="text-xs uppercase font-semibold text-gray-600">Pincode</p>
-                    <p class="text-sm font-medium">{{ $userDetails->c_pin }}</p>
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-3">
+                    <p class="text-xs uppercase font-semibold text-gray-600">Village</p>
+                    <p class="text-sm font-medium">{{ $userDetails->c_village }}
+                    </p>
                 </div>
-                <div class="border border-1 rounded-md p-2 col-span-4 md:col-span-4 mlgcol-span-4 xl:col-span-2">
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">state</p>
                     <p class="text-sm font-medium">{{ $userDetails->cState }}</p>
                 </div>
                 @if ($userDetails->c_state_id == 17)
-                    <div class="border border-1 rounded-md p-2 col-span-8 md:col-span-4 mlgcol-span-4 xl:col-span-2">
+                    <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-3">
                         <p class="text-xs uppercase font-semibold text-gray-600">District</p>
                         <p class="text-sm font-medium">{{ $userDetails->cDist }}</p>
                     </div>
                 @else
-                    <div class="border border-1 rounded-md p-2 col-span-8 md:col-span-4 mlgcol-span-4 xl:col-span-2">
+                    <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-3">
                         <p class="text-xs uppercase font-semibold text-gray-600">District</p>
                         <p class="text-sm font-medium">{{ $userDetails->c_other_district }}</p>
                     </div>
                 @endif
-                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2">
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">Police Station</p>
                     <p class="text-sm font-medium">{{ $userDetails->c_police_id }}</p>
                 </div>
-                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-2">
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">Post Office</p>
                     <p class="text-sm font-medium">{{ $userDetails->c_post_office }}</p>
+                </div>
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 mlgcol-span-4 xl:col-span-1">
+                    <p class="text-xs uppercase font-semibold text-gray-600">Pincode</p>
+                    <p class="text-sm font-medium">{{ $userDetails->c_pin }}</p>
+                </div>
+                <div
+                    class="border border-1 rounded-md p-2 col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-5 hidden xl:block">
                 </div>
 
                 <div class="rounded-md p-1 col-span-12 bg-gray-200"></div>
 
-                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-12 xl:col-span-4">
-                    <p class="text-xs uppercase font-semibold text-gray-600">Have you achieved a minimum score in Mizo
-                        Language Proficiency qualifying test?</p>
-                    @if ($userDetails->min_score_mizo == 1)
+                @if ($userDetails->min_score_mizo == 1)
+                    <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-12 xl:col-span-4">
+                        <p class="text-xs uppercase font-semibold text-gray-600">Have you achieved a minimum score in Mizo
+                            Language Proficiency qualifying test?</p>
                         <p class="text-sm font-medium">YES</p>
-                    @else
-                        <p class="text-sm font-medium">NO</p>
-                    @endif
-                </div>
-                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-12 xl:col-span-4">
-                    <p class="text-xs uppercase font-semibold text-gray-600">Have you studied Mizo subject in Class-X
-                        standard (HSLC) or above within Mizoram?</p>
-                    @if ($userDetails->class_x_mizo == 1)
+                    </div>
+                @endif
+                @if ($userDetails->class_x_mizo == 1)
+                    <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-12 xl:col-span-4">
+                        <p class="text-xs uppercase font-semibold text-gray-600">Have you studied Mizo subject in
+                            Class-X
+                            standard (HSLC) or above within Mizoram?</p>
                         <p class="text-sm font-medium">YES</p>
-                    @else
-                        <p class="text-sm font-medium">NO</p>
-                    @endif
-                </div>
-                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-12 xl:col-span-4">
-                    <p class="text-xs uppercase font-semibold text-gray-600">Have you studied Mizo subject as MIL in
-                        Class-X standard in outside Mizoram?</p>
-                    @if ($userDetails->mizo_as_mil == 1)
+                    </div>
+                @endif
+                @if ($userDetails->mizo_as_mil == 1)
+                    <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-12 xl:col-span-4">
+                        <p class="text-xs uppercase font-semibold text-gray-600">Have you studied Mizo subject as MIL in
+                            Class-X standard in outside Mizoram?</p>
                         <p class="text-sm font-medium">YES</p>
-                    @else
-                        <p class="text-sm font-medium">NO</p>
-                    @endif
-                </div>
+                    </div>
+                @endif
                 <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-4">
                     <p class="text-xs uppercase font-semibold text-gray-600">Do you have Computer Certificate?</p>
                     @if ($userDetails->comp == 1)

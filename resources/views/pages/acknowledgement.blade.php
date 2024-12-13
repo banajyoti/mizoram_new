@@ -419,9 +419,9 @@
                 <img src="img/mizo-logo.png" style="height: 50px!important;" alt="" class="">
             </td>
             <td class="text-c text-m" style="width: 70%!important; padding: 2px 0px 0px 0px!important;">
-                <p class="m-0 fs-14">Mizoram Police</p>
-                <p class="m-0 fs-24">State Level Police Recruitment</p>
                 <p class="m-0 fs-14">Government of Mizroram</p>
+                <p class="m-0 fs-14">Mizoram Police</p>
+                <p class="m-0 fs-24">Police Recruitment 2024</p>
             </td>
             <td class="text-e text-m fw-600" style="width: 15%!important; padding: 0px 0px 0px 0px!important;">
                 <img src="img/SJ-yellow.png" style="height: 50px!important;" alt="" class="">
@@ -509,6 +509,11 @@
                 <p class="m-0 fs-14 fw-500">{{ $userDetails->email }}</p>
             </td>
             <td colspan="" class="p-1 text-m">
+                <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Voter ID
+                    Number (EPIC):</p>
+                <p class="m-0 fs-14 fw-500">{{ $userDetails->voter_no }}</p>
+            </td>
+            {{-- <td colspan="" class="p-1 text-m">
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Religion:</p>
                 @if ($userDetails->religion == 1)
                     <p class="m-0 fs-14 fw-500">Hindu</p>
@@ -525,7 +530,7 @@
                 @else
                     <p class="m-0 fs-14 fw-500">Other Religions</p>
                 @endif
-            </td>
+            </td> --}}
             <td style="width: 15%!important;" rowspan="2" class="text-m text-c">
                 <img src="data:image/png;base64, {!! $qrcode !!}" style="height:90px; width: ">
             </td>
@@ -548,16 +553,29 @@
                 @endif
             </td>
         </tr>
+        <tr>
+            <td colspan="" class="p-1 text-m">
+                <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Identification Marks:</p>
+                <p class="m-0 fs-14 fw-500">{{ $userDetails->identity_mark }}</p>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
     </table>
 
     <table class="t-100 bor-sin" style="margin: 10px 0px 0px 0px!important;">
         <tr>
-            <td class="p-1" style="width: 25%!important" colspan="5">
+            <td class="p-1" style="width: 25%!important" colspan="6">
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Permanent Address:</p>
                 <p class="m-0 fs-14 fw-500">{{ $userDetails->p_address1 }} , {{ $userDetails->p_address2 }}</p>
             </td>
         </tr>
         <tr>
+            <td class="p-1" style="width: 25%!important">
+                <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Village:</p>
+                <p class="m-0 fs-14 fw-500">{{ $userDetails->p_village }}</p>
+            </td>
             <td class="p-1" style="width: 25%!important">
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">State:</p>
                 <p class="m-0 fs-14 fw-500">{{ $userDetails->pState }}</p>
@@ -590,12 +608,16 @@
 
     <table class="t-100 bor-sin" style="margin: 10px 0px 0px 0px!important;">
         <tr>
-            <td class="p-1" style="width: 25%!important" colspan="5">
+            <td class="p-1" style="width: 25%!important" colspan="6">
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Correspondance Address:</p>
                 <p class="m-0 fs-14 fw-500">{{ $userDetails->c_address1 }} , {{ $userDetails->c_address2 }}</p>
             </td>
         </tr>
         <tr>
+            <td class="p-1" style="width: 25%!important">
+                <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Village:</p>
+                <p class="m-0 fs-14 fw-500">{{ $userDetails->c_village }}</p>
+            </td>
             <td class="p-1" style="width: 25%!important">
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">State:</p>
                 <p class="m-0 fs-14 fw-500">{{ $userDetails->cState }}</p>
@@ -635,12 +657,17 @@
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Board/ University Name:</p>
                 <p class="m-0 fs-14 fw-500">{{ $userDetails->board_id }}</p>
             </td>
-            <td class="p-1" style="width: 25%!important" colspan="2">
+            <td class="p-1" style="width: 25%!important">
+                <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Year of Passing:</p>
+                <p class="m-0 fs-14 fw-500">{{ $userDetails->year_of_passing }}</p>
+            </td>
+
+            {{-- <td class="p-1" style="width: 25%!important" colspan="2">
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">School/ Institute Name:</p>
                 <p class="m-0 fs-14 fw-500">{{ $userDetails->school_name }}</p>
-            </td>
+            </td> --}}
         </tr>
-        <tr>
+        {{-- <tr>
             <td class="p-1" style="width: 25%!important">
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Roll Number:</p>
                 <p class="m-0 fs-14 fw-500">{{ $userDetails->roll_no }}</p>
@@ -653,49 +680,45 @@
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Percentage (%):</p>
                 <p class="m-0 fs-14 fw-500">{{ $userDetails->percentage }}%</p>
             </td>
-        </tr>
+        </tr> --}}
     </table>
 
     <table class="t-100 bor-sin" style="margin: 10px 0px 0px 0px!important;">
-        <tr>
-            <td class="p-1" style="width: !important" colspan="">
-                <p class="m-0 fs-12 fw-600 text-gray-700">Have you achieved a minimum score in Mizo Language
-                    Proficiency qualifying test?</p>
-            </td>
-            <td class="p-1" style="width: !important" colspan="">
-                @if ($userDetails->min_score_mizo == 1)
+        @if ($userDetails->min_score_mizo == 1)
+            <tr>
+                <td class="p-1" style="width: !important" colspan="">
+                    <p class="m-0 fs-12 fw-600 text-gray-700">Have you achieved a minimum score in Mizo Language
+                        Proficiency qualifying test?</p>
+                </td>
+                <td class="p-1" style="width: !important" colspan="">
                     <p class="m-0 fs-12 fw-500 text-c">YES</p>
-                @else
-                    <p class="m-0 fs-12 fw-500 text-c">NO</p>
-                @endif
-            </td>
-        </tr>
-        <tr>
-            <td class="p-1" style="width: !important" colspan="">
-                <p class="m-0 fs-12 fw-600 text-gray-700">Have you studied Mizo subject in Class-X standard (HSLC) or
-                    above within Mizoram?</p>
-            </td>
-            <td class="p-1" style="width: !important" colspan="">
-                @if ($userDetails->class_x_mizo == 1)
+                </td>
+            </tr>
+        @endif
+        @if ($userDetails->class_x_mizo == 1)
+            <tr>
+                <td class="p-1" style="width: !important" colspan="">
+                    <p class="m-0 fs-12 fw-600 text-gray-700">Have you studied Mizo subject in Class-X standard (HSLC)
+                        or
+                        above within Mizoram?</p>
+                </td>
+                <td class="p-1" style="width: !important" colspan="">
                     <p class="m-0 fs-12 fw-500 text-c">YES</p>
-                @else
-                    <p class="m-0 fs-12 fw-500 text-c">NO</p>
-                @endif
-            </td>
-        </tr>
-        <tr>
-            <td class="p-1" style="width: !important" colspan="">
-                <p class="m-0 fs-12 fw-600 text-gray-700">Have you studied Mizo subject as MIL in Class-X standard in
-                    outside Mizoram?</p>
-            </td>
-            <td class="p-1" style="width: !important" colspan="">
-                @if ($userDetails->mizo_as_mil == 1)
+                </td>
+            </tr>
+        @endif
+        @if ($userDetails->mizo_as_mil == 1)
+            <tr>
+                <td class="p-1" style="width: !important" colspan="">
+                    <p class="m-0 fs-12 fw-600 text-gray-700">Have you studied Mizo subject as MIL in Class-X standard
+                        in
+                        outside Mizoram?</p>
+                </td>
+                <td class="p-1" style="width: !important" colspan="">
                     <p class="m-0 fs-12 fw-500 text-c">YES</p>
-                @else
-                    <p class="m-0 fs-12 fw-500 text-c">NO</p>
-                @endif
-            </td>
-        </tr>
+                </td>
+            </tr>
+        @endif
         <tr>
             <td class="p-1" style="width: !important" colspan="">
                 <p class="m-0 fs-12 fw-600 text-gray-700">Do you have Computer Certificate?</p>

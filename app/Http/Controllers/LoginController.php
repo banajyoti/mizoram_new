@@ -72,9 +72,15 @@ class LoginController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Login successful!',
-                    'redirect_url' => route('document')
+                    'redirect_url' => route('centrePreference')
                 ]);
             } elseif ($user->stage == 4) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Login successful!',
+                    'redirect_url' => route('document')
+                ]);
+            } elseif ($user->stage == 5) {
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Login successful!',

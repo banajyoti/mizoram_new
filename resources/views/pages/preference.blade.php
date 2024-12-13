@@ -41,7 +41,20 @@
                             class="m-auto text-sm TimesNR"><i class="bi bi-person"></i></span></div>
                     <span class="hidden lg:inline-block">Profile</span>
                 </a>
-                <div class="flex h-6 ml-6">
+                <div class="flex h-6 sm:ml-6">
+                    <div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grow flex flex-col group">
+            <div class="h-full flex flex-col items-center md:items-start">
+                <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
+                    href="#">
+                    <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
+                            class="m-auto text-sm TimesNR"><i class="bi bi-building"></i></span></div>
+                            <span class="hidden lg:inline-block">Exam Centre Preference</span>
+                </a>
+                <div class="flex h-6 sm:ml-6">
                     <div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
                 </div>
             </div>
@@ -89,7 +102,7 @@
 
     <div class="p-4 grow border border-gray-300 rounded-lg space-y-8">
         <p class="m-auto text-yellow-500 text-center rounded-md text-[0.65rem] md:text-sm font-medium">Candidate are
-            requested to slect the post as per their preference</p>
+            requested to select the post as per their preference</p>
         <div class="flex flex-col items-center justify-center space-y-">
             <div class="mb-8">
                 <p class="mb-2 text-gray-600">Select post's manually that you want to apply for</p>
@@ -247,7 +260,7 @@
     <a class="inline-block bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md Nunito"
         href="{{ route('questionaries') }}"><i class="bi bi-arrow-left-short pr-1"></i>Go Back</a>
     <a class="ml-auto inline-block bg-green-600 hover:bg-green-700 text-white p-2 rounded-md Nunito {{ !empty($check) ? '' : 'hidden' }}"
-        href="{{ route('profile') }}"><i class="bi bi-check-all pr-1"></i>Save & proceede</a>
+        href="{{ route('profile') }}"><i class="bi bi-check-all pr-1"></i>Save & proceed</a>
 </div>
 
 @include('layouts.footer')

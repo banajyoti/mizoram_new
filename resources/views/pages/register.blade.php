@@ -6,14 +6,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Registration Form</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <!-- Include Flatpickr CSS -->
-     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+    <!-- Include Flatpickr CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
 
-     <!-- Tailwind CSS (via CDN) -->
-     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Tailwind CSS (via CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-     <!-- Include Flatpickr JS -->
-     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Include Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- Your other scripts -->
 </head>
 <div class="grow md:p-4 grid lg:grid-cols-5 gap-3">
@@ -36,7 +36,7 @@
                             <ul class="list-disc list-inside space-y-2">
                                 <li>
                                     Photograph must be in colour and must be in white background and must have been
-                                    taken after <span class="font-semibold">1st january 2025.</span>
+                                    recently taken.
                                 </li>
                                 <li>
                                     The maximum file size should be 450 kb | <span class="font-semibold">Format: JPEG,
@@ -66,14 +66,11 @@
                         <div class="ps-3">
                             <ul class="list-disc list-inside space-y-2">
                                 <li>
-                                    Certificate of proof of age. <span class="font-semibold">(Admit Card/ Certificate of
-                                        H.S.L.C./ equivalent examination)
+                                    Certificate of proof of age. <span class="font-semibold">(Certificate of
+                                        H.S.L.C./ Birth Certificate)
                                 </li>
                                 <li>
-                                    Pass Certificate & Marksheet of all qualifications
-                                </li>
-                                <li>
-                                    Employment Exchange registration number.
+                                    Marksheet of H.S.L.C
                                 </li>
                                 <li>
                                     Certificate of Caste from Competent Authority. <span class="font-semibold">NO CASTE
@@ -92,23 +89,15 @@
                                             <li>
                                                 Copy of Discharged Book.
                                             </li>
-                                            <li>
-                                                Copy of Identity Card of Ex-Serviceman.
-                                            </li>
                                         </ol>
                                     </div>
                                 </li>
                                 <li>
-                                    Birth Certificate issued by the Competent Authority or Educational Qualification
-                                    Certificate issued by the Competent Authority of the School/ Institution last
-                                    studied by the candidates who have not appeared in HSLC/ Matriculation.
+                                    Certificate of ITI certificate / Experience Certificate
+                                    (if applicable).
                                 </li>
                                 <li>
-                                    Certificate of addition essential qualification /requirement as applicable.
-                                </li>
-                                <li>
-                                    Certificate of other diploma qualification or Trade certificate /license required,
-                                    as applicable.
+                                    Meritorious Sports Certificate Issued by Competent Authority (if applicable).
                                 </li>
                             </ul>
                         </div>
@@ -136,7 +125,7 @@
             <form id="registrationForm" method="POST">
                 @csrf
                 <div class="grid grid-cols-6 sm:grid-cols-12 gap-4">
-                    <div class="col-span-2">
+                    <div class="col-span-4">
                         <div class="h-full flex flex-col">
                             <label for="sal"
                                 class="block mb-auto px-1 text-sm font-medium text-gray-600">Salutation<span
@@ -155,19 +144,20 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-span-4">
+                    <div class="col-span-8">
                         <div class="h-full flex flex-col">
-                            <label for="first_name" class="block mb-auto px-1 text-sm font-medium text-gray-600">First
-                                Name<span class="ps-1 text-red-500">*</span></label>
-                            <input type="text" id="first_name" onkeydown="return /[a-z]/i.test(event.key)"
+                            <label for="full_name"
+                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Candidate Name<span
+                                    class="ps-1 text-red-500">*</span></label>
+                            <input type="text" id="full_name" onkeydown="return /[a-z ]/i.test(event.key)"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                name="first_name" value="{{ old('first_name') }}" placeholder="First Name" required />
+                                name="full_name" value="{{ old('full_name') }}" placeholder="First Name" required />
                         </div>
-                        @error('first_name')
+                        @error('full_name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="col-span-3">
+                    {{-- <div class="col-span-3">
                         <div class="h-full flex flex-col">
                             <label for="middle_name" class="block mb-auto px-1 text-sm font-medium text-gray-600">Middle
                                 Name</label>
@@ -179,8 +169,8 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="col-span-3">
+                    </div> --}}
+                    {{-- <div class="col-span-3">
                         <div class="h-full flex flex-col">
                             <label for="last_name" class="block mb-auto px-1 text-sm font-medium text-gray-600">Last
                                 Name<span class="ps-1 text-red-500">*</span></label>
@@ -191,11 +181,10 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-span-6">
                         <div class="h-full flex flex-col">
-                            <label for="father_name"
-                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Father
+                            <label for="father_name" class="block mb-auto px-1 text-sm font-medium text-gray-600">Father
                                 Name<span class="ps-1 text-red-500">*</span></label>
                             <input type="text" id="father_name" onkeydown="return /[a-z ]/i.test(event.key)"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
@@ -208,9 +197,8 @@
                     </div>
                     <div class="col-span-6">
                         <div class="h-full flex flex-col">
-                            <label for="mother_name"
-                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Mother Name<span
-                                    class="ps-1 text-red-500">*</span></label>
+                            <label for="mother_name" class="block mb-auto px-1 text-sm font-medium text-gray-600">Mother
+                                Name<span class="ps-1 text-red-500">*</span></label>
                             <input type="text" id="mother_name" onkeydown="return /[a-z ]/i.test(event.key)"
                                 class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                                 name="mother_name" value="{{ old('mother_name') }}" placeholder="Mother Name"
@@ -251,6 +239,10 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
                                 <option selected disabled>select</option>
                                 <option value="1">HSLC</option>
+                                <option value="2">HS</option>
+                                <option value="3">Diploma</option>
+                                <option value="4">Graduation</option>
+                                <option value="5">Post Graduation</option>
                             </select>
                             @error('high_qual')
                                 <span class="text-danger">{{ $message }}</span>
@@ -353,11 +345,10 @@
                     <div class="col-span-6 sm:col-span-4">
                         <div class="h-full flex flex-col">
                             <label for="email"
-                                class="block mb-aut px-1 text-sm font-medium text-gray-600">Email<span
-                                    class="ps-1 text-red-500">*</span></label>
+                                class="block mb-aut px-1 text-sm font-medium text-gray-600">Email</label>
                             <input type="" id="email"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 email"
-                                name="email" value="" placeholder="Email Address" required />
+                                name="email" value="" placeholder="Email Address" />
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -421,7 +412,8 @@
                             <label for="ex-ser" class="block mb-auto px-1 text-sm font-medium text-gray-600">Are you
                                 an Ex-Serviceman?<span class="ps-1 text-red-500">*</span></label>
                             <select id="ex_ser" name="ex_ser"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                                onchange="toggleDateFields()">
                                 <option selected disabled>select</option>
                                 <option value="1">YES</option>
                                 <option value="2">NO</option>
@@ -432,16 +424,62 @@
                         </div>
                     </div>
 
-                    <!-- This is where the additional text box will be appended -->
-                    <div id="ex_ser_textbox" class="col-span-4 hidden">
+                    <!-- Start Date -->
+                    <div class="col-span-4" id="start_date_container" style="display: none;">
                         <div class="h-full flex flex-col">
-                            <label for="total_ex"
-                                class="block mb-auto px-1 text-sm font-medium text-gray-600">Please provide details
-                                if you are an Ex-Serviceman</label>
-                            <input type="text" name="total_ex" id="total_ex" onkeypress="return isNumber(event)" minlength="1" maxlength="2"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
+                            <label for="start_date" class="block mb-auto px-1 text-sm font-medium text-gray-600">Start
+                                date<span class="ps-1 text-red-500">*</span></label>
+                            <input type="date" id="start_date"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 datepicker"
+                                name="start_date" value="" placeholder="Start date"
+                                onchange="validateDates()" />
+                            @error('start_date')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
+
+                    <!-- End Date -->
+                    <div class="col-span-4" id="end_date_container" style="display: none;">
+                        <div class="h-full flex flex-col">
+                            <label for="end_date" class="block mb-auto px-1 text-sm font-medium text-gray-600">End
+                                date<span class="ps-1 text-red-500">*</span></label>
+                            <input type="date" id="end_date"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 datepicker"
+                                name="end_date" value="" placeholder="End date" onchange="validateDates()" />
+                            @error('end_date')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <!-- Error Message for Invalid Dates -->
+                    <div class="col-span-12" id="date_error" style="display: none; color: red;">
+                        <span>The start date should not be later than the end date. Please correct it.</span>
+                    </div>
+
+                    <!-- Calculated Experience Display -->
+                    <div class="col-span-4" id="age_display" style="display: none;">
+                        <div class="h-full flex flex-col">
+                            <label class="block mb-auto px-1 text-sm font-medium text-gray-600">Calculated
+                                Experience</label>
+                            <input type="text" id="calculated_age" name="calculated_age"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2"
+                                readonly />
+                        </div>
+                    </div>
+
+                    <!-- This is where the additional text box will be appended -->
+                    {{-- <div id="ex_ser_textbox" class="col-span-4 hidden">
+                        <div class="h-full flex flex-col">
+                            <label for="total_ex" class="block mb-auto px-1 text-sm font-medium text-gray-600">Please
+                                provide no of years served/put in service?<span
+                                    class="ps-1 text-red-500">*</span></label>
+                            <input type="text" name="total_ex" id="total_ex" onkeypress="return isNumber(event)"
+                                minlength="1" maxlength="2"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
+                        </div>
+                    </div> --}}
 
                     {{-- <div class="col-span-6 sm:col-span-8">
                         <div class="h-full flex flex-col">
@@ -556,3 +594,87 @@
 @include('layouts.footer')
 @include('layouts.modals')
 @include('layouts.custom-scripts.registerScript')
+<script>
+    // Function to show/hide date fields based on the ex_ser selection
+    function toggleDateFields() {
+        var exSerValue = document.getElementById('ex_ser').value;
+        var startDateContainer = document.getElementById('start_date_container');
+        var endDateContainer = document.getElementById('end_date_container');
+
+        if (exSerValue == '1') {
+            // Show date fields if YES is selected
+            startDateContainer.style.display = 'block';
+            endDateContainer.style.display = 'block';
+        } else {
+            // Hide date fields if NO or other value is selected
+            startDateContainer.style.display = 'none';
+            endDateContainer.style.display = 'none';
+        }
+    }
+</script>
+<script>
+    function validateDates() {
+        var startDate = document.getElementById('start_date').value;
+        var endDate = document.getElementById('end_date').value;
+
+        // Get the Register button
+        var submitButton = document.getElementById('submitButton');
+        var ageDisplay = document.getElementById('age_display');
+        var ageInput = document.getElementById('calculated_age');
+        var dateError = document.getElementById('date_error');
+
+        // Check if both start and end dates are filled
+        if (startDate && endDate) {
+            var start = new Date(startDate);
+            var end = new Date(endDate);
+
+            // Compare start date with end date
+            if (start > end) {
+                // Show error message if start date is later than end date
+                dateError.style.display = 'block';
+                document.getElementById('start_date').style.borderColor = 'red';
+                document.getElementById('end_date').style.borderColor = 'red';
+
+                // Hide the Register Now button
+                submitButton.style.display = 'none';
+
+                // Hide the calculated experience
+                ageDisplay.style.display = 'none';
+            } else {
+                // Hide error message if start date is valid
+                dateError.style.display = 'none';
+                document.getElementById('start_date').style.borderColor = '';
+                document.getElementById('end_date').style.borderColor = '';
+
+                // Show the Register Now button
+                submitButton.style.display = 'block';
+
+                // Calculate the age or experience
+                var experience = calculateExperience(start, end);
+
+                // Display the calculated experience
+                ageInput.value = experience;
+                ageDisplay.style.display = 'block';
+            }
+        }
+    }
+
+    function calculateExperience(start, end) {
+        // Calculate the difference in years, months, and days
+        var years = end.getFullYear() - start.getFullYear();
+        var months = end.getMonth() - start.getMonth();
+        var days = end.getDate() - start.getDate();
+
+        // Adjust if the month or day is negative
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+        if (days < 0) {
+            months--;
+            days += new Date(end.getFullYear(), end.getMonth(), 0).getDate(); // Get the last day of the month
+        }
+
+        return years + ' Years ' + months + ' Months ' + days + ' Days';
+    }
+</script>

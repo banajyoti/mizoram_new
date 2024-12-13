@@ -27,8 +27,8 @@ class RegisterController extends Controller
             // Validate the incoming request data
             $validator = Validator::make($request->all(), [
                 'salutation' => 'required|string|max:10',
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
+                'full_name' => 'required|string|max:255',
+                // 'last_name' => 'required|string|max:255',
                 'father_name' => 'required|string|max:255',
                 'mother_name' => 'required|string|max:255',
                 'high_qual' => 'required|string|max:10',
@@ -36,13 +36,14 @@ class RegisterController extends Controller
                 'category_id' => 'required|max:10',
                 'dob' => 'required|date',
                 'age' => 'required',
-                'email' => 'required|email|max:255|unique:users,email', // Ensure the email is unique
+                // 'email' => 'required|email|max:255|unique:users,email', // Ensure the email is unique
                 'phone' => 'required|string|max:15|unique:users,phone',
                 'ex_ser' => 'required',
                 // 'X_inMizo' => 'required',
                 'permanent_residence' => 'required|in:0,1',
                 'otp' => 'required|numeric|digits:4',
-                'total_ex' => 'required_if:ex_ser,1',
+                'start_date' => 'required_if:ex_ser,1',
+                'end_date' => 'required_if:ex_ser,1',
                 // 'm_sport' => 'required',
                 'g_id' => 'required_if:m_sport,1',
                 'c_ms_id' => 'required_if:m_sport,1',
@@ -51,13 +52,13 @@ class RegisterController extends Controller
                 'salutation.string' => 'Salutation must be a valid string.',
                 'salutation.max' => 'Salutation cannot exceed 10 characters.',
 
-                'first_name.required' => 'First name is required.',
-                'first_name.string' => 'First name must be a valid string.',
-                'first_name.max' => 'First name cannot exceed 255 characters.',
+                'full_name.required' => 'Candidate name is required.',
+                'full_name.string' => 'Candidate name must be a valid string.',
+                'full_name.max' => 'Candidate name cannot exceed 255 characters.',
 
-                'last_name.required' => 'Last name is required.',
-                'last_name.string' => 'Last name must be a valid string.',
-                'last_name.max' => 'Last name cannot exceed 255 characters.',
+                // 'last_name.required' => 'Last name is required.',
+                // 'last_name.string' => 'Last name must be a valid string.',
+                // 'last_name.max' => 'Last name cannot exceed 255 characters.',
 
                 'father_name.required' => 'Father\'s name is required.',
                 'father_name.string' => 'Father\'s name must be a valid string.',
@@ -82,10 +83,10 @@ class RegisterController extends Controller
 
                 'age.required' => 'Age is required.',
 
-                'email.required' => 'Email address is required.',
-                'email.email' => 'Please provide a valid email address.',
-                'email.max' => 'Email cannot exceed 255 characters.',
-                'email.unique' => 'This email address is already registered.',
+                // 'email.required' => 'Email address is required.',
+                // 'email.email' => 'Please provide a valid email address.',
+                // 'email.max' => 'Email cannot exceed 255 characters.',
+                // 'email.unique' => 'This email address is already registered.',
 
                 'phone.required' => 'Phone number is required.',
                 'phone.string' => 'Phone number must be a valid string.',
@@ -120,18 +121,34 @@ class RegisterController extends Controller
             }
 
             if ($request->ex_ser == '1') {
+                // Set default minAge and maxAge based on the category_id
                 if ($request->category_id == '1') {
                     $minAge = "1996-11-09";
                     $maxAge = "2006-11-09";
                 } elseif ($request->category_id == '3' || $request->category_id == '4') {
                     $minAge = "1991-11-09";
                     $maxAge = "2006-11-09";
-
                 } elseif ($request->category_id == '2') {
                     $minAge = "1993-11-09";
                     $maxAge = "2006-11-09";
                 }
 
+                // Check if 'calculated_age' is set and is valid
+                if (isset($request->calculated_age)) {
+                    // Parse the calculated_age (in format "X Years Y Months Z Days")
+                    preg_match('/(\d+) Years (\d+) Months (\d+) Days/', $request->calculated_age, $matches);
+
+                    if (count($matches) === 4) {
+                        $years = (int) $matches[1];
+                        $months = (int) $matches[2];
+                        $days = (int) $matches[3];
+
+                        // Calculate the date based on the calculated age by subtracting the years, months, and days
+                        $minAge = date('Y-m-d', strtotime("-$years years -$months months -$days days", strtotime($minAge)));
+                    }
+                }
+
+                // If total_ex is set, subtract the years from minAge
                 if (isset($request->total_ex) && is_numeric($request->total_ex)) {
                     $minAge = date('Y-m-d', strtotime($minAge . ' -' . $request->total_ex . ' years'));
                 }
@@ -177,14 +194,14 @@ class RegisterController extends Controller
                 }
             }
 
-            $full_name = $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name;
+            // $full_name = $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name;
             $user = User::create([
                 'registration_number' => $uniqueFormId,
                 'salutation' => $request->salutation,
-                'full_name' => $full_name,
-                'first_name' => $request->first_name,
-                'middle_name' => $request->middle_name,
-                'last_name' => $request->last_name,
+                'full_name' => $request->full_name,
+                // 'first_name' => $request->first_name,
+                // 'middle_name' => $request->middle_name,
+                // 'last_name' => $request->last_name,
                 'father_name' => $request->father_name,
                 'mother_name' => $request->mother_name,
                 'high_qual' => $request->high_qual,
@@ -200,7 +217,10 @@ class RegisterController extends Controller
                 'total_ex' => $request->total_ex,
                 'm_sport' => $request->m_sport,
                 'g_id' => $request->g_id,
-                'c_ms_id' => $request->c_ms_id
+                'c_ms_id' => $request->c_ms_id,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'calculated_age' => $request->calculated_age
                 // Add more fields as necessary
             ]);
 

@@ -34,28 +34,40 @@
             toggleSaveButton();
 
             function toggleSaveButton() {
-                const minScoreMizo = $('input[name="min_score_mizo"]:checked').val();
                 const classXMizo = $('input[name="class_x_mizo"]:checked').val();
                 const mizoAsMil = $('input[name="mizo_as_mil"]:checked').val();
+                const minScoreMizo = $('input[name="min_score_mizo"]:checked').val();
                 const compCert = $('input[name="comp_cert"]:checked').val();
                 const mStatus = $('input[name="m_status"]:checked').val();
                 const mQuestion = $('input[name="m_question"]:checked').val();
 
                 if ((minScoreMizo === '1' || classXMizo === '1' || mizoAsMil === '1') && compCert === '1' &&
-                    mStatus === '0' || mQuestion === '0') {
+                    (mStatus === '0' || mQuestion === '0')) {
                     $('#save_button').show();
                 } else {
                     $('#save_button').hide();
                 }
 
+                // Show or hide #x2 and #x3 based on classXMizo value
                 if (classXMizo === '0') {
+                    // Show x2 and x3 when classXMizo is '0'
                     $('#x2').removeClass('hidden');
-                } else {
+                    $('#x3').removeClass('hidden');
+                } else if (classXMizo === '1') {console.log($('#x2').hasClass('hidden'));
+                    // Hide x2 and x3 when classXMizo is '1'
+                    $('input[name="min_score_mizo"]').prop('checked', false); // Deselect min_score_mizo
+                    $('input[name="mizo_as_mil"]').prop('checked', false); // Deselect mizo_as_mil
                     $('#x2').addClass('hidden');
+                    $('#x3').addClass('hidden');
+                   // Explicitly hide x3 when classXMizo is 1
+                } else {
+                    // Hide x2 and x3 if no value is selected for classXMizo (edge case)
+                    $('#x2').addClass('hidden');
+                    $('#x3').addClass('hidden');
                 }
 
                 if (mizoAsMil === '0') {
-                    $('#x3').removeClass('hidden');
+                    // $('#x3').removeClass('hidden');
                 } else {
                     $('#x3').addClass('hidden');
                 }
@@ -75,11 +87,11 @@
                 $('.choose_m_status').addClass('hidden');
             }
 
-            if (formData['auto_mobile'] === '1') {
-                $('.mechExperience').removeClass('hidden');
-            } else {
-                $('.mechExperience').addClass('hidden');
-            }
+            // if (formData['auto_mobile'] === '1') {
+            //     $('.mechExperience').removeClass('hidden');
+            // } else {
+            //     $('.mechExperience').addClass('hidden');
+            // }
         }
 
         function submitAllData() {
@@ -216,11 +228,11 @@
             $('.choose_m_status').addClass('hidden');
         }
 
-        if ($('input[name="auto_mobile"]:checked').val() === '1') {
-            $('.mechExperience').removeClass('hidden');
-        } else {
-            $('.mechExperience').addClass('hidden');
-        }
+        // if ($('input[name="auto_mobile"]:checked').val() === '1') {
+        //     $('.mechExperience').removeClass('hidden');
+        // } else {
+        //     $('.mechExperience').addClass('hidden');
+        // }
     });
 </script>
 <script>

@@ -171,7 +171,7 @@
                     <div class="h-[0.08rem] bg-gray-300 w-full"></div>
                 </div>
                 <div class="mb-6">
-                    <label for="mob_no" class="block mb-2 text-sm font-medium text-gray-600">Registared Mobile
+                    <label for="mob_no" class="block mb-2 text-sm font-medium text-gray-600">Registered Mobile
                         Number</label>
                     <input type="text" id="mob_no" name="mobile_no" maxlength="10" minlength="10"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"

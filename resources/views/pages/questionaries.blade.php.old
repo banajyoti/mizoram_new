@@ -2,6 +2,7 @@
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 @include('layouts.nav-2')
@@ -51,7 +52,7 @@
                 <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-1 sm:p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
                     href="#">
                     <div class="h-6 w-6 sm:h-8 sm:w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
-                            class="m-auto text-sm TimesNR"><i class="bi bi-file-building"></i></span></div>
+                            class="m-auto text-sm TimesNR"><i class="bi bi-file-earmark-pdf"></i></span></div>
                     <span class="hidden lg:inline-block">Exam Centre Preference</span>
                 </a>
                 <div class="flex h-6 sm:ml-6">
@@ -120,8 +121,7 @@
                                             class="grow p-2 md:px-4 md:py-3 bg-gray-100 rounded-t-lg md:rounded-lg space-y-2">
                                             <div class="flex lg:items-start 2xl:items-center">
                                                 <i class="text-blue-600 text-xl mr-2"></i>
-                                                <p class="text-base">Have you studied Mizo subject in Class-X
-                                                    standard
+                                                <p class="text-base">Have you studied Mizo subject in Class-X standard
                                                     (HSLC) or above within Mizoram?<span class="text-red-600">*</span>
                                                 </p>
                                             </div>
@@ -159,7 +159,7 @@
                             </div>
                         </div>
                         <!-- card 2 -->
-                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300 {{ isset($data->mizo_as_mil) && $data->mizo_as_mil == 1 ? '' : 'hidden' }}" id="x2">
+                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300 hidden" id="x2">
                             <div class="h-full">
                                 <div class="md:my-2 md:mt-2 flex flex-col sm:flex-row items-end sm:items-center">
                                     <div class="flex items-center flex-grow w-full">
@@ -206,7 +206,7 @@
                             </div>
                         </div>
                         <!-- card 3 -->
-                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300 {{ isset($data->min_score_mizo) && $data->min_score_mizo == 1 ? '' : 'hidden' }}" id="x3">
+                        <div class="p-0 md:p-4 md:py-6 border rounded-lg border-gray-300 hidden" id="x3">
                             <div class="h-full">
                                 <div class="md:my-2 md:mt-2 flex flex-col sm:flex-row items-end sm:items-center">
                                     <div class="flex items-center flex-grow">
@@ -586,7 +586,7 @@
                                     </div>
                                     <div class="flex gap-2 items-center justify-end p-2">
                                         <div>
-                                            <input id="yes_iti_eqi" {{ isset($data) && $data->iti_eqi == 1 ? 'checked' : '' }}
+                                            <input id="yes_iti_eqi" {{ ($data->iti_eqi ?? '') == 1 ? 'checked' : '' }}
                                                 value="1" type="radio" name="iti_eqi" class="hidden peer">
                                             <label for="yes_iti_eqi"
                                                 class="p-2 inline-block border border-gray-300 hover:border-blue-600 hover:text-blue-800 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
@@ -594,7 +594,7 @@
                                             </label>
                                         </div>
                                         <div>
-                                            <input id="no_iti_eqi" {{ isset($data) && $data->iti_eqi == 0 ? 'checked' : '' }}
+                                            <input id="no_iti_eqi" {{ ($data->iti_eqi ?? '') == 0 ? 'checked' : '' }}
                                                 value="0" type="radio" name="iti_eqi" class="hidden peer">
                                             <label for="no_iti_eqi"
                                                 class="p-2 inline-block border border-gray-300 hover:border-gray-600 hover:text-gray-800 peer-checked:border-gray-600 peer-checked:bg-gray-600 peer-checked:text-white rounded-md h-8 w-24 sm:h-11 sm:w-28 flex items-center justify-center text-xs sm:text-sm">
@@ -656,7 +656,72 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div
+                                <!-- Date Input Fields (Hidden by default) -->
+                                <div id="experience_dates" class="m-2 flex flex-col w-full items-start hidden">
+                                    @foreach ($experienceDates as $index => $experience)
+                                        <div class="date-pair flex items-center w-full mb-4 space-x-4">
+                                            <!-- Organization Name -->
+                                            <p class="text-black-500 w-full sm:w-1/4">
+                                                <label for="organization_name_{{ $index + 1 }}"
+                                                    class="block">Organization Name:</label>
+                                                <input type="text" id="organization_name_{{ $index + 1 }}"
+                                                    name="experience_dates[{{ $index }}][organization_name]"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    placeholder="Organization Name"
+                                                    value="{{ old('experience_dates.' . $index . '.organization_name', $experience->org_name) }}"
+                                                    required>
+                                            </p>
+
+                                            <!-- Start Date -->
+                                            <p class="text-black-500 w-full sm:w-1/4">
+                                                <label for="start_date_{{ $index + 1 }}" class="block">Start
+                                                    Date:</label>
+                                                <input type="date" id="start_date_{{ $index + 1 }}"
+                                                    name="experience_dates[{{ $index }}][start_date]"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    placeholder="Start Date"
+                                                    value="{{ old('experience_dates.' . $index . '.start_date', $experience->start_date) }}"
+                                                    required>
+                                            </p>
+
+                                            <!-- End Date -->
+                                            <p class="text-black-500 w-full sm:w-1/4">
+                                                <label for="end_date_{{ $index + 1 }}" class="block">End
+                                                    Date:</label>
+                                                <input type="date" id="end_date_{{ $index + 1 }}"
+                                                    name="experience_dates[{{ $index }}][end_date]"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    placeholder="End Date"
+                                                    value="{{ old('experience_dates.' . $index . '.end_date', $experience->end_date) }}"
+                                                    required>
+                                            </p>
+
+                                            <!-- Document Upload -->
+                                            <p class="text-black-500 w-full sm:w-1/4">
+                                                <label for="document_upload_{{ $index + 1 }}"
+                                                    class="block">Upload Document:</label>
+                                                <input type="file" id="document_upload_{{ $index + 1 }}"
+                                                    name="experience_dates[{{ $index }}][document_upload]"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                                @if ($experience->document_upload)
+                                                    <p>Uploaded Document: <a
+                                                            href="{{ asset('storage/' . $experience->document_upload) }}"
+                                                            target="_blank">View Document</a></p>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    @endforeach
+
+                                    <!-- Add More Button -->
+                                    <div class="w-full text-center mt-4">
+                                        <button type="button" id="add_more_dates"
+                                            class="bg-blue-600 text-white py-2 px-6 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out">
+                                            <i class="fas fa-plus mr-2"></i> Add More
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {{-- <div
                                     class="m-2 flex w-full lg:flex-col xl:flex-row items-center mechExperience hidden">
                                     <p class="px-6 text-black-500 md:block ml-auto">Enter Total experience in years
                                         <input type="text" id="mech_experience" name="mech_experience"
@@ -665,7 +730,7 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                             placeholder="Enter your experience" required />
                                     </p>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -682,3 +747,78 @@
 </div>
 @include('layouts.footer')
 @include('layouts.custom-scripts.questionariesScript')
+<script>
+    // Get the radio buttons, the 'Add More' button, and the experience date div
+    const yesRadio = document.getElementById('yes_auto_mobile');
+    const noRadio = document.getElementById('no_auto_mobile');
+    const experienceDatesDiv = document.getElementById('experience_dates');
+    const addMoreButton = document.getElementById('add_more_dates');
+    let datePairCount = 1;
+
+    // Function to toggle visibility based on the radio selection
+    const toggleExperienceDatesVisibility = () => {
+        if (yesRadio.checked) {
+            experienceDatesDiv.classList.remove('hidden');
+        } else {
+            experienceDatesDiv.classList.add('hidden');
+        }
+    };
+
+    yesRadio.addEventListener('change', toggleExperienceDatesVisibility);
+    noRadio.addEventListener('change', toggleExperienceDatesVisibility);
+    toggleExperienceDatesVisibility();
+
+    const createDatePair = (pairCount, startDate = '', endDate = '', orgName = '', docUpload = '') => {
+        const newDatePair = document.createElement('div');
+        newDatePair.classList.add('date-pair', 'flex', 'items-center', 'w-full', 'mb-4', 'relative');
+
+        const orgNameField = `
+            <p class="text-black-500 w-full sm:w-1/4">Organization Name:
+                <input type="text" id="organization_name_${pairCount}" name="experience_dates[${pairCount}][organization_name]"
+                    value="${orgName}"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Organization Name" />
+            </p>
+        `;
+        const startDateField = `
+            <p class="text-black-500 w-full sm:w-1/4">Start Date:
+                <input type="date" id="start_date_${pairCount}" name="experience_dates[${pairCount}][start_date]"
+                    value="${startDate}"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Start Date" />
+            </p>
+        `;
+        const endDateField = `
+            <p class="text-black-500 w-full sm:w-1/4">End Date:
+                <input type="date" id="end_date_${pairCount}" name="experience_dates[${pairCount}][end_date]"
+                    value="${endDate}"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="End Date" />
+            </p>
+        `;
+        const docUploadField = `
+            <p class="text-black-500 w-full sm:w-1/4">Upload Document:
+                <input type="file" id="document_upload_${pairCount}" name="experience_dates[${pairCount}][document_upload]"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Upload Document" />
+            </p>
+        `;
+        const removeButton = `
+            <button type="button" class="remove-date-pair absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 text-sm flex items-center justify-center"
+                style="transform: translate(50%, -50%);">
+                X
+            </button>
+        `;
+
+        newDatePair.innerHTML = orgNameField + startDateField + endDateField + docUploadField + removeButton;
+        experienceDatesDiv.insertBefore(newDatePair, addMoreButton.parentElement);
+
+        const removeBtn = newDatePair.querySelector('.remove-date-pair');
+        removeBtn.addEventListener('click', () => newDatePair.remove());
+    };
+
+    addMoreButton.addEventListener('click', () => {
+        datePairCount++;
+        createDatePair(datePairCount);
+    });
+</script>

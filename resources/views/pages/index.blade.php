@@ -63,7 +63,7 @@
                             <img class="lg:mb-3 h-8 lg:h-10" src="{{ asset('img/click_b.png') }}" alt="">
                             <h3 class="text-sm sm:text-lg font-semibold text-blue-900 mb-1 sm:mb-3">Payment</h3>
                             <p class="text-xs sm:text-xs md:text-md xl:text-base font-normal text-gray-700 pb-4">
-                                Applying successfully proceede to payment as per the post.</p>
+                                Applied successfully proceed to payment as per the post.</p>
                         </div>
                     </div>
                     <div class="col-span-6 sm:col-span-1 flex flex-col">

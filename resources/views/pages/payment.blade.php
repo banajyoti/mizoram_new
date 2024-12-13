@@ -46,6 +46,19 @@
                 <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
                     href="#">
                     <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
+                            class="m-auto text-sm TimesNR"><i class="bi bi-building"></i></span></div>
+                            <span class="hidden lg:inline-block">Exam Centre Preference</span>
+                </a>
+                <div class="flex h-6 ml-6">
+                    <div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grow flex flex-col group">
+            <div class="h-full flex flex-col items-center md:items-start">
+                <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
+                    href="#">
+                    <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
                             class="m-auto text-sm TimesNR"><i class="bi bi-file-earmark-pdf"></i></span></div>
                     <span class="hidden lg:inline-block">Document's</span>
                 </a>

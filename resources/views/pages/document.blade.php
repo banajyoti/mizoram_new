@@ -74,6 +74,19 @@
         </div>
         <div class="grow flex flex-col group">
             <div class="h-full flex flex-col items-center md:items-start">
+                <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
+                    href="#">
+                    <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
+                            class="m-auto text-sm TimesNR"><i class="bi bi-building"></i></span></div>
+                    <span class="hidden lg:inline-block">Exam Centre Preference</span>
+                </a>
+                <div class="flex h-6 ml-6">
+                    <div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grow flex flex-col group">
+            <div class="h-full flex flex-col items-center md:items-start">
                 <a
                     class="grow inline-block lg:w-full border border-green-600 shadow-md rounded-lg p-2 flex items-center text-green-600 font-medium transition-all text-xs">
                     <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
@@ -149,8 +162,9 @@
                             class="inline-block p-0 py-1 md:py-1 px-3 text-xs md:text-sm font-medium rounded md:rounded-full my-1 my-md-0 bg-blue-500 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 cursor-pointer">
                             <i class="bi bi-cloud-arrow-up"></i> <br class="block md:hidden">UPLOAD
                         </label>
-                        <input type="file" id="upload_photo" name="photo" class="hidden upload_doc" data-id="photo"
-                            accept="image/jpg, image/jpeg, image/png" onchange="uploadFile(event, 'photo')">
+                        <input type="file" id="upload_photo" name="photo" class="hidden upload_doc"
+                            data-id="photo" accept="image/jpg, image/jpeg, image/png"
+                            onchange="uploadFile(event, 'photo')">
                     </td>
                     <td class="p-2 flex justify-center items-center">
                         @if (isset($documents->photo) && !empty($documents->photo))
@@ -280,7 +294,7 @@
                         </td>
                     </tr>
                 @endif
-                @if ($questionaries && $questionaries->class_x_mizo == 1)
+                {{-- @if ($questionaries && $questionaries->class_x_mizo == 1)
                     <tr class="border-b border-gray-300">
                         <td class="p-2 border-r border-gray-300 text-center align-middle">{{ $count++ }}</td>
 
@@ -343,7 +357,7 @@
                             @endif
                         </td>
                     </tr>
-                @endif
+                @endif --}}
                 @if ($questionaries && $questionaries->home_guard == 1)
                     <tr class="border-b border-gray-300">
                         <td class="p-2 border-r border-gray-300 text-center align-middle">{{ $count++ }}</td>
@@ -477,7 +491,8 @@
                             <p class="text-center md:text-start text-xs md:text-md ">Mechanic Experience Certificate
                             </p>
                             <p class="text-[0.65rem] md:text-xs text-red-500 text-center md:text-start">
-                                PDF <br class="block md:hidden">(MAX. SIZE 200kb)
+                                PDF <br class="block md:hidden">(MAX. SIZE 200kb)<br>(Multiple PDFs should be merged
+                                into one PDF)
                             </p>
                         </td>
                         <td class="p-2 border-r border-gray-300 text-center"><label for="upload_mechanic_ex_cert"
@@ -507,6 +522,7 @@
 
                         <td class="p-2 border-r border-gray-300">
                             <p class="text-center md:text-start text-xs md:text-md ">Industrial Training Institute
+                                (ITI)
                                 Certificate</p>
                             <p class="text-[0.65rem] md:text-xs text-red-500 text-center md:text-start">
                                 PDF <br class="block md:hidden">(MAX. SIZE 200kb)
@@ -613,7 +629,7 @@
     <div class="relative w-full h-auto max-w-4xl max-h-[80%] bg-white rounded-lg">
         <span id="closePdfModal"
             class="absolute top-2 right-2 cursor-pointer text-blue font-bold text-2xl">&times;</span>
-        <iframe id="pdfIframe" src="" width="100%" height="300px"
+        <iframe id="pdfIframe" src="" width="100%" height="600px"
             class="border-4 border-blue-500 rounded-md"></iframe>
     </div>
 </div>
@@ -621,40 +637,40 @@
 
 @php
     // List of all fields that must be checked for being empty
-    $requiredFields = ['photo', 'signature', 'age_prof_cert', 'class_x_cert', 'comp_cert'];
+     $requiredFields = ['photo', 'signature', 'age_prof_cert', 'class_x_cert', 'comp_cert'];
 
-    // Check if 'mizu_lang_cert' is required based on the questionaries value
-    if ($questionaries && $questionaries->min_score_mizo != 0) {
-        // Add 'mizu_lang_cert' to the list if min_score_mizo is not 0
-        $requiredFields[] = 'mizu_lang_cert';
-    }
-    if ($questionaries && $questionaries->class_x_mizo != 0) {
-        $requiredFields[] = 'mizu_class_x';
-    }
-    if ($questionaries && $questionaries->mizo_as_mil != 0) {
-        $requiredFields[] = 'mizu_class_x_outside';
-    }
-    if ($questionaries && $questionaries->home_guard != 0) {
-        $requiredFields[] = 'homeguard_cert';
-    }
-    if ($questionaries && $questionaries->ncc_cert != 0) {
-        $requiredFields[] = 'ncc_cert';
-    }
-    if ($questionaries && $questionaries->auto_mobile != 0) {
-        $requiredFields[] = 'mechanic_ex_cert';
-    }
-    if ($questionaries && $questionaries->iti_eqi != 0) {
-        $requiredFields[] = 'iti_ex_cert';
-    }
-    if ($userDetails && $userDetails->ex_ser != 0) {
-        $requiredFields[] = 'ex_service';
-    }
-    if ($userDetails && $userDetails->m_sport != 0) {
-        $requiredFields[] = 'sports_cert';
-    }
-    if ($userDetails && $userDetails->category_id != 1) {
-        $requiredFields[] = 'caste_cert';
-    }
+    // // Check if 'mizu_lang_cert' is required based on the questionaries value
+    // if ($questionaries && $questionaries->min_score_mizo != 0) {
+    //     // Add 'mizu_lang_cert' to the list if min_score_mizo is not 0
+    //     $requiredFields[] = 'mizu_lang_cert';
+    // }
+    // if ($questionaries && $questionaries->class_x_mizo != 0) {
+    //     $requiredFields[] = 'mizu_class_x';
+    // }
+    // if ($questionaries && $questionaries->mizo_as_mil != 0) {
+    //     $requiredFields[] = 'mizu_class_x_outside';
+    // }
+    // if ($questionaries && $questionaries->home_guard != 0) {
+    //     $requiredFields[] = 'homeguard_cert';
+    // }
+    // if ($questionaries && $questionaries->ncc_cert != 0) {
+    //     $requiredFields[] = 'ncc_cert';
+    // }
+    // if ($questionaries && $questionaries->auto_mobile != 0) {
+    //     $requiredFields[] = 'mechanic_ex_cert';
+    // }
+    // if ($questionaries && $questionaries->iti_eqi != 0) {
+    //     $requiredFields[] = 'iti_ex_cert';
+    // }
+    // if ($userDetails && $userDetails->ex_ser != 0) {
+    //     $requiredFields[] = 'ex_service';
+    // }
+    // if ($userDetails && $userDetails->m_sport != 0) {
+    //     $requiredFields[] = 'sports_cert';
+    // }
+    // if ($userDetails && $userDetails->category_id != 1) {
+    //     $requiredFields[] = 'caste_cert';
+    // }
 
     // Check if any required field is empty
     $anyFieldEmpty = false;
@@ -672,12 +688,12 @@
     if ($questionaries && $questionaries->min_score_mizo == 1 && empty($documents->mizu_lang_cert)) {
         $anyFieldEmpty = true;
     }
-    if ($questionaries && $questionaries->class_x_mizo == 1 && empty($documents->class_x_cert)) {
-        $anyFieldEmpty = true;
-    }
-    if ($questionaries && $questionaries->mizo_as_mil == 1 && empty($documents->mizu_class_x_outside)) {
-        $anyFieldEmpty = true;
-    }
+    // if ($questionaries && $questionaries->class_x_mizo == 1 && empty($documents->class_x_cert)) {
+    //     $anyFieldEmpty = true;
+    // }
+    // if ($questionaries && $questionaries->mizo_as_mil == 1 && empty($documents->mizu_class_x_outside)) {
+    //     $anyFieldEmpty = true;
+    // }
     if ($questionaries && $questionaries->home_guard == 1 && empty($documents->homeguard_cert)) {
         $anyFieldEmpty = true;
     }
@@ -703,7 +719,7 @@
 
 <div class="mt-auto px-4 flex items-center">
     <a class="inline-block bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md Nunito"
-        href="{{ route('profile') }}"><i class="bi bi-arrow-left-short pr-1"></i>Go Back</a>
+        href="{{ route('centrePreference') }}"><i class="bi bi-arrow-left-short pr-1"></i>Go Back</a>
     <!-- Display Save & Proceed button if no fields are empty -->
     @if (!$anyFieldEmpty)
         <a class="ml-auto inline-block bg-green-600 hover:bg-green-700 text-white p-2 rounded-md Nunito"
