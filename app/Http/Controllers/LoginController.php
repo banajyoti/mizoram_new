@@ -44,11 +44,17 @@ class LoginController extends Controller
 
         if ($user) {
             Auth::login($user);
-            if ($user->final_submit == 1) {
+            if (($user->payment_status == 0 || $user->payment_status == 3) && $user->final_submit == 1) {
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Login successful!',
                     'redirect_url' => route('getPayment')
+                ]);
+            } elseif ($user->payment_status == 1 && $user->final_submit == 1) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Login successful!',
+                    'redirect_url' => route('dashboard')
                 ]);
             } elseif ($user->stage == 0) {
                 return response()->json([

@@ -259,7 +259,7 @@
                                 <option selected disabled>select</option>
                                 <option value="1">Male</option>
                                 <option value="2">Female</option>
-                                <option value="3">Others</option>
+                                {{-- <option value="3">Others</option> --}}
                             </select>
                             @error('gender_id')
                                 <span class="text-danger">{{ $message }}</span>

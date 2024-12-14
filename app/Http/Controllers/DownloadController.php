@@ -22,6 +22,7 @@ class DownloadController extends Controller
             ->leftJoin('states as s2', 's2.id', '=', 'profiles.c_state_id')
             ->leftJoin('districts as d1', 'd1.id', '=', 'profiles.p_district_id')
             ->leftJoin('districts as d2', 'd2.id', '=', 'profiles.c_district_id')
+            ->leftJoin('payments', 'payments.user_id', '=', 'users.id')
             ->select(
                 'users.*',
                 'questionaries.*',
@@ -35,7 +36,9 @@ class DownloadController extends Controller
                 's2.name as cState',
                 'd1.name as pDist',
                 'd2.name as cDist',
-                'users.updated_at as up'
+                'users.updated_at as up',
+                'payments.*',
+                'payments.created_at as c'
             )
             ->where('users.id', Auth::user()->id)
             ->first();

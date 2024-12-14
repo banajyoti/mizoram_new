@@ -14,30 +14,21 @@ class PaymentController extends Controller
     {
         if ($request->isMethod('GET')) {
             $userDetails = User::where('id', Auth::user()->id)->first();
-            // Check if payment status is 3 (Already pending)
-            if ($userDetails->payment_status != 3) {
-                // If payment status is not 3, create a new transaction ID and update status
-                $tran = $userDetails->registration_number . time();
-                $userDetails->t_id = $tran;
-                $userDetails->payment_status = 3;
-                $userDetails->save();
-            } else {
-                // If already pending, use the existing transaction ID
-                $tran = $userDetails->t_id;
-            }
-
-            // Set the amount based on category_id
-            if ($userDetails->category_id == 1) {
-                $data['amount'] = '200.00';
-            } elseif (in_array($userDetails->category_id, [2, 3, 4])) {
-                $data['amount'] = '150.00';
-            }
+            $tran = $userDetails->registration_number . time();
+            $userDetails->t_id = $tran;
+            $userDetails->save();
+            // // Conditionally set the amount based on the user's category
+            // if ($userDetails->category == 1) {
+            //     $data['amount'] = '200.00'; // Amount for category 1
+            // } elseif (in_array($userDetails->category, [2, 3, 4])) {
+            //     $data['amount'] = '150.00'; // Amount for categories 2, 3, and 4
+            // }
 
             $merchantId = 'M00006275';
             $data['merchantId'] = 'M00006275';
             $data['apiKey'] = 'bJ5zs9YF5uc5GD8Ig3pg0vO8wZ7AE2WM';
             $data['txnId'] = $tran;
-           // $data['amount'] = '1.00';
+            $data['amount'] = '1.00';
             $data['dateTime'] = Carbon::now()->format('Y-m-d h:i:s');
             $data['ResellerTxnId'] = 'NA';
             //$data['Rid'] = 'R0000135';
@@ -65,6 +56,7 @@ class PaymentController extends Controller
 
     public function getresposne(Request $request)
     {
+
         // dd($request->input('respData'));
         $merchantId = $request->input('merchantId');
         $respData = $request->input('respData');
@@ -179,6 +171,25 @@ class PaymentController extends Controller
 
     public function paymentSuccess(Request $request)
     {
-        return view('pages.paymentSuccess');
+        $userDetails = PaymentResponse::join('users', 'users.id', '=', 'payments.user_id')
+            ->select('users.full_name', 'users.registration_number', 'payments.*')
+            ->where('payments.user_id', Auth::user()->id)->first();
+        return view('pages.paymentSuccess', compact('userDetails'));
+    }
+
+    public function paymentFail(Request $request)
+    {
+        return view('pages.payment-failed');
+    }
+
+    public function updatePaymentStatus(Request $request)
+    {
+        $user = Auth::user();
+        $user->payment_status = 3;
+        if ($user->save()) {
+            return response()->json(['status' => 'success', 'message' => 'Payment status updated successfully.']);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Failed to update payment status.'], 500);
+        }
     }
 }

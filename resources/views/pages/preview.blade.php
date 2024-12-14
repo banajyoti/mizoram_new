@@ -49,7 +49,7 @@
         <div class="grow flex flex-col group">
             <div class="h-full flex flex-col items-center md:items-start">
                 <a class="grow inline-block lg:w-full border border-gray-300 hover:border-blue-600 hover:shadow-md rounded-lg p-1 sm:p-2 flex items-center hover:text-blue-600 font-medium transition-all text-xs"
-                    href="#">
+                    href="{{ route('centrePreference') }}">
                     <div class="h-6 w-6 sm:h-8 sm:w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
                             class="m-auto text-sm TimesNR"><i class="bi bi-file-building"></i></span></div>
                     <span class="hidden lg:inline-block">Exam Centre Preference</span>
@@ -126,10 +126,8 @@
                     <p class="text-xs uppercase font-semibold text-gray-600">Gender</p>
                     @if ($userDetails->gender_id == 1)
                         <p class="text-sm font-medium">Male</p>
-                    @elseif($userDetails->gender_id == 2)
-                        <p class="text-sm font-medium">Male</p>
                     @else
-                        <p class="text-sm font-medium">Others</p>
+                        <p class="text-sm font-medium">Female</p>
                     @endif
                 </div>
                 <div class="border border-1 rounded-md p-2 col-span-6 md:col-span-3 lg::col-span-4 xl:col-span-3">
@@ -174,7 +172,7 @@
                         <p class="text-sm font-medium">NO</p>
                     @endif
                 </div>
-                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-8 lg::col-span-4 xl:col-span-3">
+                {{-- <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-8 lg::col-span-4 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">Have you completed your Class-X Standard
                         (HSLC) in Mizoram?</p>
                     @if ($userDetails->X_inMizo == 1)
@@ -182,7 +180,7 @@
                     @else
                         <p class="text-sm font-medium">NO</p>
                     @endif
-                </div>
+                </div> --}}
                 {{-- <div class="border border-1 rounded-md p-2 col-span-6 md:col-span-2 lg::col-span-4 xl:col-span-3">
                     <p class="text-xs uppercase font-semibold text-gray-600">Religion</p>
                     @if ($userDetails->religion == 1)
@@ -327,6 +325,14 @@
                         <p class="text-sm font-medium">YES</p>
                     </div>
                 @endif
+                <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-4">
+                    <p class="text-xs uppercase font-semibold text-gray-600">Marital Status?</p>
+                    @if ($userDetails->m_status == 1)
+                        <p class="text-sm font-medium">YES</p>
+                    @else
+                        <p class="text-sm font-medium">NO</p>
+                    @endif
+                </div>
                 <div class="border border-1 rounded-md p-2 col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-4">
                     <p class="text-xs uppercase font-semibold text-gray-600">Do you have Computer Certificate?</p>
                     @if ($userDetails->comp == 1)

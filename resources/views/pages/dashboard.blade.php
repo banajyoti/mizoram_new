@@ -10,8 +10,7 @@
                     src="{{ asset('storage/public/uploads/upload_photo/' . $documents->photo) }}" alt="User Photo">
             </div>
             <div class="mb-4 text-right">
-                <button type="button" data-modal-target="edit_profile" data-modal-toggle="edit_profile"
-                    class="h-8 w-8"
+                <button type="button" data-modal-target="edit_profile" data-modal-toggle="edit_profile" class="h-8 w-8"
                     title="edit profile"></button>
             </div>
             <div class="space-y-1">
@@ -64,10 +63,8 @@
                         <p class="text-xs text-gray-500 font-medium">Gender</p>
                         @if ($userDetails->gender_id == 1)
                             <p class="text-md text-gray-800 Nunito">Male</p>
-                        @elseif($userDetails->gender_id == 2)
-                            <p class="text-md text-gray-800 Nunito">Male</p>
                         @else
-                            <p class="text-md text-gray-800 Nunito">Others</p>
+                            <p class="text-md text-gray-800 Nunito">Female</p>
                         @endif
                     </div>
                 </div>
@@ -114,8 +111,10 @@
                     <p class="text-xs font-medium text-gray-500">(Post's are displayed in respect to preference order)
                     </p>
                     <div class="pt-6">
-                        <a class="inline-block hover:text-blue-600" href="{{ route('download_ack') }}"><i
-                                class="bi bi-download pr-1"></i>Download Acknowledgement Slip</a>
+                        <a href="{{ route('download_ack') }}"
+                            class="inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                            <i class="bi bi-download pr-1"></i> Download Acknowledgement Slip
+                        </a>
                     </div>
                 </div>
             </div>

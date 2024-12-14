@@ -416,23 +416,28 @@
     <table class="t-100 bor-0-0">
         <tr>
             <td class="text-s text-m fw-600" style="width: 15%!important; padding: 2px 0px 0px 0px!important;">
-                <img src="img/mizo-logo.png" style="height: 50px!important;" alt="" class="">
+                <img src="img/mizo-logo.png" style="height: 30px!important;" alt="" class="">
             </td>
             <td class="text-c text-m" style="width: 70%!important; padding: 2px 0px 0px 0px!important;">
-                <p class="m-0 fs-14">Government of Mizroram</p>
-                <p class="m-0 fs-14">Mizoram Police</p>
-                <p class="m-0 fs-24">Police Recruitment 2024</p>
+                <p class="m-0 fs-08">GOVERNMENT OF MIZORAM</p>
+                <p class="m-0 fs-14">MIZORAM POLICE</p>
+                <p class="m-0 fs-10">Police Recruitment 2024</p>
             </td>
             <td class="text-e text-m fw-600" style="width: 15%!important; padding: 0px 0px 0px 0px!important;">
-                <img src="img/SJ-yellow.png" style="height: 50px!important;" alt="" class="">
+                <img src="img/SJ-yellow.png" style="height: 30px!important;" alt="" class="">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="width: 50%!important;" class="fs-08 text-e">Generated On -
+                {{ \Carbon\Carbon::parse($userDetails->up)->format('F d, Y') }}
             </td>
         </tr>
     </table>
-    <table class="t-100 bor-0-0">
+    {{-- <table class="t-100 bor-0-0">
         <tr>
             <td style="width: 50%!important;" class="fs-08 text-e">Generated On - {{ $userDetails->up }}</td>
         </tr>
-    </table>
+    </table> --}}
 
     <table class="t-100 bor-sin" style="margin: 10px 0px 0px 0px!important;">
         <tr>
@@ -462,10 +467,8 @@
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Gender:</p>
                 @if ($userDetails->gender_id == 1)
                     <p class="m-0 fs-14 fw-500">Male</p>
-                @elseif($userDetails->gender_id == 2)
-                    <p class="m-0 fs-14 fw-500">Male</p>
                 @else
-                    <p class="m-0 fs-14 fw-500">Others</p>
+                    <p class="m-0 fs-14 fw-500">Female</p>
                 @endif
             </td>
             <td colspan="" class="p-1 text-m">
@@ -555,12 +558,14 @@
         </tr>
         <tr>
             <td colspan="" class="p-1 text-m">
+                <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Voter ID
+                    Number (EPIC):</p>
+                <p class="m-0 fs-14 fw-500">{{ $userDetails->voter_no ?? 'N/A' }}</p>
+            </td>
+            <td colspan="3" class="p-1 text-m">
                 <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Identification Marks:</p>
                 <p class="m-0 fs-14 fw-500">{{ $userDetails->identity_mark }}</p>
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
         </tr>
     </table>
 
@@ -721,6 +726,18 @@
         @endif
         <tr>
             <td class="p-1" style="width: !important" colspan="">
+                <p class="m-0 fs-12 fw-600 text-gray-700">Marital Status?</p>
+            </td>
+            <td class="p-1" style="width: !important" colspan="">
+                @if ($userDetails->m_status == 1)
+                    <p class="m-0 fs-12 fw-500 text-c">YES</p>
+                @else
+                    <p class="m-0 fs-12 fw-500 text-c">NO</p>
+                @endif
+            </td>
+        </tr>
+        <tr>
+            <td class="p-1" style="width: !important" colspan="">
                 <p class="m-0 fs-12 fw-600 text-gray-700">Do you have Computer Certificate?</p>
             </td>
             <td class="p-1" style="width: !important" colspan="">
@@ -824,9 +841,9 @@
         </tr>
     </table>
 
-    <p class="fs-10 fw-600 text-uppercase text-gray-700" style="margin: 10px 0px 0px 0px!important;">Uploaded
+    <p class="fs-10 fw-600 text-uppercase text-gray-700" style="margin: 8px 0px 0px 0px!important;">Uploaded
         Documents</p>
-    <table class="t-100 bor-sin" style="margin: 10px 0px 0px 0px!important;">
+    <table class="t-100 bor-sin" style="margin: 8px 0px 0px 0px!important;">
         <tr>
             <td class="p-1" style="width: 20%!important" colspan="">
                 <p class="m-0 fs-10 fw-600 text-gray-700 text-">Age proof Certificate</p>
@@ -854,6 +871,14 @@
                 @endif
             </td>
             <td class="p-1" style="width: 20%!important" colspan="">
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Homeguard Certificate</p>
+                @if (is_null($userDetails->homeguard_cert))
+                    <p class="m-0 fs-12 fw-500 text-e">Not Uploaded</p>
+                @else
+                    <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
+                @endif
+            </td>
+            {{-- <td class="p-1" style="width: 20%!important" colspan="">
                 <p class="m-0 fs-10 fw-600 text-gray-700 text-">Mizo subject in Class-X
                     standard
                     (HSLC).</p>
@@ -862,10 +887,10 @@
                 @else
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
                 @endif
-            </td>
+            </td> --}}
         </tr>
         <tr>
-            <td class="p-1" style="width: 20%!important" colspan="">
+            {{-- <td class="p-1" style="width: 20%!important" colspan="">
                 <p class="m-0 fs-10 fw-600 text-gray-700 text-">Mizo subject as MIL in Class-X
                     standard in outside Mizoram.</p>
                 @if (is_null($userDetails->mizu_class_x_outside))
@@ -873,15 +898,8 @@
                 @else
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
                 @endif
-            </td>
-            <td class="p-1" style="width: 20%!important" colspan="">
-                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Homeguard Certificate</p>
-                @if (is_null($userDetails->homeguard_cert))
-                    <p class="m-0 fs-12 fw-500 text-e">Not Uploaded</p>
-                @else
-                    <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
-                @endif
-            </td>
+            </td> --}}
+
             <td class="p-1" style="width: 20%!important" colspan="">
                 <p class="m-0 fs-10 fw-600 text-gray-700 text-">Cast Certificate</p>
                 @if (is_null($userDetails->caste_cert))
@@ -898,8 +916,6 @@
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
                 @endif
             </td>
-        </tr>
-        <tr>
             <td class="p-1" style="width: 20%!important" colspan="">
                 <p class="m-0 fs-10 fw-600 text-gray-700 text-">Computer Certificate</p>
                 @if (is_null($userDetails->comp))
@@ -916,6 +932,7 @@
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
                 @endif
             </td>
+        <tr>
             <td class="p-1" style="width: 20%!important" colspan="">
                 <p class="m-0 fs-10 fw-600 text-gray-700 text-">Ex-Serviceman Certificate</p>
                 @if (is_null($userDetails->ex_service))
@@ -932,30 +949,39 @@
                     <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
                 @endif
             </td>
+            <td class="p-1" style="width: 20%!important" colspan="">
+                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Marital Status</p>
+                @if (is_null($userDetails->m_status))
+                    <p class="m-0 fs-12 fw-500 text-e">Not Uploaded</p>
+                @else
+                    <p class="m-0 fs-12 fw-500 text-e">Uploaded</p>
+                @endif
+            </td>
+            <td></td>
         </tr>
     </table>
 
-    <p class="fs-10 fw-600 text-uppercase text-gray-700" style="margin: 10px 0px 0px 0px!important;">Payment Details
+    <p class="fs-10 fw-600 text-uppercase text-gray-700" style="margin: 8px 0px 0px 0px!important;">Payment Details
     </p>
-    <table class="t-100 bor-sin" style="margin: 10px 0px 0px 0px!important;">
+    <table class="t-100 bor-sin" style="margin: 8px 0px 0px 0px!important;">
         <tr>
-            <td class="p-1" style="width: 20%!important" colspan="">
-                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Transaction ID</p>
-                <p class="m-0 fs-12 fw-500 text-e">TRANStest</p>
+            <td style="width: 30%!important;" colspan="" class="p-1 text-m">
+                <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Transaction ID:</p>
+                <p class="m-0 fs-12 fw-500">{{ $userDetails->txnid }}</p>
             </td>
-            <td class="p-1" style="width: 20%!important" colspan="">
-                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Amount</p>
-                <p class="m-0 fs-12 fw-500 text-e">200</p>
-
+            <td style="width: 30%!important;" colspan="" class="p-1 text-m">
+                <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Amount:</p>
+                <p class="m-0 fs-12 fw-500">{{ $userDetails->txnamount }}</p>
             </td>
-            <td class="p-1" style="width: 20%!important" colspan="">
-                <p class="m-0 fs-10 fw-600 text-gray-700 text-">Date</p>
-                <p class="m-0 fs-12 fw-500 text-e">26-11-2024</p>
+            <td style="width: 30%!important;" colspan="" class="p-1 text-m">
+                <p class="m-0 fs-08 fw-600 text-uppercase text-gray-600">Date:</p>
+                <p class="m-0 fs-12 fw-500">{{ \Carbon\Carbon::parse($userDetails->txndateTime)->format('F d, Y') }}
+                </p>
             </td>
         </tr>
     </table>
 
-    <table class="t-100" style="margin: 10px 0px 0px 0px!important;">
+    <table class="t-100" style="margin: 5px 0px 0px 0px!important;">
         <tr>
             <td class="fs-10"><span style="display: inline-block!important; padding: 0 20px 0 0!important;"></span>
                 I hearby declare that the particular given by me in this form are true to the best of my knowledge and

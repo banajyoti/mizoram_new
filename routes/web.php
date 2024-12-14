@@ -50,3 +50,4 @@ Route::post('/getresposne', [PaymentController::class, 'getresposne'])->name('ge
 Route::get('/payment-failed', [PaymentController::class, 'paymentFail'])->name('paymentFailed');
 Route::get('payment-success', [PaymentController::class, 'paymentSuccess'])->name('paymentSuccess');
 Route::get('/payment-failed', [PaymentController::class, 'paymentFail'])->name('paymentFailed');
+Route::get('/update-payment-status', [PaymentController::class, 'updatePaymentStatus'])->name('updatePaymentStatus');

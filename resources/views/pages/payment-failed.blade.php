@@ -17,19 +17,19 @@
             or contact support.</p>
 
         <!-- Payment Details -->
-        <div class="text-left text-sm text-gray-600 mb-6">
+        {{-- <div class="text-left text-sm text-gray-600 mb-6">
             <p><span class="font-semibold">Transaction ID:</span> 1234567890</p>
             <p><span class="font-semibold">Amount Attempted:</span> $100.00</p>
             <p><span class="font-semibold">Payment Method:</span> Credit Card</p>
             <p><span class="font-semibold">Date:</span> December 13, 2024</p>
-        </div>
+        </div> --}}
 
         <!-- Call to Action -->
         <div class="flex justify-center gap-4">
-            <a href=""
+            <a href="{{ route('getPayment') }}"
                 class="text-white bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg text-sm font-semibold transition duration-300">Retry
                 Payment</a>
-            <a href="{{ route('home') }}"
+            <a href="{{ route('dashboard') }}"
                 class="text-red-600 bg-white border border-red-600 hover:bg-red-50 px-6 py-2 rounded-lg text-sm font-semibold transition duration-300">Go
                 Back to Homepage</a>
         </div>

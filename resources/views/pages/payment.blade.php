@@ -47,7 +47,7 @@
                     href="#">
                     <div class="h-8 w-8 bg-gray-200 rounded-full lg:mr-2 text-black text-xs flex"><span
                             class="m-auto text-sm TimesNR"><i class="bi bi-building"></i></span></div>
-                            <span class="hidden lg:inline-block">Exam Centre Preference</span>
+                    <span class="hidden lg:inline-block">Exam Centre Preference</span>
                 </a>
                 <div class="flex h-6 ml-6">
                     <div class="h-full w-[2px] bg-gray-300 group-hover:bg-blue-600"></div>
@@ -116,20 +116,33 @@
                 <div class="text-xl">Total Amount: ₹ 150</div>
             @endif
             <div class="pt-6 proceed_payment_div">
-                {{-- <button type="button" class="proceed_payment inline-block bg-blue-600 hover:bg-blue-700 text-white p-2 px-3 rounded-lg">Proceede to Pay<i class="bi bi-chevron-double-right ps-1 text-sm"></i></button> --}}
+                {{-- <button type="button" class="proceed_payment inline-block bg-blue-600 hover:bg-blue-700 text-white p-2 px-3 rounded-lg">Proceede to Pay<i class="bi bi-chevron-double-right ps-1 text-sm"></i></button>
                 <button type="button"
                     class="proceed_payment inline-block bg-blue-600 hover:bg-blue-700 text-white p-2 px-3 rounded-lg"
                     onclick="window.location='{{ route('dashboard') }}'">
                     Proceed to Pay <i class="bi bi-chevron-double-right ps-1 text-sm"></i>
-                </button>
+                </button> --}}
 
             </div>
             <div class="pt-6 payment_completed_div hidden">
                 <p class="md:text-xl text-green-600 font-medium">Payment Completed!</p>
                 <p class="text-xs text-gray-600 font-medium">Click on proceed button to continue.</p>
             </div>
+            @if ($userDetails->payment_status == 0)
+                <form name="paymentForm" id="paymentForm" method="POST"
+                    action="https://pa-preprod.1pay.in/payment/payprocessorV2">
+                    <input type="hidden" name="merchantId" value="{{ $merchantId }}">
+                    <input type="hidden" name="reqData" value="{{ $enc }}">
 
-
+                    <button
+                        class="proceed_payment inline-block bg-blue-600 hover:bg-blue-700 text-white p-2 px-3 rounded-lg"
+                        id="ecomBtn" type="submit">
+                        Proceed to Payment<i class="bi bi-chevron-double-right ps-1 text-sm"></i>
+                    </button>
+                </form>
+            @elseif ($userDetails->payment_status == 3)
+                <p class="text-red-600">Your payment is currently pending. Please check after 3 hours.</p>
+            @endif
             <!-- jquery where on click 'proceed_payment' button-
    1. Remove class 'hidden' from 'payment_completed_div' div.
    2. Add class 'hidden' in 'proceed_payment_div' div. -->
@@ -139,8 +152,41 @@
 <div class="mt-auto px-4 flex items-center">
     <a class="inline-block bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md Nunito" href="#"><i
             class="bi bi-arrow-left-short pr-1"></i>Go Back</a>
-    <a class="ml-auto inline-block bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md Nunito"
-        href="{{ route('dashboard') }}"><i class="bi bi-house pr-1"></i>Home</a>
+    @if ($userDetails->payment_status == 1)
+        <a class="ml-auto inline-block bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md Nunito"
+            href="{{ route('dashboard') }}"><i class="bi bi-house pr-1"></i>Home</a>
+    @endif
 </div>
 
 @include('layouts.footer')
+<script>
+    $('#ecomBtn').on('click', function(e) {
+        e.preventDefault();
+
+        var elm = $(this);
+        var form = $('#paymentForm');
+        var actionUrl = "/update-payment-status";
+
+        $('.pageloader').fadeIn();
+        elm.attr('disabled', true);
+
+        $.ajax({
+            type: 'GET',
+            url: actionUrl,
+            success: function(data) {
+                form.submit();
+            },
+            error: function(data) {
+                $(".pageloader").fadeOut();
+                elm.attr('disabled', false);
+                var msg = ajaxErrorMsg(data);
+                swal.fire({
+                    "title": 'Sorry!',
+                    "html": msg,
+                    "icon": "error",
+                    "confirmButtonClass": "btn btn-danger"
+                });
+            }
+        });
+    });
+</script>
